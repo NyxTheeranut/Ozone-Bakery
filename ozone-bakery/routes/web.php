@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\IngredientController;
-use App\Http\Controllers\API\MadeToOrderController;
+use App\Http\Controllers\View\MadeToOrderController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\UserController;
