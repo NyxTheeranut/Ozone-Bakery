@@ -101,8 +101,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/customer-orders') }}" class="nav-menu {{ request()->is('customer-orders') ? 'active' : '' }}">
-                           Customer orders
+                        <a href="{{ url('/orders') }}" class="nav-menu {{ request()->is('customer-orders') ? 'active' : '' }}">
+                           orders
                         </a>
                     </li>
                 @else

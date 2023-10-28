@@ -11,7 +11,7 @@
     <section class="bg-[url(https://cdn.builder.io/api/v1/image/assets%2F77d863c720664375bca8264055c66bc2%2Fb8f8ffa6577244b4affdb5583b314cc1)] bg-cover text-white text-center bg-no-repeat bg-center py-32">
       <h1 class="text-5xl text-white">Welcome to Our Bakery</h1>
       <p class="text-2xl my-5">Delicious pastries baked fresh every day</p>
-      <a href="#" onclick="scrollToTarget()" class="bg-stone-500 text-white no-underline px-5 py-2.5 rounded-3xl">All Products</a>
+      <a href="/products" class="bg-stone-500 text-white no-underline px-5 py-2.5 rounded-3xl">All Products</a>
     </section>
     <section class="bg-neutral-100 flex flex-col text-4xl pt-10 pb-5">
         <div class="flex flex-col">
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="flex flex-col items-stretch w-6/12 ml-5 max-md:w-full">
-            <a href="#" class="relative shrink-0 box-border h-auto grow-0 w-auto self-center text-2xl underline ml-auto mr-5 mt-5 mr-20 pr-10">
+            <a href="/products" class="relative shrink-0 box-border h-auto grow-0 w-auto self-center text-2xl underline ml-auto mr-5 mt-5 mr-20 pr-10">
               see more
             </a>
           </div>
@@ -87,9 +87,6 @@
 </div>
 @endsection
 <script setup lang="ts">
-  function scrollToTarget() {
-    const targetElement = document.getElementById('scrollTarget');
-    targetElement.scrollIntoView({ behavior: 'smooth' });
-  }
+  
 </script>
   
