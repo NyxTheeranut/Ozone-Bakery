@@ -16,4 +16,8 @@ class Recipe extends Model
     public function made_to_orders(){
         return $this->hasMany(MadeToOrder::class);
     }
+
+    public function products(){
+        return $this->belongsTo(Product::class);
+    }
 }

@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
+            $table->foreignId('product_id')->constrained('products');
             $table->unsignedInteger('yield');
             $table->time('duration');
+
+            $table->unique('product_id');
 
             $table->timestamps();
         });

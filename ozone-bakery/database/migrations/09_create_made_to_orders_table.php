@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('recipe_id')->constrained('recipes');
             $table->unsignedInteger('price');
-            $table->enum('order_status', ['Evaluating', 'Negotiating', 'In Progress', 'Waiting', 'Complete', 'Rejected'])->default('Evaluating');
-            $table->date('pickup_date');
-            $table->text('description');
+            $table->enum('order_status', ['Pending', 'Evaluating', 'In Progress', 'Waiting', 'Complete', 'Rejected'])->default('Pending');
+            $table->date('pickup_date')->nullable();
+            $table->text('description')->nullable();
 
             $table->timestamps();
         });

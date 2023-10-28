@@ -7,7 +7,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\View\CartController;
 use App\Http\Controllers\View\CheckoutController;
+use App\Http\Controllers\View\OrderController;
 use Illuminate\Support\Facades\Route;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,10 @@ Route::put('/update-cart', [CartController::class, 'update'])->name('cart.update
 
 //Checkout routes
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+
+//Order routes
+Route::post('/orders', [OrderController::class, 'store'])->name('orders');
+Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
 
 Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');

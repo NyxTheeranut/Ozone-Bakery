@@ -34,5 +34,20 @@ class UsersTableSeeder extends Seeder
         $user->is_admin = 1;
         $user->save();
 
+        // $data = [
+        //     [
+        //         'name' => 'Kan',
+        //         'lastname' => 'Sriprapai',
+        //         'tel' => '0931503337',
+        //         'email' => 'gunkspp1511@gmail.com',
+        //         'password' => Hash::make('12345678'),
+        //         'is_admin' => 0,
+        //         'created_at' => now(),
+        //         'updated_at' => now(),
+        //     ],
+        // ];
+
+        // DB::table('users')->insert($data);
+
     }
 }
