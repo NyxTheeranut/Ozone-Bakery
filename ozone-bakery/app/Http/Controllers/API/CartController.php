@@ -4,13 +4,16 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
     public function index()
     {
-        return Cart::get();
+        return Cart::get(); 
     }
 
     public function show(Cart $cart)
