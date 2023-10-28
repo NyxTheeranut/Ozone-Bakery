@@ -3,7 +3,7 @@
 @section('content')
 <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
     <!-- Card -->
-    <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7 dark:bg-slate-900">
+    <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
         <div class="mb-3 flex flex-wrap">
             <h1 class="ml-3 text-3xl font-bold">Made to Order</h1>
         </div>
@@ -32,7 +32,7 @@
                     :disabled="selectedQuantity <= minQuantity">
                         -
                     </button>
-                    <input id="quantity" type="number" class="mr-1 pl-3 border border-2 border-gray-400 h-8 w-12 rounded-xl"
+                    <input id="quantity" type="integer" class="mr-1 pl-3 border border-2 border-gray-400 h-8 w-12 rounded-xl"
                     :value="selectedQuantity"
                     :min="minQuantity"
                     :disabled="!selectedProduct"
@@ -91,8 +91,8 @@
     const decreaseButton = document.getElementById('decreaseQuantity');
     const increaseButton = document.getElementById('increaseQuantity');
 
-    let productPrice = 0;
-    let quantity = 10;
+    let productPrice = parseFloat(selectedProduct.options[selectedProduct.selectedIndex].getAttribute('data-price'));
+    let quantity = 1;
 
     selectedProduct.addEventListener('change', () => {
         productPrice = parseFloat(selectedProduct.options[selectedProduct.selectedIndex].getAttribute('data-price'));
@@ -104,7 +104,7 @@
     }
 
     decreaseButton.addEventListener('click', () => {
-        if (quantity > 10) {
+        if (quantity > 1) {
             quantity--;
             quantityInput.value = quantity;
             updateTotalPrice();
