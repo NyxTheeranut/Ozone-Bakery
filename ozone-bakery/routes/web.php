@@ -3,7 +3,7 @@
 use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\IngredientController;
 use App\Http\Controllers\View\MadeToOrderController;
-use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\View\OrderController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\HomeController;
@@ -47,6 +47,6 @@ Route::get('/custom-orders', [MadeToOrderController::class, 'index'])->name('lay
 
 Route::get('/ingredients', [IngredientController::class, 'index'])->name('layouts.products.ingredient');
 
-Route::get('/customer-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
+Route::get('/history', [OrderController::class, 'index'])->name('layouts.orders.history');
 
 Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admin.order');
