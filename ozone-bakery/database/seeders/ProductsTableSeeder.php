@@ -89,7 +89,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Taiwanese Castella Cake',
                 'price' => 25,
-                'image_path' => 'image/product/tiwanegg.jpg',
+                'image_path' => 'image/product/taiwanegg.jpg',
                 'description' => 'Hey! Nice piece cake',
                 'created_at' => now(),
                 'updated_at' => now(),
