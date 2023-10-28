@@ -9,9 +9,11 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): view
     {
-        return User::get();
+        return view('profile.index', [
+            'user' => $request->user(),
+        ]);
     }
 
     public function show(User $user)
