@@ -8,7 +8,7 @@
         <div class="bg-white rounded-xl shadow-lg mt-7 p-4 sm:p-7 ">
             <div class="mb-3 flex flex-wrap">
                 <section class="flex flex-col items-stretch w-[30%] max-md:w-full">
-                    <a onclick="goBack()" class="mr-auto mb-3 text-xl text-gray-800 dark:text-black">
+                    <a href="javascript:void(0);" onclick="goBack()" class="mr-auto mb-3 text-xl text-gray-800 dark:text-black">
                         < Product Detail </a>
 
                             <div class="flex flex-wrap items-start">

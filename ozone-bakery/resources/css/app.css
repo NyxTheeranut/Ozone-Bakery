@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dropdown-content button {
+    color: black;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+    width: fill;
+    text-align: left;
+}
