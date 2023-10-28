@@ -7,7 +7,7 @@ use App\Models\MadeToOrder;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class HistoryController extends Controller
 {
     public function index()
     {
@@ -19,4 +19,5 @@ class OrderController extends Controller
             'madeToOrderData' => $madeToOrderData
         ]);
     }
+
 }

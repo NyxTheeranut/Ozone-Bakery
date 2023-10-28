@@ -15,7 +15,7 @@
                 Select Product:
             </label>
             <select id="selectedProduct" class="pl-2 pt-1 pb-1 pr-1 mr-20 border border-2 border-gray-400 h-8 w-40 rounded-xl">
-                <option value="" disabled selected>Select a Product</option>
+                <option value="" selected>Select a Product</option>
                 @foreach ($products as $product)
                     <option value="{{ $product['name'] }}" data-price="{{ $product['price'] }}">{{ $product['name'] }}</option>
                 @endforeach
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <p class="mr-auto pl-5 pb-3 text-red-900">* Some products may have a minimum order quantity requirement.</p>
+        <p class="mr-auto pl-5 pb-3 text-red-900">* The total must be at least 1,000 Baht.</p>
 
         <div class="mt-4 pl-2">
             <label for="pickup_date" class="font-semibold text-xl mr-2">
@@ -85,7 +85,6 @@
 
 <script>
     const selectedProduct = document.getElementById('selectedProduct');
-    const selectedQuantity = document.getElementById('selectedQuantity');
     const itemPrice = document.getElementById('itemPrice');
     const quantityInput = document.getElementById('quantity');
     const decreaseButton = document.getElementById('decreaseQuantity');
@@ -96,11 +95,20 @@
 
     selectedProduct.addEventListener('change', () => {
         productPrice = parseFloat(selectedProduct.options[selectedProduct.selectedIndex].getAttribute('data-price'));
-        updateTotalPrice();
+        // Check if "Select a Product" is selected and set the itemPrice to 0, or calculate the total price
+        if (selectedProduct.selectedIndex === 0) {
+            itemPrice.textContent = 0;
+        } else {
+            updateTotalPrice();
+        }
     });
 
     function updateTotalPrice() {
-        itemPrice.textContent = (productPrice * quantity);
+        if (selectedProduct.selectedIndex === 0) {
+            itemPrice.textContent = 0;
+        } else {
+            itemPrice.textContent = (productPrice * quantity);
+        }
     }
 
     decreaseButton.addEventListener('click', () => {
