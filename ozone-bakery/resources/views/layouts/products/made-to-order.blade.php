@@ -4,14 +4,16 @@
 <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
     <!-- Card -->
     <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
-        <div class="mb-3 flex flex-wrap">
+        <div class="mb-1 flex flex-wrap">
             <h1 class="ml-3 text-3xl font-bold">Made to Order</h1>
         </div>
 
-        <p class="pl-7 pb-5">You can customize the type of bakery and the quantity you want. Feel free to leave notes for specific details you'd like us to know.</p>
+        <p class="pl-7 pb-3">You can customize the type of bakery and the quantity you want. Feel free to leave notes for specific details you'd like us to know.</p>
+
+        <hr class="mt-0 mb-6" style="border-color:#c4b7a6; border-width: 2px;">
 
         <div class="flex flex-row mt-4 pl-2 pb-3">
-            <label for="product" class="font-semibold text-xl mr-2">
+            <label for="product" class="font-semibold text-2xl mr-2">
                 Select Product:
             </label>
             <select id="selectedProduct" class="pl-2 pt-1 pb-1 pr-1 mr-20 border border-2 border-gray-400 h-8 w-40 rounded-xl">
@@ -22,7 +24,7 @@
             </select>
 
             <div class="flex pl-2">
-                <label for="quantity" class="font-semibold text-xl mr-2">
+                <label for="quantity" class="font-semibold text-2xl mr-2">
                     Quantity:
                 </label>
                 <div class="items-center">
@@ -59,7 +61,7 @@
         <p class="mr-auto pl-5 pb-3 text-red-900">* The total must be at least 1,000 Baht.</p>
 
         <div class="mt-4 pl-2">
-            <label for="pickup_date" class="font-semibold text-xl mr-2">
+            <label for="pickup_date" class="font-semibold text-2xl mr-2">
                 Pick-up Date:
             </label>
             <input type="date" class="pl-3 pb-1 border border-2 border-gray-400 h-8 w-40 rounded-xl" v-model="selectedPickUpDate" :min="minPickUpDate">
@@ -70,7 +72,7 @@
         </p>
 
         <div class="flex flex-row mt-4 pl-2">
-            <label for "description" class="font-semibold text-xl mb-2 mr-2 block">
+            <label for "description" class="font-semibold text-2xl mb-2 mr-2 block">
                 Note:
             </label>
             <textarea class="pl-2 pt-2 border border-2 border-gray-400 h-40 w-80 rounded-xl" v-model="note"></textarea>
@@ -112,6 +114,9 @@
     }
 
     decreaseButton.addEventListener('click', () => {
+        if (selectedProduct.selectedIndex === 0) {
+            
+        }
         if (quantity > 1) {
             quantity--;
             quantityInput.value = quantity;
