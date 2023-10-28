@@ -10,11 +10,7 @@ class IngredientController extends Controller
 {
     public function index()
     {
-        $ingredients = Ingredient::get();
-
-        return view('layouts.products.ingredient', [
-            'ingredients' => $ingredients,
-        ]);
+        return Ingredient::get();
     }
 
     public function show(Ingredient $ingredient)

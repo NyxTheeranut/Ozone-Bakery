@@ -13,17 +13,6 @@ class ProductController extends Controller
         return Product::get();
     }
     
-    public function indexView()
-    {
-        // $products = Product::get();
-        // return $products;
-        $products = Product::get();
-
-        return view('layouts.products.index', [
-            'products' => $products
-        ]);
-
-    }
     
     public function showProduct($productId) {
 
