@@ -29,6 +29,8 @@
                             Order #{{ $order->id }}
                         </h1>
 
+                        <hr class="mt-0 mb-4" style="border-color:#c4b7a6; border-width: 2px;">
+
                         <p class="ml-3 mb-2 text-xl font-semibold">
                             Date: {{ $order->created_at }}
                         </p>
@@ -53,6 +55,8 @@
                         <h1 class="mb-3 text-2xl font-bold">
                             Order #{{ $madeToOrder->id }}
                         </h1>
+
+                        <hr class="mt-0 mb-4" style="border-color:#c4b7a6; border-width: 2px;">
 
                         <p class="ml-3 mb-2 text-xl font-semibold">
                             Date: {{ $madeToOrder->created_at }}
