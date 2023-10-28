@@ -12,13 +12,6 @@ class ProductController extends Controller
     {
         return Product::get();
     }
-    
-    
-    public function showProduct($productId) {
-
-        $product = Product::find($productId);
-        return view('layouts.products.detail', compact('product'));
-    }
 
     public function show(Product $product)
     {

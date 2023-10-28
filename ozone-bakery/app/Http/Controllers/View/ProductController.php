@@ -17,4 +17,10 @@ class ProductController extends Controller
         ]);
 
     }
+    
+    public function showProduct($productId) {
+
+        $product = Product::find($productId);
+        return view('layouts.products.detail', compact('product'));
+    }
 }
