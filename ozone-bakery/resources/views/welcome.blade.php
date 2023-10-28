@@ -13,7 +13,7 @@
       <p class="text-2xl my-5">Delicious pastries baked fresh every day</p>
       <a href="#" onclick="scrollToTarget()" class="bg-stone-500 text-white no-underline px-5 py-2.5 rounded-3xl">All Products</a>
     </section>
-    <section class="bg-neutral-100 flex flex-col text-4xl mx-10 pt-10 pb-5">
+    <section class="bg-neutral-100 flex flex-col text-4xl pt-10 pb-5">
         <div class="flex flex-col">
           <div class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
             <div class="flex flex-col items-stretch w-6/12 max-md:w-full">
@@ -68,7 +68,7 @@
             @if (!$displayedProducts->contains('id', $product->id))
                 <div class="flex flex-col items-stretch w-3/12 max-md:w-full mb-5">
                     <div class="flex flex-col relative shrink-0 box-border h-auto shadow-[3px_-2px_26px_-20px_rgba(0,0,0,1)] w-[300px] self-center mt-5 pb-8 rounded-3xl border-[3px] border-solid border-stone-300">
-                      <img src="{{ asset($product->image_path) }}" class="aspect-[1.46] object-cover object-center w-[250px] h-[250px] mx-auto my-5 rounded-2xl border-0 border-solid">
+                      <img src="{{ asset($product->image_path) }}" alt="{{ $product->name }} " class="aspect-[1.46] object-cover object-center w-[250px] h-[250px] mx-auto my-5 rounded-2xl border-0 border-solid">
     
                         <h3 class="text-2xl mx-auto">{{ $product->name }}</h3>
                         <p class="text-xl mx-auto my-2.5">Price: {{ $product->price }} Baht</p>

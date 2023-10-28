@@ -33,5 +33,6 @@ require __DIR__.'/auth.php';
 
 Route::get('/products', [ProductController::class, 'indexView'])->name('layouts.products.index');
 
-Route::get('/mycart', [CartController::class, 'index'])
-    ->name('cart');
+Route::get('/mycart', [CartController::class, 'index'])->name('cart');
+
+Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');

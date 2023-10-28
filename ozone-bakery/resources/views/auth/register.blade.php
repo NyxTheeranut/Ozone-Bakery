@@ -1,3 +1,6 @@
+@extends('layouts.main')
+
+@section('content')
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
@@ -7,6 +10,18 @@
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="lastname" :value="__('Lastname')" />
+            <x-text-input id="lastName" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required autofocus autocomplete="lastname" />
+            <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="tel" :value="__('Tel')" />
+            <x-text-input id="tel" class="block mt-1 w-full" type="text" name="tel" :value="old('tel')" required autofocus autocomplete="tel" />
+            <x-input-error :messages="$errors->get('tel')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
@@ -50,3 +65,4 @@
         </div>
     </form>
 </x-guest-layout>
+@endsection
