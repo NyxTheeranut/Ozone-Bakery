@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\CartController;
+use App\Http\Controllers\API\IngredientController;
+use App\Http\Controllers\API\MadeToOrderController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -47,3 +50,9 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 
 Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');
+
+Route::get('/custom-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
+
+Route::get('/ingredients', [IngredientController::class, 'index'])->name('layouts.products.ingredient');
+
+Route::get('/customer-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
