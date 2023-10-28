@@ -14,8 +14,8 @@
             <label for="product" class="font-semibold text-xl mr-2">
                 Select Product:
             </label>
-            <select id="selectedProduct" class="pl-2 pb-1 mr-20 border border-2 border-gray-400 h-8 w-40 rounded-xl">
-                <option value="" disabled>Select a Product</option>
+            <select id="selectedProduct" class="pl-2 pt-1 pb-1 pr-1 mr-20 border border-2 border-gray-400 h-8 w-40 rounded-xl">
+                <option value="" disabled selected>Select a Product</option>
                 @foreach ($products as $product)
                     <option value="{{ $product['name'] }}" data-price="{{ $product['price'] }}">{{ $product['name'] }}</option>
                 @endforeach
@@ -32,12 +32,12 @@
                     :disabled="selectedQuantity <= minQuantity">
                         -
                     </button>
-                    <input id="quantity" type="integer" class="mr-1 pl-3 border border-2 border-gray-400 h-8 w-12 rounded-xl"
+                    <input id="quantity" type="integer" class="mr-1 text-center border border-2 border-gray-400 h-8 w-12 rounded-xl"
                     :value="selectedQuantity"
                     :min="minQuantity"
                     :disabled="!selectedProduct"
                     readonly>
-                    <button class="font-bold border border-2 border-gray-400 h-8 w-8 rounded-2xl hover-bg-stone-200" 
+                    <button class="font-bold border border-2 border-gray-400 h-8 w-8 rounded-2xl hover:bg-stone-200" 
                     id="increaseQuantity"
                     @click="increaseQuantity">
                         +
