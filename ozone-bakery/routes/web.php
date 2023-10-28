@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\IngredientController;
 use App\Http\Controllers\API\MadeToOrderController;
 use App\Http\Controllers\API\ProductController;
