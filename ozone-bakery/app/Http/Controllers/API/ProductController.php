@@ -10,11 +10,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::get();
-        return $products;
-
-
+        return Product::get();
     }
+    
     public function indexView()
     {
         // $products = Product::get();
