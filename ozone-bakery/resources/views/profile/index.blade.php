@@ -2,51 +2,51 @@
 
 @section('content')
     <section class="w-100 px-4 py-5">
-        <div class="row d-flex justify-content-center snipcss0-0-0-1">
-            <div class="col col-lg-7 mb-4 mb-lg-0 snipcss0-1-1-2">
+        <div class="row d-flex justify-content-center ">
+            <div class="col col-lg-7 mb-4 mb-lg-0 ">
                 <div class="card mt-20">
-                    <div class="col-md-8 snipcss0-4-4-10">
-                        <div class="card-body p-4 snipcss0-5-10-11">
-                            <h6 class="text-2xl font-bold">
+                    <div class="col-md-8 ">
+                        <div class="card-body p-4 ">
+                            <h6 class="text-2xl font-bold mb-2">
                                 Profile
                             </h6>
-                            <hr class="mt-0 mb-2 snipcss0-6-11-13">
-                            <div class="row pt-1 snipcss0-6-11-14">
-                                <div class="col-6 mb-3 snipcss0-7-14-15">
+                            <hr class="mt-0 mb-2 ">
+                            <div class="row pt-1 ">
+                                <div class="col-6 mb-3 ">
                                     <h6 class="font-bold">
                                         Firstname
                                     </h6>
-                                    <p class="text-muted snipcss0-8-15-17">
+                                    <p class="text-muted ">
                                         {{ $user->name }}
                                     </p>
                                 </div>
-                                <div class="col-6 mb-3 snipcss0-7-14-18">
+                                <div class="col-6 mb-3 ">
                                     <h6 class="font-bold">
                                         Lastname
                                     </h6>
-                                    <p class="text-muted snipcss0-8-18-20">
+                                    <p class="text-muted ">
                                         {{ $user->lastname }}
                                     </p>
                                 </div>
                             </div>
-                            <h6 class="text-xl font-bold">
+                            <h6 class="text-xl font-bold mb-2">
                                 Personal
                             </h6>
-                            <hr class="mt-0 mb-2 snipcss0-6-11-22">
-                            <div class="row pt-1 snipcss0-6-11-23">
-                                <div class="col-6 mb-3 snipcss0-7-14-18">
+                            <hr class="mt-0 mb-2 ">
+                            <div class="row pt-1 ">
+                                <div class="col-6 mb-3 ">
                                     <h6 class="font-bold">
                                         Phone
                                     </h6>
-                                    <p class="text-muted snipcss0-8-18-20">
+                                    <p class="text-muted ">
                                         {{ $user->tel }}
                                     </p>
                                 </div>
-                                <div class="col-6 mb-3 snipcss0-7-23-24">
+                                <div class="col-6 mb-3 ">
                                     <h6 class="font-bold">
                                         Email
                                     </h6>
-                                    <p class="text-muted snipcss0-8-24-26">
+                                    <p class="text-muted ">
                                         {{ $user->email }}
                                     </p>
                                 </div>
