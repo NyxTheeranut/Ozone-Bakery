@@ -19,6 +19,16 @@ class UserController extends Controller
     public function update(Request $request)
     {
 
+        $request->validate([
+            'name'  => 'nullable|min:3|max:256|regex:/^[a-zA-Z]+$/',
+            'lastname'  => 'nullable|min:3|max:256|regex:/^[a-zA-Z]+$/',
+            'tel'   => 'nullable|string|size:10|regex:/^[0-9]+$/',
+            'email' => 'nullable|email',
+            'email_verified_at' => 'nullable|date',
+            'password'  => 'nullable|string|min:8',
+            'is_admin'  => 'nullable|boolean'
+        ]);
+
         //update the user's profile information
         $request->user()->forceFill([
             'name' => $request->name,
@@ -28,11 +38,11 @@ class UserController extends Controller
 
         ])->save();
 
-//        return redirect()->route('home');
+        //        return redirect()->route('home');
         return view('profile.index', [
             'user' => $request->user(),
         ]);
 
-//        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        //        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 }
