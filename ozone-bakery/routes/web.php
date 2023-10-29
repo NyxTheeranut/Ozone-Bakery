@@ -4,6 +4,7 @@ use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\View\MadeToOrderController;
 use App\Http\Controllers\View\HistoryController;
 use App\Http\Controllers\View\OrderDetailController;
+use App\Http\Controllers\View\OrderController;
 use App\Http\Controllers\View\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
