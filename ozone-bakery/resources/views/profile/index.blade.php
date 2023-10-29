@@ -83,9 +83,9 @@
                                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
 
-                                        <div class="flex items-center justify-middle mt-6">
-                                            <button id="closeEditPopupButton" class="mr-9 btn">Close</button>
-                                            <button type="submit" class="ml-auto btn">
+                                        <div class="flex items-center justify-between mt-6">
+                                            <button id="closeEditPopupButton" class="btn bg-stone-500 text-white no-underline text-base px-5 mb-2 py-1 rounded-3xl hover:bg-stone-600 ">Close</button>
+                                            <button class="btn bg-stone-500 text-white no-underline text-base px-5 mb-2 py-1 rounded-3xl hover:bg-stone-600 ml-auto">
                                                 {{ __('Submit') }}
                                             </button>
                                         </div>
