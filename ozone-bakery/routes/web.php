@@ -52,6 +52,6 @@ Route::get('/ingredients', [IngredientController::class, 'index'])->name('layout
 
 Route::get('/history', [HistoryController::class, 'index'])->name('layouts.orders.history');
 
-Route::get('/history/{id}', [OrderDetailController::class, 'index'])->name('layouts.orders.detail');
+Route::get('/orders/{id}', [OrderDetailController::class, 'index'])->name('layouts.orders.detail');
 
 Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admin.order');

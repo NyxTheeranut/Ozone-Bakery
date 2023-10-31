@@ -8,9 +8,14 @@
 
             <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
                 <div id="order-p">
-                    <div class="text-3xl font-bold ml-3 mb-3">
-                        Order # {{ $order->id }}
-                    </div>
+                    <p class="ml-3 mb-5 text-2xl font-semibold">
+                        @foreach ($order->order_details as $index => $order_detail)
+                            {{ $order_detail->product->name }}
+                            @if ($index < count($order->order_details) - 1)
+                                ,
+                            @endif
+                        @endforeach
+                    </p>
                     <hr class="mt-0 mb-4" style="border-color: #c4b7a6; border-width: 2px;">
                     
                     <p class="ml-3 mb-5 text-2xl font-semibold">

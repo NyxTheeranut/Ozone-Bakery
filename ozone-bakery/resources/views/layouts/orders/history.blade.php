@@ -23,12 +23,17 @@
         <div id="order-p" class="order-content">
             @foreach ($orders as $order)
                 @if (Auth::check() && $order->user_id == Auth::user()->id)
-                    <a href="/history/{{ $order->id }}">
+                    <a href="/orders/{{ $order->id }}">
                         <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7 hover:bg-stone-200">
 
-                            <h1 class="mb-3 text-2xl font-bold">
-                                Order #{{ $order->id }}
-                            </h1>
+                            <p class="ml-3 mb-5 text-2xl font-semibold">
+                                @foreach ($order->order_details as $index => $order_detail)
+                                    {{ $order_detail->product->name }}
+                                    @if ($index < count($order->order_details) - 1)
+                                        ,
+                                    @endif
+                                @endforeach
+                            </p>
 
                             <hr class="mt-0 mb-4" style="border-color:#c4b7a6; border-width: 2px;">
 
@@ -54,7 +59,7 @@
         <div id="made-to-order-p" class="order-content" style="display: none;">
             @foreach ($madeToOrderData as $madeToOrder)
                 @if (Auth::check() && $madeToOrder->user_id == Auth::user()->id)
-                    <a href="/history/{{ $madeToOrder->id }}">
+                    <a href="/custom-orders/{{ $madeToOrder->id }}">
                         <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7 hover:bg-stone-200">
                             <h1 class="mb-3 text-2xl font-bold">
                                 Order #{{ $madeToOrder->id }}
