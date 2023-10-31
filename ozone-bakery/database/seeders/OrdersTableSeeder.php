@@ -16,13 +16,13 @@ class OrdersTableSeeder extends Seeder
         $data = [
             [
                 'user_id' => 1, // Replace with an existing user's ID
-                'order_status' => 'Waiting',
+                'status' => 'Waiting',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'user_id' => 2, // Replace with another existing user's ID
-                'order_status' => 'Pending',
+                'status' => 'Pending',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

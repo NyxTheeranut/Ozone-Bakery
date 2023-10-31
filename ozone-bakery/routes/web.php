@@ -57,7 +57,7 @@ Route::post('/confirm-order', [CheckoutController::class, 'confirmOrder'])->name
 
 //Order routes
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.post');
-Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+Route::get('/order/{order}', [OrderController::class, 'show'])->name('orders.show');
 
 Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admin.order');
 
@@ -71,7 +71,5 @@ Route::get('/ingredients', [IngredientController::class, 'index'])->name('layout
 Route::get('/customer-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
 
 Route::get('/history', [HistoryController::class, 'index'])->name('layouts.orders.history');
-
-Route::get('/orders/{id}', [OrderDetailController::class, 'index'])->name('layouts.orders.detail');
 
 Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admin.order');

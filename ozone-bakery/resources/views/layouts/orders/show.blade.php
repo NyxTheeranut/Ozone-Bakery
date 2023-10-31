@@ -10,13 +10,19 @@
 <p>
     Order Status: {{ $order->status }}
 </p>
+@php
+    $total = 0;
+@endphp
 @foreach ($order->order_details as $order_detail)
 <p>
     Product: {{ $order_detail->product->name }}
     Quantity: {{ $order_detail->amount }}
-    Price: {{ $order_detail->product->price * $order_detail->amount}}
+    Price: {{ $order_detail->product->price * $order_detail->amount }}
+    @php
+        $total += $order_detail->product->price * $order_detail->amount;
+    @endphp
 </p>
 @endforeach
 <p>
-    Total Price: {{ $order->amount }}
+    Total Price: {{ $total }}
 </p>
