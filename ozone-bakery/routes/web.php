@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\API\IngredientController;
 use App\Http\Controllers\View\MadeToOrderController;
 use App\Http\Controllers\View\HistoryController;
 use App\Http\Controllers\View\OrderDetailController;
-use App\Http\Controllers\API\ProductController;
-use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\View\OrderController;
+use App\Http\Controllers\View\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\View\CartController;
 use App\Http\Controllers\View\CheckoutController;
-use App\Http\Controllers\View\OrderController;
+use App\Http\Controllers\View\IngredientController;
+use App\Http\Controllers\View\ProductController;
 use Illuminate\Support\Facades\Route;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -34,9 +34,10 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/myprofile', [UserController::class, 'index'])->name('profile.index');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/myprofile', [UserController::class, 'update'])->name('profile.update');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
@@ -58,6 +59,8 @@ Route::post('/confirm-order', [CheckoutController::class, 'confirmOrder'])->name
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.post');
 Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
+Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admin.order');
+
 
 Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');
 
@@ -69,4 +72,6 @@ Route::get('/customer-orders', [MadeToOrderController::class, 'index'])->name('l
 
 Route::get('/history', [HistoryController::class, 'index'])->name('layouts.orders.history');
 
-Route::get('/history/{id}', [OrderDetailController::class, 'index'])->name('layouts.orders.detail');
+Route::get('/orders/{id}', [OrderDetailController::class, 'index'])->name('layouts.orders.detail');
+
+Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admin.order');
