@@ -40,8 +40,10 @@
                                 Payment Status: {{ $order->payment_status }}
                             </p>
 
-                            <p class="ml-3 text-xl font-semibold">
-                                Total: {{ $order->amount }} Baht
+                            <p class="ml-3 text-2xl font-semibold">
+                                Total: {{ $order->order_details->sum(function($detail) {
+                                    return $detail->amount * $detail->product->price;
+                                }) }} Baht
                             </p>
                         </div>
                     </a>
