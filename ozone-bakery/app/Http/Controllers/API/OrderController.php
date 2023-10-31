@@ -13,6 +13,15 @@ class OrderController extends Controller
         return Order::get();
     }
 
+    public function indexView()
+    {
+        $orders = Order::get();
+        
+        return view('layouts.admin.order', [
+            'products' => $orders
+        ]);
+    }
+
     public function show(Order $order)
     {
         return $order;
