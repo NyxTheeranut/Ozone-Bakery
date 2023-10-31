@@ -15,14 +15,14 @@ class RecipesTableSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'Recipe 1',
+                'product_id' => 1,
                 'yield' => 4,
                 'duration' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Recipe 2',
+                'product_id' => 2,
                 'yield' => 2,
                 'duration' => now(),
                 'created_at' => now(),

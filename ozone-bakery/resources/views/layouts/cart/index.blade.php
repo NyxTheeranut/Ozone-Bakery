@@ -16,9 +16,6 @@
         Quantity:
         <input type="number" class="quantity-input" name="cart_items[{{ $item->id }}][amount]" value="{{ $item->amount }}" min="0" max="100">
         Price: <span class="item-price">{{ $item->product->price}}</span>
-        <!-- Hidden input for product and quantity -->
-        <input type="hidden" name="cart_items[{{ $item->id }}][product]" value="{{ $item->product->name }}">
-        <input type="hidden" name="cart_items[{{ $item->id }}][quantity]" value="{{ $item->amount }}">
     </div>
     @php
     $totalPrice += $item->product->price * $item->amount;
@@ -36,7 +33,7 @@
 
 <form method="GET" action="{{ route('checkout') }}" id="checkout-form">
     @foreach ($carts as $item)
-        <input type="hidden" name="cart_items[{{ $item->id }}][product]" value="{{ $item->product->name }}">
+        <input type="hidden" name="cart_items[{{ $item->id }}][product]" value="{{ $item->product->id }}">
         <input type="hidden" name="cart_items[{{ $item->id }}][quantity]" value="{{ $item->amount }}">
     @endforeach
     <button type="submit" id="checkout-button" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all text-sm rounded-3xl">

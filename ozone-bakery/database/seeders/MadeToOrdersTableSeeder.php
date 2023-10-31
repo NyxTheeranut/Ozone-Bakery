@@ -18,7 +18,7 @@ class MadeToOrdersTableSeeder extends Seeder
                 'user_id' => 1, // Replace with valid user_id
                 'recipe_id' => 1, // Replace with valid recipe_id
                 'price' => 50,
-                'order_status' => 'Evaluating',
+                'order_status' => 'Pending',
                 'pickup_date' => now()->addDays(3),
                 'description' => 'Description for order 1',
                 'created_at' => now(),
@@ -28,7 +28,7 @@ class MadeToOrdersTableSeeder extends Seeder
                 'user_id' => 2, // Replace with valid user_id
                 'recipe_id' => 2, // Replace with valid recipe_id
                 'price' => 45,
-                'order_status' => 'Negotiating',
+                'order_status' => 'Evaluating',
                 'pickup_date' => now()->addDays(5),
                 'description' => 'Description for order 2',
                 'created_at' => now(),

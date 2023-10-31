@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
@@ -47,8 +48,6 @@ class CartController extends Controller
             $cart->save();
             $cart->refresh();
         }
-
-        return redirect()->route('cart');
     }
 
     public function update(Request $request)
@@ -66,6 +65,22 @@ class CartController extends Controller
         }
     
         return redirect()->route('cart');
+    }
+
+    public function resetOnConfirm()
+    {
+        Log::info('resetOnConfirm method called');
+
+        $user = Auth::user();
+
+        $carts = Cart::where('user_id', $user->id)->get();
+
+        foreach ($carts as $cart) {
+            $cart->delete();
+            Log::info('Cart: ' . $cart);
+        }
+
+        return;
     }
     
 }
