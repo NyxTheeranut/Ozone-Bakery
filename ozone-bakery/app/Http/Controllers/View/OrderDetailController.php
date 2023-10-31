@@ -10,16 +10,18 @@ use Illuminate\Http\Request;
 
 class OrderDetailController extends Controller
 {
-    public function index()
+    public function index($orderId)
     {
-        $orders = Order::get();
-        $orderDetail = OrderDetail::get();
-        $madeToOrderData = MadeToOrder::get();
+        // Fetch the specific order using the provided $orderId
+        $order = Order::find($orderId);
+
+        // Check if the order exists
+        if (!$order) {
+            abort(404); // You can handle this case as needed
+        }
 
         return view('layouts.orders.detail', [
-            'orders' => $orders,
-            'orderDetail' => $orderDetail,
-            'madeToOrderData' => $madeToOrderData
+            'order' => $order,
         ]);
     }
 }
