@@ -23,8 +23,8 @@
         <div id="order-p" class="order-content">
             @foreach ($orders as $order)
                 @if (Auth::check() && $order->user_id == Auth::user()->id)
-                    <a href="/order/{{ $order->id }}?source=page1">
-                        <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7 hover:bg-stone-200">
+                    <a href="/order/{{ $order->id }}?source=history">
+                        <div class="bg-stone-100 rounded-xl shadow-lg mt-7 mb-7 p-4 sm:p-7 hover:bg-stone-200">
 
                             <p class="ml-0 mb-5 text-2xl font-semibold">
                                 Order #{{ $order->id }}
@@ -92,7 +92,7 @@
             @foreach ($madeToOrderData as $madeToOrder)
                 @if (Auth::check() && $madeToOrder->user_id == Auth::user()->id)
                     <a href="/orders/{{ $madeToOrder->id }}">
-                        <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7 hover:bg-stone-200">
+                        <div class="bg-stone-100 rounded-xl shadow-lg mt-7 mb-5 p-4 sm:p-7 hover:bg-stone-200">
                             <h1 class="ml-0 mb-5 text-2xl font-semibold">
                                 Order #{{ $madeToOrder->id }}
                             </h1>

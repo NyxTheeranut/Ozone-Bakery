@@ -3,10 +3,13 @@
 @section('content')
     <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
 
-        <a onclick="goBack()" style="cursor: pointer;"
-            class="mr-auto mt-2 text-2xl font-semibold text-gray-800 dark:text-black">
-            &lt; Order History
+        <a class="flex items-center mt-3 text-2xl" onclick="goBack()" style="cursor: pointer;">
+            <img src="https://cdn-icons-png.flaticon.com/512/3683/3683627.png" alt="" class="h-6 w-6 m-2">
+            <span class="text-2xl font-semibold text-gray-800 ">
+                Go back</span>
         </a>
+
+
 
         <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
 
@@ -17,7 +20,7 @@
 
             <div class="flex flex-row">
                 <p class="ml-3 mb-5 text-2xl font-semibold">
-                    Date: 
+                    Date:
                 </p>
 
                 <p class="ml-3 mb-5 text-2xl">
@@ -27,17 +30,17 @@
 
             <div class="flex flex-row">
                 <p class="ml-3 mb-5 text-2xl font-semibold">
-                    Customer Name: 
+                    Customer Name:
                 </p>
 
                 <p class="ml-3 mb-5 text-2xl">
                     {{ $order->user->name }}
                 </p>
             </div>
-            
+
             <div class="flex flex-row">
                 <p class="ml-3 text-2xl font-semibold">
-                    Order Status: 
+                    Order Status:
                 </p>
 
                 <p class="ml-3 text-2xl">
@@ -86,15 +89,15 @@
 
     <script>
         function goBack() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const source = urlParams.get('source');
+            const urlParams = new URLSearchParams(window.location.search);
+            const source = urlParams.get('source');
 
-        if (source === 'page1') {
-            // Redirect to Page 1
-            window.location.href = '/history';
-        } else {
-            window.location.href = '/';
-        } 
-    }
+            if (source === 'history') {
+                // Redirect to Page 1
+                window.location.href = '/history';
+            } else {
+                window.location.href = '/';
+            }
+        }
     </script>
 @endsection
