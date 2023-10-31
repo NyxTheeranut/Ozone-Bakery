@@ -18,9 +18,9 @@
                                     <img src="{{ asset($item->product->image_path) }}" class="h-40 w-40 rounded-3xl">
                                 </div>
                             </section>
-                            
+
                             <section class="flex flex-col items-stretch w-[40%] ml-5 max-md:w-full">
-                                <h2 class="mt-8 text-3xl font-bold text-gray-800 text-black text-left">
+                                <h2 class="mt-2 text-3xl font-bold text-gray-800 text-black text-left">
                                     {{ $item->product->name }}
                                 </h2>
 
@@ -43,32 +43,29 @@
             @endforeach
         </div>
         <div class="flex flex-row">
-            <div class=" black mt-auto py-2 px-3 ml-10 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl transition-all text-sm rounded-3xl p-5 mr-10">
-            <h class="font-bold">Total Price:</h>
-            <h id="total-price">{{ $totalPrice }}</h>
+            <div
+                class=" black mt-auto py-2 px-3 ml-10 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl transition-all text-sm rounded-3xl p-5 mr-10">
+                <h class="font-bold">Total Price:</h>
+                <h id="total-price">{{ $totalPrice }}</h>
             </div>
-
             <button type="submit"
                 class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all text-sm rounded-3xl p-5 mr-10"
                 style="display: none;">
                 Confirm Changes
             </button>
-
-            <form method="GET" action="{{ route('checkout') }}" id="checkout-form">
-                @foreach ($carts as $item)
-                    <input type="hidden" name="cart_items[{{ $item->id }}][product]" value="{{ $item->product->id }}">
-                    <input type="hidden" name="cart_items[{{ $item->id }}][quantity]" value="{{ $item->amount }}">
-                @endforeach
-                <button type="submit" id="checkout-button"
-                    class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all text-sm rounded-3xl p-5 mr-10">
-                    Checkout
-                </button>
-            </form>
         </div>
-
-
     </form>
 
+    <form method="GET" action="{{ route('checkout') }}" id="checkout-form">
+        @foreach ($carts as $item)
+            <input type="hidden" name="cart_items[{{ $item->id }}][product]" value="{{ $item->product->id }}">
+            <input type="hidden" name="cart_items[{{ $item->id }}][quantity]" value="{{ $item->amount }}">
+        @endforeach
+        <button type="submit" id="checkout-button"
+            class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all text-sm rounded-3xl p-5 mr-10">
+            Checkout
+        </button>
+    </form>
 
 
     <script>
