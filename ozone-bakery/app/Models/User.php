@@ -16,6 +16,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class);
     }
+    public function made_to_order_carts()
+    {
+        return $this->hasMany(MadeToOrderCart::class);
+    }
 
     public function orders()
     {

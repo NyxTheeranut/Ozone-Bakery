@@ -25,4 +25,12 @@ class Product extends Model
         return $this->hasOne(Recipe::class);
     }
 
+    public function made_to_order_details(){
+        return $this->hasMany(MadeToOrderDetail::class);
+    }
+
+    public function made_to_order_carts(){
+        return $this->hasMany(MadeToOrderCart::class);
+    }
+
 }

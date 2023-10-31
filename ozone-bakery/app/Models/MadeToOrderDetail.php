@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Recipe extends Model
+class MadeToOrderDetail extends Model
 {
     use HasFactory;
 
-    public function recipe_details(){
-        return $this->hasMany(RecipeDetail::class);
+    public function madeToOrder()
+    {
+        return $this->belongsTo(MadeToOrder::class);
     }
 
-    public function products(){
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
 }
