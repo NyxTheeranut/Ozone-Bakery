@@ -42,7 +42,15 @@ require __DIR__.'/auth.php';
 
 Route::get('/products', [ProductController::class, 'indexView'])->name('layouts.products.index');
 
+
+//Cart routes
 Route::get('/mycart', [CartController::class, 'index'])->name('cart');
+Route::post('/add-to-cart', [CartController::class, 'store'])->name('cart.add');
+Route::put('/update-cart', [CartController::class, 'update'])->name('cart.update');
+
+//Checkout routes
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+
 
 Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');
 
