@@ -134,34 +134,3 @@
         }
     </script>
 @endsection
-
-{{-- <!-- Card -->
-<div class="flex flex-col">
-    <div class="-m-1.5 overflow-x-auto">
-        <div class="p-1.5 min-w-full inline-block align-middle">
-
-            <!-- Body -->
-            <div class="max-w-sm w-full min-h-[400px] flex flex-col justify-center mx-auto px-6 py-4">
-
-                <h2 class="mt-5 font-semibold text-gray-800 dark:text-black">
-                    No products?
-                </h2>
-                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    Find yourself nice bakery below
-                </p>
-                <div class="mt-5 grid sm:flex gap-2">
-                    <button type="button"
-                        class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-stone-500 text-white hover:bg-stone-600 focus:outline-none transition-all text-sm">
-                        <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" />
-                        </svg>
-                        Select a product
-                    </button>
-                </div>
-            </div>
-            <!-- End Body -->
-        </div>
-    </div>
-</div> --}}
