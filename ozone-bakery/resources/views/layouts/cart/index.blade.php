@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('content')
-<h1>Shopping Cart</h1>
-<form method="POST" action="{{ route('cart.update') }}" id="cart-form">
+    <h1>Shopping Cart</h1>
+    <form method="POST" action="{{ route('cart.update') }}" id="cart-form">
         @csrf
         @method('PUT')
 
@@ -24,14 +24,18 @@
                                     Find yourself a nice bakery below
                                 </p>
                                 <div class="mt-5 grid sm:flex gap-2 justify-center">
-                                    <a href="/products" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-stone-500 text-white hover:bg-stone-600 focus:outline-none transition-all text-sm">
-                                        <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                    <a href="/products"
+                                        class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-stone-500 text-white hover:bg-stone-600 focus:outline-none transition-all text-sm">
+                                        <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16"
+                                            height="16" viewBox="0 0 16 16" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" />
                                         </svg>
                                         Select a product
                                     </a>
                                 </div>
-                                
+
                             </div>
                             <!-- End Body -->
                         </div>
@@ -52,7 +56,9 @@
                                     <h2 class="mt-2 text-3xl font-bold text-gray-800 text-black text-left">
                                         {{ $item->product->name }}
                                     </h2>
-
+                                    <span class="item-price text-xl mt-auto mb-3">Price:
+                                        {{ $item->product->price }} Baht
+                                    </span>
                                     <h1 class="text-2xl font-semibold mt-auto mb-3">
                                         Quantities: <input type="number" class="quantity-input text-center rounded-xl"
                                             name="cart_items[{{ $item->id }}][amount]" value="{{ $item->amount }}"
@@ -61,8 +67,10 @@
                                 </section>
                                 <section class="flex flex-col items-stretch w-[20%] ml-auto mt-auto max-md:w-full">
                                     <span class="item-price text-2xl font-semibold mt-auto mb-3">Price:
-                                        {{ $item->product->price }} Baht</span>
+                                        {{ $item->product->price * $item->amount }} Baht
+                                    </span>
                                 </section>
+                                
                             </div>
                         </div>
                     </div>
@@ -77,7 +85,7 @@
             <div
                 class=" black mt-auto py-2 px-3 ml-10 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl transition-all text-sm rounded-3xl p-5 mr-10">
                 <h class="font-bold">Total Price:</h>
-                <h id="total-price">{{ $totalPrice }}</h>
+                <h id="total-price">{{ $totalPrice }} Baht</h>
             </div>
             <button type="submit"
                 class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all text-sm rounded-3xl p-5 mr-10"

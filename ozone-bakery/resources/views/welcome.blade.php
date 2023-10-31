@@ -18,8 +18,8 @@
             <div class="flex flex-col">
                 <div class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
                     <div class="flex flex-col items-stretch w-6/12 max-md:w-full">
-                        <h3 class="relative shrink-0 box-border h-auto text-3xl grow-0 w-auto ml-20 mt-5 mb-2.5">Best
-                            Sellers</h3>
+                        <h3 class="relative shrink-0 box-border h-auto text-3xl grow-0 w-auto ml-20 mt-5 mb-2.5">
+                            Best Sellers</h3>
                     </div>
                 </div>
             </div>
