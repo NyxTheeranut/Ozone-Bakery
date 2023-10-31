@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id')->constrained('users');
-            $table->unsignedInteger('amount');
             $table->enum('payment_status', ['Pending', 'Completed', 'Failed'])->default('Pending');
 
             $table->timestamps();
