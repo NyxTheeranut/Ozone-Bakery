@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('made_to_orders', function (Blueprint $table) {
+        Schema::create('made_to_order_carts', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('user_id')->constrained('users');
-            $table->enum('order_status', ['Pending Confirmation', 'Payment await', 'In Progress', 'Ready for pickup', 'Complete', 'Rejected'])->default('Pending');
-            $table->date('pickup_date')->nullable();
-            $table->text('description')->nullable();
+            $table->foreignId('product_id')->constrained('products');
+            $table->integer('amount');
 
             $table->timestamps();
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('made_to_orders');
+        Schema::dropIfExists('made_to_order_carts');
     }
 };
