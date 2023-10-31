@@ -29,7 +29,7 @@ $totalPrice = 0;
     <strong>
         Total Price:
     </strong> {{ $totalPrice }}
-<form method="POST" action="{{ route('orders') }}" id="order-form">
+<form method="POST" action="{{ route('confirm-order') }}" id="order-form">
     @csrf <!-- Add this line to include the CSRF token -->
     <input type="hidden" name="amount" value="{{ $totalPrice }}">
     @foreach ($cartItems as $cartItem)

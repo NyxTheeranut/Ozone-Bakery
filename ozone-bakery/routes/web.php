@@ -45,12 +45,14 @@ Route::get('/products', [ProductController::class, 'indexView'])->name('layouts.
 Route::get('/mycart', [CartController::class, 'index'])->name('cart');
 Route::post('/add-to-cart', [CartController::class, 'store'])->name('cart.add');
 Route::put('/update-cart', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/reset-on-confirm', [CartController::class, 'resetOnConfirm'])->name('cart.reset-on-confirm');
 
 //Checkout routes
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm-order');
 
 //Order routes
-Route::post('/orders', [OrderController::class, 'store'])->name('orders');
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.post');
 Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
 

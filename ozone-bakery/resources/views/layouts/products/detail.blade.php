@@ -31,11 +31,11 @@
             </section>
 
             <section class="flex flex-col items-stretch w-[20%] ml-auto max-md:w-full">
-                <form method="POST" action="{{ route('cart.add') }}">
+                <form id="add-to-cart-form" method="POST" action="{{ route('cart.add') }}">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <input type="number" name="amount" value="1" min="1" max="100" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
-                    <button type="submit" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
+                    <button type="submit" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover.bg-stone-600 transition-all text-sm rounded-3xl">
                         + | Add to Cart
                     </button>
                 </form>
@@ -61,5 +61,31 @@
     function goBack() {
         window.history.back();
     }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#add-to-cart-form').submit(function(e) {
+            e.preventDefault(); // Prevent the default form submission
+            var formData = $(this).serialize(); // Serialize form data
+
+            // Send an AJAX POST request to the route
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('cart.add') }}",
+                data: formData,
+                success: function(response) {
+                    // Handle the response as needed, e.g., update the UI
+                    console.log('Success: ' + response);
+                },
+                error: function(xhr) {
+                    // Handle errors if any
+                    console.error('Error: ' + xhr.responseText);
+                }
+            });
+        });
+    });
 </script>
 @endsection

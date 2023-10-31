@@ -9,6 +9,7 @@ use App\Http\Controllers\QrCodeController;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
@@ -27,5 +28,17 @@ class CheckoutController extends Controller
         }
 
         return view('layouts.checkout.index', compact('cartItems', 'totalPrice'));
+    }
+
+    public function confirmOrder(Request $request)
+    {
+        $response = app('request')->create(route('cart.reset-on-confirm'), 'DELETE', $request->all());
+        app()->handle($response);
+        
+        $response = app('request')->create(route('orders.post'), 'POST', $request->all());
+        app()->handle($response);
+        $order = session('order_id');
+
+        return redirect()->route('orders.show', ['order' => $order]);
     }
 }
