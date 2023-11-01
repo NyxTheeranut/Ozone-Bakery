@@ -91,7 +91,7 @@
         <div id="made-to-order-p" class="order-content" style="display: none;">
             @foreach ($madeToOrderData as $madeToOrder)
                 @if (Auth::check() && $madeToOrder->user_id == Auth::user()->id)
-                    <a href="/order/{{ $madeToOrder->id }}">
+                    <a href="/mto/{{ $madeToOrder->id }}">
                         <div class="bg-stone-100 rounded-xl shadow-lg mt-7 mb-5 p-4 sm:p-7 hover:bg-stone-200">
                             <h1 class="ml-0 mb-5 text-2xl font-semibold">
                                 Order #{{ $madeToOrder->id }}
