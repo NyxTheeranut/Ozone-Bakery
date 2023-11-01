@@ -12,11 +12,7 @@ class MadeToOrderController extends Controller
 {
     public function index()
     {
-        $madeToOrderData = MadeToOrder::get();
-
-        return view('layouts.products.made-to-order', [
-            'madeToOrderData' => $madeToOrderData,
-        ]);
+        return MadeToOrder::get();
     }
 
     public function show(MadeToOrder $madeToOrder)

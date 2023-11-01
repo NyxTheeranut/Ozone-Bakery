@@ -16,7 +16,7 @@ class MadeToOrdersTableSeeder extends Seeder
         $data = [
             [
                 'user_id' => 1, // Replace with valid user_id
-                'order_status' => 'Pending Confirmation',
+                'status' => 'Pending Confirmation',
                 'pickup_date' => now()->addDays(3),
                 'description' => 'Description for order 1',
                 'created_at' => now(),
@@ -24,7 +24,7 @@ class MadeToOrdersTableSeeder extends Seeder
             ],
             [
                 'user_id' => 2, // Replace with valid user_id
-                'order_status' => 'Pending Confirmation',
+                'status' => 'Pending Confirmation',
                 'pickup_date' => now()->addDays(5),
                 'description' => 'Description for order 2',
                 'created_at' => now(),

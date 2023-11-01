@@ -9,11 +9,17 @@ class MadeToOrder extends Model
 {
     use HasFactory;
 
+    public static $discount = 0.2;
+
     public function user(){
         return $this->belongsTo(User::class);
     }
 
     public function madeToOrderDetails(){
         return $this->hasMany(MadeToOrderDetail::class);
+    }
+
+    public static function getDiscount(){
+        return 1 - self::$discount;
     }
 }

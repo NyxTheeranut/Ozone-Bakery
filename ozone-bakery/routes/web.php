@@ -55,11 +55,20 @@ Route::delete('/cart/reset-on-confirm', [CartController::class, 'resetOnConfirm'
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm-order');
 
+Route::get('/mto-checkout', [CheckoutController::class, 'mtoIndex'])->name('mto-checkout');
+
 //Order routes
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.post');
 Route::get('/order/{order}', [OrderController::class, 'show'])->name('orders.show');
-
 Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admin.order');
+
+//Made to order routes
+Route::post('/mto-post', [MadeToOrderController::class, 'store'])->name('made-to-order.post');
+//Route::get('/mto-continue', [MadeToOrderController::class, 'continue'])->name('mto-continue');
+Route::post('/mto/checkout', [CheckoutController::class, 'mtoConfirmOrder'])->name('mto-confirm-order');
+Route::post('/mto/estimate-date', [MadeToOrderController::class, 'estimateDate'])->name('mto-estimate-date');
+Route::get('/mto/{madeToOrder}', [MadeToOrderController::class, 'show'])->name('made-to-order.show');
+//Route::get('/mto/products/{id}', [MadeToOrderController::class, 'productShow'])->name('made-to-order-product.show');
 
 
 Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');
