@@ -13,9 +13,22 @@
 
         <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
 
-            <p class="ml-3 mb-5 text-2xl font-semibold">
+            <div class="flex flex-row">
+                <p class="ml-3 mb-5 text-2xl font-semibold">
                 Order #{{ $order->id }}
             </p>
+            
+            
+            @if (Auth::check() && Auth::user()->is_admin)
+            <button id="manageButton"
+            class="flex flex-wrap block ml-auto h-10 mr-2 ml-2 pr-2 pl-2 pt-1 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
+                <img src="https://icon-library.com/images/white-icon-png/white-icon-png-14.jpg" alt=""
+                class="h-6 w-6 mr-2 mt-1">
+                Manage
+            </button>
+            @endif
+            </div>
+            
             <hr class="mt-0 mb-4" style="border-color: #c4b7a6; border-width: 2px;">
 
             <div class="flex flex-row">
@@ -59,17 +72,19 @@
 
                     <thead>
                         <tr>
-                            <th class="text-2xl text-left font-semibold pb-4 p-2 ml-3">Product</th>
-                            <th class="text-2xl font-semibold pb-4 p-2 ml-3">Quantity</th>
-                            <th class="text-2xl text-right font-semibold pb-4 p-2 ml-3">Price</th>
+                            <th class="text-2xl text-left font-semibold pb-4 p-2 ml-3 w-[30%]">Product</th>
+                            <th class="text-2xl text-cneter font-semibold pb-4 p-2 ml-3 w-[30%]">Unit Price (Baht)</th>
+                            <th class="text-2xl text-center font-semibold pb-4 p-2 ml-3 w-[20%]">Quantity</th>
+                            <th class="text-2xl text-center font-semibold pb-4 p-2 ml-3 w-[20%]">Amount (Baht)</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($order->order_details as $order_detail)
                             <tr>
                                 <td class="text-left pl-3">{{ $order_detail->product->name }}</td>
+                                <td class="text-center pl-3">{{ $order_detail->product->price }}</td>
                                 <td class="text-center">{{ $order_detail->amount }}</td>
-                                <td class="text-right pr-3">{{ $order_detail->product->price * $order_detail->amount }}</td>
+                                <td class="text-center pr-3">{{ $order_detail->product->price * $order_detail->amount }}</td>
                             </tr>
                             @php
                                 $total += $order_detail->product->price * $order_detail->amount;
@@ -95,6 +110,8 @@
             if (source === 'history') {
                 // Redirect to Page 1
                 window.location.href = '/history';
+            } else if (source === 'manage') {
+                window.history.back();
             } else {
                 window.location.href = '/';
             }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
+use App\Models\MadeToOrder;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
@@ -34,6 +35,16 @@ class OrderController extends Controller
         session()->put('order_id', $order->id);
 
         return;
+    }
+
+    public function indexView() {
+        $orders = Order::get();
+        $madeToOrderData = MadeToOrder::get();
+
+        return view('layouts.admin.order', [
+            'orders' => $orders,
+            'madeToOrderData' => $madeToOrderData
+        ]);
     }
     
 }
