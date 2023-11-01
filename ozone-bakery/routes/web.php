@@ -46,7 +46,7 @@ Route::get('/products', [ProductController::class, 'indexView'])->name('layouts.
 
 
 //Cart routes
-Route::get('/mycart', [CartController::class, 'index'])->name('cart');
+Route::get('/mycart', [CartController::class, 'index'])->name('cart')->middleware('auth');
 Route::post('/add-to-cart', [CartController::class, 'store'])->name('cart.add');
 Route::put('/update-cart', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/reset-on-confirm', [CartController::class, 'resetOnConfirm'])->name('cart.reset-on-confirm');

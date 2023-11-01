@@ -30,11 +30,11 @@
                 </h1>
             </section>
 
-            <section class="flex flex-col items-stretch w-[20%] ml-auto max-md:w-full">
+            <section class="flex flex-col items-stretch w-[20%] ml-auto mt-auto max-md:w-full">
                 <form id="add-to-cart-form" method="POST" action="{{ route('cart.add') }}">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="number" name="amount" value="1" min="1" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
+                    <input type="number" name="amount" value="1" min="1" max="100" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl text-center mb-2">
                     <button type="submit" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover.bg-stone-600 transition-all text-sm rounded-3xl">
                         + | Add to Cart
                     </button>
