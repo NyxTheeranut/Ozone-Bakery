@@ -6,35 +6,32 @@
             <div class="flex justify-center w-full">
                 <div class="flex flex-col items-stretch w-6/12 w-full">
                     <div id="scrollTarget"
-                        class="relative shrink-0 box-border h-auto text-3xl grow-0 w-auto ml-20 mt-5 mb-2.5 pl-10">
+                        class="relative shrink-0 box-border h-auto text-3xl grow-0 w-auto ml-20 mt-5 mb-2.5 pl-20">
 
-                        <h3 class="text-3xl">
-                            All Products
+                        <h3 class="text-3xl mb-2">
+                            Custom Orders
                         </h3>
 
-                        <p class="text-lg" style="color: green">
+                        <p class="text-xl ml-5" style="color: #008000">
                             For custom orders, all products are available at 20% off.
                         </p>
-                        
-                        <hr class="mt-3 mb-4" style="border-color: #c4b7a6; border-width: 2px; width: 90%;">
-
 
                         <div class="ml-4 mt-2">
-                            <p class="text-lg " style="color: rgb(184, 60, 60)";>
-                                * Minimum purchase per product is 500 Baht.
-                            </p>
-
-                            <p class="text-lg" style="color: rgb(184, 60, 60)">
-                                * Minimum purchase per order is 1,000 Baht.
+                            <p class="text-xl " style="color: rgb(184, 60, 60)";>
+                                The minimum purchase requirement is 500 Baht per product and 1,000 Baht per order.
                             </p>
                         </div>
 
+                        <hr class="mt-3" style="border-color: #c4b7a6; border-width: 2px; width: 90%;">
+
+                        <p class="text-lg mt-5 bg-stone-200 py-3 p-2 rounded-xl" style="max-width: 35%;">
+                            1. Select the type of products and specify the quantity you want.
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <div
-                class="flex flex-wrap max-md:flex-col max-md:items-stretch max-md:gap- ml-20 mr-20 pl-20 pr-20 mt-5 mx-auto">
+            <div class="flex flex-wrap max-md:flex-col max-md:items-stretch max-md:gap- ml-20 mr-20 pl-20 pr-20 mx-auto">
                 @csrf
                 @foreach ($products as $product)
                     <div class="flex flex-col items-stretch w-3/12 max-md:w-full mb-5">
@@ -43,7 +40,7 @@
                             <img src="{{ asset($product->image_path) }}" alt="{{ $product->name }} "
                                 class="aspect-[1.46] object-cover object-center w-[250px] h-[250px] mx-auto my-5 rounded-2xl border-0 border-solid">
 
-                            <h3 class="text-2xl mx-auto">
+                            <h3 class="text-2xl font-semibold mx-auto">
                                 {{ $product->name }}
                             </h3>
 
@@ -58,10 +55,11 @@
                                 </p>
 
                                 <p class="text-center">
-                                    <input type="number" class="quantity-input text-center"
-                                        data-price="{{ $product->price * $discount }}" data-product-id="{{ $product->id }}"
-                                        data-min-price="500" name="items[{{ $product->id }}][amount]" value="0"
-                                        min="0">
+                                    <input type="number"
+                                        class="quantity-input text-center rounded-3xl border border-stone-200 bg-stone-100 hover:bg-stone-200"
+                                        style="border-width: 4px;" data-price="{{ $product->price * $discount }}"
+                                        data-product-id="{{ $product->id }}" data-min-price="500"
+                                        name="items[{{ $product->id }}][amount]" value="0" min="0">
                                 </p>
 
                             </form>
@@ -71,36 +69,65 @@
                                     Total: 0 Baht
                                 </h3>
 
-                                <span class="product-error-message" style="color: rgb(184, 60, 60);"></span>
                             </div>
 
                         </a>
+
+                        <span class="product-error-message ml-5" style="color: rgb(184, 60, 60);"></span>
+
                     </div>
                 @endforeach
+                <hr class="mt-3 mb-4" style="border-color: #c4b7a6; border-width: 2px; width: 100%;">
 
+                <p class="text-lg mt-5 mb-5 bg-stone-200 py-3 p-2 rounded-xl" style="max-width: 50%;">
+                    2. Tell us about the details and estimate the avalable pick-up date.
+                </p>
             </div>
-            <div>
-                <span id="total-price">
-                    Total Price: 0 Baht
-                </span>
-                <span id="error-message" style="color: red;"></span>
-                <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
-                <div>
-                    <p id="datePane">Estimated Date: <span id="estimatedDate">Loading...</span></p>
+
+            <div class="flex flex-row w-full justify-center">
+
+                <div class="flex flex-row ml-20 mb-auto w-[60%]">
+                    <h1 class="text-3xl ml-20">
+                        Description:
+                    </h1>
+
+                    <textarea name="description" id="description" cols="30" rows="10" class="ml-5 mr-5" style="width: 100%;"
+                        placeholder="Describe your custom bakery order (e.g., flavors, design, dietary needs)."></textarea>
                 </div>
 
-                <input type='hidden' name='pickup_date' id='pickup_date' value=''>
+                <div class="flex flex-col mr-20 w-[40%]">
+                    <h1 id="total-price" class="text-3xl text-left font-semibold mr-20">
+                        Total Price: 0 Baht
+                    </h1>
+                    <span id="error-message" class="text-sm" style="color: rgb(184, 60, 60);"></span>
 
-                <button id="fetchButton" type="button"
-                    class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover.bg-stone-600 transition-all text-sm rounded-3xl">
-                    Estimated Date
-                </button>
+                    <div class="mt-5 mb-5">
+                        <p id="datePane" class="text-3xl font-semibold">
+                            Estimated Date:
+                            <span id="estimatedDate">
+                                Loading...
+                            </span>
+                        </p>
+                    </div>
+
+                    <input type='hidden' name='pickup_date' id='pickup_date' value=''>
+
+                    <button id="fetchButton" type="button"
+                        class="flex flex-wrap block mb-auto py-2 px-3 mr-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
+                        Estimated Date
+                    </button>
+
+                    <button id="checkoutButton" type="submit"
+                        class="flex flex-wrap block mt-auto py-2 px-3 ml-auto mr-20 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
+                        <p class="">
+                            Checkout
+                            </p>
+                    </button>
+                </div>
+
             </div>
 
-            <button id="checkoutButton" type="submit"
-                class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover.bg-stone-600 transition-all text-sm rounded-3xl">
-                Checkout
-            </button>
+
     </section>
 
     <script>
@@ -154,7 +181,7 @@
                     if (productTotal < minPrice && quantity > 0) {
                         allProductsValid = false;
                         productErrorElement.innerHTML =
-                            "<span class='error-message text-xl mx-auto'>Total price must be more than 500</span>";
+                            "<span class='error-message text-lg mx-auto'>* The total price must exceed 500 Baht.</span>";
                     } else {
                         productErrorElement.innerHTML = ""; // Clear the error message
                     }
@@ -166,13 +193,13 @@
                 totalPriceElement.textContent = `Total Price: ${total.toFixed(2)} Baht`;
 
                 // Check if the total price is greater than 1000
-                if (total > 1000) {
-                    totalPriceElement.style.color = "green"; // Change color to green for total price
-                    totalPriceElement.textContent += " (Eligible for Continue)";
+                if (total >= 1000) {
+                    totalPriceElement.style.color = "#008000"; // Change color to green for total price
                     showEstimatedDate();
                 } else {
-                    totalPriceElement.style.color = "red"; // Change color to red for total price
-                    totalPriceElement.textContent += " (Total must be more than 1000 to Continue)";
+                    totalPriceElement.style.color = "rgb(184, 60, 60)"; // Change color to red for total price
+                    totalPriceElement.innerHTML +=
+                        "<br> <p class='text-xl mt-2'>* Total must be more than 1,000 Baht to continue.</p>";
                     hideEstimatedDate();
                 }
 
