@@ -35,7 +35,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function showCreateProductView(Request $request)
+    public function showCreateProductView()
     {
         Log::info('showCreateProductView');
         return view('layouts.admin.create-product');

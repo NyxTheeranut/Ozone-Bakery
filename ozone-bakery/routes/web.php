@@ -26,6 +26,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Wtf laravel
+Route::get('/admin/products/create', [AdminController::class, 'showCreateProductView'])->name('layouts.admin.product.create');
+Route::post('/ingredients', [IngredientController::class, 'store'])->name('layouts.products.ingredient.post');
+
 Route::get('/', [HomeController::class, 'index'])
     ->name('welcome');
 
@@ -50,10 +54,6 @@ Route::get('/admin/products', [AdminController::class, 'index'])->name('layouts.
 Route::get('/admin/products/{product}/edit', [AdminController::class, 'showEditProductView'])->name('layouts.admin.products.edit');
 Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
 Route::get('/admin/products/{product}', [AdminController::class, 'showProduct'])->name('layouts.admin.product');
-Route::get('/admin/products/create', function(){
-    Log::info('showCreateProductView');
-    return view('layouts.admin.create-product');
-})->name('layouts.admin.product.create');
 
 //Cart routes
 Route::get('/mycart', [CartController::class, 'index'])->name('cart')->middleware('auth');
@@ -85,6 +85,7 @@ Route::get('/mto/{madeToOrder}', [MadeToOrderController::class, 'show'])->name('
 Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');
 Route::post('/products', [ProductController::class, 'store'])->name('products.post');
 
+//Ingredient routes
 Route::get('/ingredients', [IngredientController::class, 'index'])->name('layouts.products.ingredient');
 
 Route::get('/history', [HistoryController::class, 'index'])->name('layouts.orders.history');

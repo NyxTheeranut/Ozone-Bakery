@@ -98,6 +98,11 @@
                         orders
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/stocks') }}" class="nav-menu {{ request()->is('stocks') ? 'active' : '' }}">
+                        stocks
+                    </a>
+                </li>
             </ul>
         </div>
 
