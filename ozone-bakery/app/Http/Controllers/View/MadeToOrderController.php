@@ -18,6 +18,7 @@ class MadeToOrderController extends Controller
 
     public function index()
     {
+        Log::info('index');
         // $items = Product::get();
         // return $items;
         $products = Product::get();

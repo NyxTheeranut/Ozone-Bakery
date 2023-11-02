@@ -45,7 +45,7 @@ class ProductController extends Controller
         $request->validate ([
             'name' => 'nullable|string|min:3',
             'price' => 'nullable|integer|min:0',
-            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_path' => 'nullable|string',
             'description' => 'nullable|string',
         ]);
 

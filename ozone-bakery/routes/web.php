@@ -7,12 +7,13 @@ use App\Http\Controllers\View\OrderController;
 use App\Http\Controllers\View\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\View\AdminController;
 use App\Http\Controllers\View\CartController;
 use App\Http\Controllers\View\CheckoutController;
 use App\Http\Controllers\View\IngredientController;
 use App\Http\Controllers\View\ProductController;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,15 @@ require __DIR__.'/auth.php';
 
 Route::get('/products', [ProductController::class, 'indexView'])->name('layouts.products.index');
 
+//Admin routes
+Route::get('/admin/products', [AdminController::class, 'index'])->name('layouts.admin.products');
+Route::get('/admin/products/{product}/edit', [AdminController::class, 'showEditProductView'])->name('layouts.admin.products.edit');
+Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
+Route::get('/admin/products/{product}', [AdminController::class, 'showProduct'])->name('layouts.admin.product');
+Route::get('/admin/products/create', function(){
+    Log::info('showCreateProductView');
+    return view('layouts.admin.create-product');
+})->name('layouts.admin.product.create');
 
 //Cart routes
 Route::get('/mycart', [CartController::class, 'index'])->name('cart')->middleware('auth');
@@ -58,11 +68,12 @@ Route::post('/confirm-order', [CheckoutController::class, 'confirmOrder'])->name
 Route::get('/mto-checkout', [CheckoutController::class, 'mtoIndex'])->name('mto-checkout');
 
 //Order routes
-Route::post('/orders', [OrderController::class, 'store'])->name('orders.post');
-Route::get('/order/{order}', [OrderController::class, 'show'])->name('orders.show');
+Route::post('/orders', [OrderController::class, 'store'])->name('view.orders.post');
+Route::get('/order/{order}', [OrderController::class, 'show'])->name('view.orders.show');
 Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admin.order');
 
 //Made to order routes
+Route::get('/custom-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
 Route::post('/mto-post', [MadeToOrderController::class, 'store'])->name('made-to-order.post');
 //Route::get('/mto-continue', [MadeToOrderController::class, 'continue'])->name('mto-continue');
 Route::post('/mto/checkout', [CheckoutController::class, 'mtoConfirmOrder'])->name('mto-confirm-order');
@@ -70,14 +81,11 @@ Route::post('/mto/estimate-date', [MadeToOrderController::class, 'estimateDate']
 Route::get('/mto/{madeToOrder}', [MadeToOrderController::class, 'show'])->name('made-to-order.show');
 //Route::get('/mto/products/{id}', [MadeToOrderController::class, 'productShow'])->name('made-to-order-product.show');
 
-
+//Product routes
 Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');
-
-Route::get('/custom-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
+Route::post('/products', [ProductController::class, 'store'])->name('products.post');
 
 Route::get('/ingredients', [IngredientController::class, 'index'])->name('layouts.products.ingredient');
-
-Route::get('/customer-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
 
 Route::get('/history', [HistoryController::class, 'index'])->name('layouts.orders.history');
 

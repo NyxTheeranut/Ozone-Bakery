@@ -37,11 +37,11 @@ class CheckoutController extends Controller
         $response = app('request')->create(route('cart.reset-on-confirm'), 'DELETE', $request->all());
         app()->handle($response);
         
-        $response = app('request')->create(route('orders.post'), 'POST', $request->all());
+        $response = app('request')->create(route('view.orders.post'), 'POST', $request->all());
         app()->handle($response);
         $order = session('order_id');
 
-        return redirect()->route('orders.show', ['order' => $order]);
+        return redirect()->route('view.orders.show', ['order' => $order]);
     }
 
     public function mtoIndex(Request $request)
