@@ -33,21 +33,20 @@
 
             <div class="flex flex-row">
                 <p class="ml-3 mb-5 text-2xl font-semibold">
-                    Date:
-                </p>
-
-                <p class="ml-3 mb-5 text-2xl">
-                    {{ $order->created_at }}
-                </p>
-            </div>
-
-            <div class="flex flex-row">
-                <p class="ml-3 mb-5 text-2xl font-semibold">
                     Customer Name:
                 </p>
 
                 <p class="ml-3 mb-5 text-2xl">
                     {{ $order->user->name }}
+                </p>
+            </div>
+            <div class="flex flex-row">
+                <p class="ml-3 mb-5 text-2xl font-semibold">
+                    Date:
+                </p>
+
+                <p class="ml-3 mb-5 text-2xl">
+                    {{ $order->created_at }}
                 </p>
             </div>
 

@@ -66,7 +66,7 @@
                                     {{ $order->status }}
                                 </p>
                             </div>
-                            
+
                             <div class="flex flex-row">
                                 <p class="ml-3 mb-2 text-xl font-semibold">
                                     Total:
@@ -91,24 +91,56 @@
         <div id="made-to-order-p" class="order-content" style="display: none;">
             @foreach ($madeToOrderData as $madeToOrder)
                 @if (Auth::check() && $madeToOrder->user_id == Auth::user()->id)
-                    <a href="/mto/{{ $madeToOrder->id }}">
+                    <a href="/mto/{{ $madeToOrder->id }}?source=history">
                         <div class="bg-stone-100 rounded-xl shadow-lg mt-7 mb-5 p-4 sm:p-7 hover:bg-stone-200">
                             <h1 class="ml-0 mb-5 text-2xl font-semibold">
                                 Order #{{ $madeToOrder->id }}
                             </h1>
                             <hr class="mt-0 mb-4" style="border-color:#c4b7a6; border-width: 2px;">
-                            <p class="ml-3 mb-2 text-xl font-semibold">
-                                Date: {{ $madeToOrder->created_at }}
-                            </p>
-                            <p class="ml-3 mb-2 text-xl font-semibold">
-                                Status: {{ $madeToOrder->order_status }}
-                            </p>
-                            <p class="ml-3 mb-2 text-xl font-semibold">
-                                Total: {{ $madeToOrder->price }} Baht
-                            </p>
-                            <p class="ml-3 text-xl font-semibold">
-                                Pick-up Date: {{ $madeToOrder->pickup_date }}
-                            </p>
+
+                            <div class="flex flex-row">
+                                <p class="ml-3 mb-2 text-xl font-semibold">
+                                    Products:
+                                <p class="ml-3 mb-2 text-xl">
+                                    @foreach ($madeToOrder->madeToOrderDetails as $index => $detail)
+                                        {{ $detail->product->name }} ({{ $detail->amount }} ea)
+                                        @if ($index < count($madeToOrder->madeToOrderDetails) - 1)
+                                            ,
+                                        @endif
+                                    @endforeach
+                                </p>
+                                </p>
+                            </div>
+
+                            <div class="flex flex-row">
+                                <p class="ml-3 mb-2 text-xl font-semibold">
+                                    Date:
+                                </p>
+
+                                <p class="ml-3 mb-2 text-xl">
+                                    {{ $madeToOrder->created_at }}
+                                </p>
+                            </div>
+
+                            <div class="flex flex-row">
+                                <p class="ml-3 mb-2 text-xl font-semibold">
+                                    Status:
+                                </p>
+
+                                <p class="ml-3 mb-2 text-xl">
+                                    {{ $madeToOrder->status }}
+                                </p>
+                            </div>
+
+                            <div class="flex flex-row">
+                                <p class="ml-3 mb-2 text-xl font-semibold">
+                                    Pick-up Date:
+                                </p>
+
+                                <p class="ml-3 mb-2 text-xl">
+                                    {{ $madeToOrder->pickup_date }}
+                                </p>
+                            </div>
                         </div>
                     </a>
                 @endif
