@@ -29,7 +29,7 @@
                 @foreach ($products as $product)
                     <div class="flex flex-col items-stretch w-3/12 max-md:w-full mb-5">
                         <a href="/products/{{ $product->id }}"
-                            class="flex flex-col relative shrink-0 box-border h-auto shadow-[3px_-2px_26px_-20px_rgba(0,0,0,1)] w-[300px] self-center mt-5 pb-8 rounded-3xl border-[3px] border-solid border-stone-300 hover:bg-stone-200">
+                            class="flex flex-col relative shrink-0 box-border h-auto shadow-[3px_-2px_26px_-20px_rgba(0,0,0,1)] w-[300px] self-center mt-5 pb-8 rounded-3xl border-[3px] border-solid border-stone-300 transition-all hover:bg-stone-200">
                             <img src="{{ asset($product->image_path) }}" alt="{{ $product->name }} "
                                 class="aspect-[1.46] object-cover object-center w-[250px] h-[250px] mx-auto my-5 rounded-2xl border-0 border-solid">
 

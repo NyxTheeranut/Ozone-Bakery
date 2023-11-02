@@ -56,7 +56,7 @@
 
                                 <p class="text-center">
                                     <input type="number"
-                                        class="quantity-input text-center rounded-3xl border border-stone-200 bg-stone-100 hover:bg-stone-200"
+                                        class="quantity-input text-center rounded-3xl border border-stone-200 bg-stone-100 hover:bg-stone-200 transition-all"
                                         style="border-width: 4px;" data-price="{{ $product->price * $discount }}"
                                         data-product-id="{{ $product->id }}" data-min-price="500"
                                         name="items[{{ $product->id }}][amount]" value="0" min="0">
@@ -91,7 +91,7 @@
                         Description:
                     </h1>
 
-                    <textarea name="description" id="description" cols="30" rows="10" class="ml-5 mr-5" style="width: 100%;"
+                    <textarea name="description" id="description" cols="30" rows="10" class="ml-5 mr-5 text-xl" style="width: 100%;"
                         placeholder="Describe your custom bakery order (e.g., flavors, design, dietary needs)."></textarea>
                 </div>
 
@@ -114,7 +114,7 @@
 
                     <button id="fetchButton" type="button"
                         class="flex flex-wrap block mb-auto py-2 px-3 mr-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
-                        Estimated Date
+                        Estimate Pick-up Date
                     </button>
 
                     <button id="checkoutButton" type="submit"

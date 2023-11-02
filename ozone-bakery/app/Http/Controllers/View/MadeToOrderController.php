@@ -112,7 +112,7 @@ class MadeToOrderController extends Controller
 
             $date += ceil($amount/100);
         }
-        $date += 1;
+        $date += 2;
 
         $estimatedDate = Date::now()->addDays($date);
 

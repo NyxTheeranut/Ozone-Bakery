@@ -44,7 +44,7 @@
                     text-sm rounded-3xl text-center mb-4"
                             style="border-width: 4px;">
                         <button type="submit"
-                            class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover.bg-stone-600 transition-all text-sm rounded-3xl">
+                            class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
                             + | Add to Cart
                         </button>
                     </form>
