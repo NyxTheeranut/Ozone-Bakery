@@ -26,12 +26,13 @@
                 </div>
             </div>
 
-            <div class="flex max-md:flex-col max-md:items-stretch w-6/12 max-md:gap- ml-20 mr-20 pl-20 pr-20 mt-5 mx-auto">
-
+            <div
+                class="flex flex-wrap max-md:flex-col max-md:items-stretch max-md:gap- ml-20 mr-20 pl-20 pr-20 mt-5 mx-auto">
                 @csrf
                 @foreach ($products as $product)
-                    <div class="flex flex-col items-stretch max-md:w-full mb-5">
-                        <a class="flex flex-col relative shrink-0 box-border h-auto shadow-[3px_-2px_26px_-20px_rgba(0,0,0,1)] w-[300px] self-center mt-5 pb-8 rounded-3xl border-[3px] border-solid border-stone-300">
+                    <div class="flex flex-col items-stretch w-3/12 max-md:w-full mb-5">
+                        <a
+                            class="flex flex-col relative shrink-0 box-border h-auto shadow-[3px_-2px_26px_-20px_rgba(0,0,0,1)] w-[300px] self-center mt-5 pb-8 rounded-3xl border-[3px] border-solid border-stone-300">
                             <img src="{{ asset($product->image_path) }}" alt="{{ $product->name }} "
                                 class="aspect-[1.46] object-cover object-center w-[250px] h-[250px] mx-auto my-5 rounded-2xl border-0 border-solid">
 
@@ -44,23 +45,24 @@
                             </p>
 
                             <form id=checkout-form method="GET" action="{{ route('mto-checkout') }}">
-                                <p>
+                                <p class="justify-content-center">
                                     <input type="hidden" name="items[{{ $product->id }}][product_id]"
                                         value="{{ $product->id }}">
                                 </p>
 
-                                <p>
-                                    <input type="number" class="quantity-input"
+                                <p class="text-center">
+                                    <input type="number" class="quantity-input text-center"
                                         data-price="{{ $product->price * $discount }}" data-product-id="{{ $product->id }}"
                                         data-min-price="500" name="items[{{ $product->id }}][amount]" value="0"
                                         min="0">
                                 </p>
+
                             </form>
 
                             <div>
-                                <span class="product-total-price">
+                                <h3 class="product-total-price text-2xl mx-auto text-center font-bold mt-2">
                                     Total: 0 Baht
-                                </span>
+                                </h3>
 
                                 <span class="product-error-message" style="color: rgb(184, 60, 60);"></span>
                             </div>
@@ -68,30 +70,30 @@
                         </a>
                     </div>
                 @endforeach
-                
+
             </div>
             <div>
-                    <span id="total-price">
-                        Total Price: 0 Baht
-                    </span>
-                    <span id="error-message" style="color: red;"></span>
-                    <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
-                    <div>
-                        <p id="datePane">Estimated Date: <span id="estimatedDate">Loading...</span></p>
-                    </div>
-
-                    <input type='hidden' name='pickup_date' id='pickup_date' value=''>
-
-                    <button id="fetchButton" type="button"
-                        class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover.bg-stone-600 transition-all text-sm rounded-3xl">
-                        Estimated Date
-                    </button>
+                <span id="total-price">
+                    Total Price: 0 Baht
+                </span>
+                <span id="error-message" style="color: red;"></span>
+                <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
+                <div>
+                    <p id="datePane">Estimated Date: <span id="estimatedDate">Loading...</span></p>
                 </div>
 
-                <button id="checkoutButton" type="submit"
+                <input type='hidden' name='pickup_date' id='pickup_date' value=''>
+
+                <button id="fetchButton" type="button"
                     class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover.bg-stone-600 transition-all text-sm rounded-3xl">
-                    Checkout
+                    Estimated Date
                 </button>
+            </div>
+
+            <button id="checkoutButton" type="submit"
+                class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover.bg-stone-600 transition-all text-sm rounded-3xl">
+                Checkout
+            </button>
     </section>
 
     <script>
@@ -143,10 +145,12 @@
                     // Check if product total is valid
                     if (productTotal < minPrice && quantity > 0) {
                         allProductsValid = false;
-                        productErrorElement.textContent = "Total price must be more than 500";
+                        productErrorElement.innerHTML =
+                            "<span class='error-message text-xl mx-auto'>Total price must be more than 500</span>";
                     } else {
-                        productErrorElement.textContent = ""; // Clear the error message
+                        productErrorElement.innerHTML = ""; // Clear the error message
                     }
+
 
                     total += productTotal;
                 });

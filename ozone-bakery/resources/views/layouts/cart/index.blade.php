@@ -66,7 +66,7 @@
                                     </h1>
                                 </section>
                                 <section class="flex flex-col items-stretch w-[20%] ml-auto mt-auto max-md:w-full">
-                                    <span class="item-price text-2xl font-semibold mt-auto mb-3">Price:
+                                    <span class="item-price text-2xl font-semibold mt-auto mb-3">Total:
                                         {{ $item->product->price * $item->amount }} Baht
                                     </span>
                                 </section>
