@@ -126,6 +126,7 @@
             }
 
             function showEstimatedDate() {
+                console.log('Showing estimated date...');
                 document.getElementById("fetchButton").style.display = "block";
             }
 
@@ -168,18 +169,15 @@
                 if (total > 1000) {
                     totalPriceElement.style.color = "green"; // Change color to green for total price
                     totalPriceElement.textContent += " (Eligible for Continue)";
-                    checkoutForm.querySelector("button[type='submit']").removeAttribute("disabled");
                     showEstimatedDate();
                 } else {
                     totalPriceElement.style.color = "red"; // Change color to red for total price
                     totalPriceElement.textContent += " (Total must be more than 1000 to Continue)";
-                    checkoutForm.querySelector("button[type='submit']").setAttribute("disabled", "disabled");
                     hideEstimatedDate();
                 }
 
                 // Enable or disable the submit button and show error message
                 if (!allProductsValid) {
-                    checkoutForm.querySelector("button[type='submit']").setAttribute("disabled", "disabled");
                     hideEstimatedDate();
                 }
             }
