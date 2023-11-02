@@ -3,14 +3,21 @@
 @section('content')
     <section class="bg-neutral-100 flex flex-col text-4xl pt-8 pb-20">
         <div class="flex flex-col">
-            <div class="flex justify-content-between">
-                <div class="flex flex-col items-stretch  w-6/12 max-md:w-full">
+            <div class="flex justify-center w-full">
+                <div class="flex flex-col items-stretch w-6/12 w-full">
                     <div id="scrollTarget"
                         class="relative shrink-0 box-border h-auto text-3xl grow-0 w-auto ml-20 mt-5 mb-2.5 pl-10">
 
                         <h3 class="text-3xl">
                             All Products
                         </h3>
+
+                        <p class="text-lg" style="color: green">
+                            For custom orders, all products are available at 20% off.
+                        </p>
+                        
+                        <hr class="mt-3 mb-4" style="border-color: #c4b7a6; border-width: 2px; width: 90%;">
+
 
                         <div class="ml-4 mt-2">
                             <p class="text-lg " style="color: rgb(184, 60, 60)";>
