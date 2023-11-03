@@ -32,9 +32,10 @@
             </div>
 
             <div class="flex flex-wrap max-md:flex-col max-md:items-stretch max-md:gap- ml-20 mr-20 pl-20 pr-20 mx-auto">
+                <form id=checkout-form method="GET" action="{{ route('mto-checkout') }}">
                 @csrf
                 @foreach ($products as $product)
-                    <div class="flex flex-col items-stretch w-3/12 max-md:w-full mb-5">
+                    <div class="flex flex-row items-stretch w-3/12 max-md:w-full mb-5" style="flex: 0 0 25%;">
                         <a
                             class="flex flex-col relative shrink-0 box-border h-auto shadow-[3px_-2px_26px_-20px_rgba(0,0,0,1)] w-[300px] self-center mt-5 pb-8 rounded-3xl border-[3px] border-solid border-stone-300">
                             <img src="{{ asset($product->image_path) }}" alt="{{ $product->name }} "
@@ -48,7 +49,7 @@
                                 Price: {{ $product->price * $discount }} Baht
                             </p>
 
-                            <form id=checkout-form method="GET" action="{{ route('mto-checkout') }}">
+                            
                                 <p class="justify-content-center">
                                     <input type="hidden" name="items[{{ $product->id }}][product_id]"
                                         value="{{ $product->id }}">
@@ -62,7 +63,7 @@
                                         name="items[{{ $product->id }}][amount]" value="0" min="0">
                                 </p>
 
-                            </form>
+                            
 
                             <div>
                                 <h3 class="product-total-price text-2xl mx-auto text-center font-bold mt-2">
@@ -124,9 +125,9 @@
                             </p>
                     </button>
                 </div>
-
+            
             </div>
-
+</form>
 
     </section>
 

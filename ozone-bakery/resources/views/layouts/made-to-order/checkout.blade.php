@@ -14,6 +14,19 @@
             </h1>
 
             <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
+                <div class="mb-2 flex flex-col">
+                    <p class="mb-3 text-2xl font-bold">
+                        Custom Order
+                    </p>
+                    <p class="mt-1 text-2xl font-semibold">
+                        Pick-up Date: {{ $pickup_date }}
+                    </p>
+
+                    <p class="mt-1 text-2xl font-semibold">
+                        Description: {{ $description }}
+                    </p>
+                </div>
+                <hr class="mt-0" style="border-color:#c4b7a6; border-width: 2px;">
                 <div class="max-w-4xl flex flex-row">
                     <table class="min-w-full mt-3 mb-5 ml-7" style="font-size: 1.3em;">
 
@@ -30,7 +43,7 @@
                                 <tr>
                                     <td class="text-left pl-3">{{ $item['product']->name }}</td>
                                     <td class="text-center pr-3">{{ $item['product']->price * $discount }}</td>
-                                    <td class="text-center pl-3">{{ $item['amlount'] }}</td>
+                                    <td class="text-center pl-3">{{ $item['amount'] }}</td>
                                     <td class="text-center pr-3">
                                         {{ $item['product']->price * $item['amount'] * $discount }}
                                     </td>
@@ -44,16 +57,6 @@
 
                 </div>
                 <hr class="mt-0 mb-4" style="border-color:#c4b7a6; border-width: 2px;">
-
-                <div class="mb-2 flex flex-wrap">
-                    <p class="mt-1 text-xl font-semibold">
-                        Pick-up Date: {{ $pickup_date }}
-                    </p>
-
-                    <p class="mt-1 text-xl font-semibold">
-                        Description: {{ $description }}
-                    </p>
-                </div>
 
                 <div class="mb-3 flex flex-wrap">
                     <section class="ml-8 flex flex-col items-stretch w-[47%] max-md:w-full">
