@@ -140,7 +140,7 @@
         document.getElementById("deleteIngredientButton" + ingredientId).style.display = "none";
     }
 
-    function onCancelIngredientButtonClicked() {
+    function onCancelNewIngredientButtonClicked() {
         document.getElementById("new-ingredient-row").style.display = "none";
         document.getElementById("addIngredientButton").style.display = "block";
     }

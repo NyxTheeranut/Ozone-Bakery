@@ -11,14 +11,6 @@
                     </div>
                 </div>
                 <div class="flex flex-col items-stretch w-6/12 ml-5 max-md:w-full">
-                    @auth
-                        @if (auth()->user()->is_admin == 1)
-                            <a href="#"
-                                class="shrink-0 box-border bg-stone-500 text-white no-underline text-base mx-auto px-5 py-2.5 rounded-3xl hover:bg-stone-600 ml-auto mt-5 mr-20 bg-stone-500">
-                                Add product
-                            </a>
-                        @endif
-                    @endauth
                 </div>
             </div>
             <div
