@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\View\ProductStockController;
 use App\Http\Controllers\View\RecipeController;
 use App\Http\Controllers\View\MadeToOrderController;
 use App\Http\Controllers\View\HistoryController;
@@ -89,6 +90,9 @@ Route::post('/products', [ProductController::class, 'store'])->name('products.po
 
 //Ingredient routes
 Route::get('/ingredients', [IngredientController::class, 'index'])->name('layouts.products.ingredient');
+
+//Stock routes
+Route::get('/stocks', [ProductStockController::class, 'index'])->name('layouts.admin.stocks');
 
 Route::get('/history', [HistoryController::class, 'index'])->name('layouts.orders.history');
 
