@@ -116,7 +116,7 @@
                     </li>
                 @else
                     <li>
-                        <a href="{{ url('/custom-orders') }}"
+                        <a href="{{ url('/custom-orders', ['user' => Auth::user()]) }}"
                             class="nav-menu {{ request()->is('custom-orders') ? 'active' : '' }}">
                             Custom Orders
                         </a>

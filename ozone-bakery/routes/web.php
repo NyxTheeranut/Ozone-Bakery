@@ -73,7 +73,7 @@ Route::get('/mto/{madeToOrder}', [MadeToOrderController::class, 'show'])->name('
 
 Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');
 
-Route::get('/custom-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
+Route::get('/custom-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order')->middleware('auth');
 
 Route::get('/ingredients', [IngredientController::class, 'index'])->name('layouts.products.ingredient');
 
