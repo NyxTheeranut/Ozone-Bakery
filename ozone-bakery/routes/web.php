@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/products', [ProductController::class, 'indexView'])->name('layouts.products.index');
+Route::post('/mto/estimate-date', [MadeToOrderController::class, 'estimateDate'])->name('mto-estimate-date');
 
 
 //Cart routes
@@ -66,7 +67,6 @@ Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admi
 Route::post('/mto-post', [MadeToOrderController::class, 'store'])->name('made-to-order.post');
 //Route::get('/mto-continue', [MadeToOrderController::class, 'continue'])->name('mto-continue');
 Route::post('/mto/checkout', [CheckoutController::class, 'mtoConfirmOrder'])->name('mto-confirm-order');
-Route::post('/mto/estimate-date', [MadeToOrderController::class, 'estimateDate'])->name('mto-estimate-date');
 Route::get('/mto/{madeToOrder}', [MadeToOrderController::class, 'show'])->name('made-to-order.show');
 //Route::get('/mto/products/{id}', [MadeToOrderController::class, 'productShow'])->name('made-to-order-product.show');
 

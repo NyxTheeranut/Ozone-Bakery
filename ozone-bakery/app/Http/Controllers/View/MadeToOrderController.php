@@ -95,9 +95,9 @@ class MadeToOrderController extends Controller
 
     public function estimateDate(Request $request)
     {
+        Log::info("test");
         $date = 0;
         $items = new Collection();
-        Log::info(request('items'));
         foreach (request('items') as $item) {
             $product = Product::find($item['product_id']);
             $amount = $item['amount'];
