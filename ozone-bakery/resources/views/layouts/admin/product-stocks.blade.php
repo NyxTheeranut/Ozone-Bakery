@@ -1,66 +1,86 @@
-<style>
-    th {
-        text-align: left;
-        /* Align the text to the left */
-    }
+@extends ('layouts.main')
 
-    td {
-        text-align: left;
-        /* Align the text to the left */
-    }
-</style>
+@section('content')
 
-<table style="width: 50%; border-collapse: collapse;">
-    <thead>
-        <tr>
-            <th style="width: 5%;" class="text-left">ID</th>
-            <th style="width: 50%;" class="text-left">Product</th>
-            <th style="width: 20%;" class="text-left">Amount</th>
-            <th style="width: 10%;" class="text-left">Exp. date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($productStocks as $stock)
-        <tr>
-            <td>{{ $stock->id }}</td>
-            <td>{{ $stock->product->name }}</td>
-            <td><input type="number" onchange="onStockDetailChange({{$stock->id}})" id="stockAmountInput{{ $stock->id }}" value="{{ $stock->amount }}"></td>
-            <td><input type="date" onchange="onStockDetailChange({{$stock->id}})" id="stockExpDateInput{{ $stock->id }}" value="{{ $stock->exp_date }}"></td>
-            <td style="width: 25%;">
-                <button onclick="onSaveStockButtonClicked({{$stock->id}})" id="saveStockButton{{$stock->id}}" style="display: none">Save</button>
-                <button onclick="onDeleteStockButtonClicked({{$stock->id}})" id="deleteStockButton{{$stock->id}}">Delete</button>
-            </td>
-            @php
-            $lastStockId = $stock->id;
-            @endphp
-        </tr>
-        @endforeach
-        <tr id="new-stock-row" style="display: none;">
-            <td>{{ $lastStockId + 1 }}</td>
-            <td>
-                <select id="newStockProduct">
-                    @foreach($products as $product)
-                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+    <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
+
+        <h1 class="mr-auto mt-4 text-3xl font-semibold text-gray-800 dark:text-black">
+            Product Stocks
+        </h1>
+
+        <div class="bg-stone-200 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
+            
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;" class="text-2xl text-left font-semibold pb-4 p-2">ID</th>
+                        <th style="width: 30%;" class="text-2xl text-left font-semibold pb-4 p-2">Product</th>
+                        <th style="width: 20%;" class="text-2xl text-left font-semibold pb-4 pl-10 p-2">Amount(ea)</th>
+                        <th style="width: 20%;" class="text-2xl text-left font-semibold pb-4 pl-8 p-2">Exp. date</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    @foreach ($productStocks as $stock)
+                        <tr>
+                            <td class="pl-4 text-xl">{{ $stock->id }}</td>
+
+                            <td class="text-xl">{{ $stock->product->name }}</td>
+                            
+                            <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                type="number" onchange="onStockDetailChange({{ $stock->id }})"
+                                    id="stockAmountInput{{ $stock->id }}" value="{{ $stock->amount }}"></td>
+                            <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                type="date" onchange="onStockDetailChange({{ $stock->id }})"
+                                    id="stockExpDateInput{{ $stock->id }}" value="{{ $stock->exp_date }}"></td>
+                            <td style="width: 10%;">
+                                <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                onclick="onSaveStockButtonClicked({{ $stock->id }})"
+                                    id="saveStockButton{{ $stock->id }}" style="display: none">Save</button>
+                                <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                 onclick="onDeleteStockButtonClicked({{ $stock->id }})"
+                                    id="deleteStockButton{{ $stock->id }}">Delete</button>
+                            </td>
+                            @php
+                                $lastStockId = $stock->id;
+                            @endphp
+                        </tr>
                     @endforeach
-                </select>
-            </td>
-            <td><input type="number" id="newStockAmount"></td>
-            <td><input type="date" id="newStockExpDate"></td>
-            <td>
-                <button onclick="onSaveNewStockClicked()" id="saveNewStockButton">Save</button>
-                <button onclick="onCancelNewStockButtonClicked()" id="cancleNewStockButton">Cancel</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4"></td>
-            <td style="text-align: right;">
-                <button onclick="onAddStockButtonClicked()" id="addStockButton" style="display: block;">
-                    Add Stock
-                </button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+                    <tr id="new-stock-row" style="display: none;">
+                        <td class="text-xl pl-4">{{ $lastStockId + 1 }}</td>
+                        <td>
+                            <select id="newStockProduct" class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all">
+                                @foreach ($products as $product)
+                                    <option 
+                                    value="{{ $product->id }}">{{ $product->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                            type="number" id="newStockAmount"></td>
+                        <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                            type="date" id="newStockExpDate"></td>
+                        <td class="flex flex-row">
+                            <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                            onclick="onSaveNewStockClicked()" id="saveNewStockButton">Save</button>
+                            <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                            onclick="onCancelNewStockButtonClicked()" id="cancleNewStockButton">Cancel</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>
+                        <td style="text-align: center;">
+                            <button class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                            onclick="onAddStockButtonClicked()" id="addStockButton" style="display: block;">
+                               Add Stock
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection
 
 <script>
     function onAddStockButtonClicked() {
