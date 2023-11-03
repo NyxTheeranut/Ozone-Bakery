@@ -15,7 +15,7 @@
 @section('content')
     <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto"
         style="justify-content: center; align-items: center;">
-        <div class="flex flex-row mb-6">
+        <div class="flex flex-row mb-6 mt-2">
             <h1 class="mr-auto mt-6 text-3xl font-semibold text-gray-800 dark:text-black">
                 Product List
             </h1>

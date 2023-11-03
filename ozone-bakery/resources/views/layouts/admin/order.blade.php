@@ -3,7 +3,7 @@
 @section('content')
     <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
         <!-- Card -->
-        <div class="flex flex-row">
+        <div class="flex flex-row mt-3">
             <h1 class="mt-3 text-3xl font-semibold">
                 Orders
             </h1>

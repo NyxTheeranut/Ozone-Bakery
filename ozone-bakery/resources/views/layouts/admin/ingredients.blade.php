@@ -1,18 +1,20 @@
-<style>
-    th {
-        /* Align the text to the left */
-        border-bottom: 4px solid #c4b7a6;
-    }
-    </style>
-
 @extends ('layouts.main')
 
 @section('content')
     <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
 
-        <h1 class="mr-auto mt-4 text-3xl font-semibold text-gray-800 dark:text-black">
-            Ingredients
-        </h1>
+        <div class="flex flex-row mt-3">
+            <h1 class="mr-auto mt-4 text-3xl font-semibold text-gray-800 dark:text-black">
+                Ingredients
+            </h1>
+
+            <button
+                class="inline-block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                onclick="onAddIngredientButtonClicked()" id="addIngredientButton" style="display: none;">
+                Add Ingredient
+            </button>
+        </div>
+
 
         <div class="bg-stone-200 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
 
@@ -75,16 +77,7 @@
                                 id="cancleNewIngredientButton">Cancel</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                        <td style="text-align: right; width: 70%;">
-                            <button
-                                class="inline-block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
-                                onclick="onAddIngredientButtonClicked()" id="addIngredientButton" style="display: none;">
-                                Add Ingredient
-                            </button>
-                        </td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>
@@ -169,8 +162,19 @@
     }
 
     function onAddIngredientButtonClicked() {
-        ingredientTable = document.getElementById("new-ingredient-row").style.display = "table-row";
+        // Show the new-ingredient-row
+        const ingredientRow = document.getElementById("new-ingredient-row");
+        ingredientRow.style.display = "table-row";
+
+        // Scroll to the new-ingredient-row
+        ingredientRow.scrollIntoView({
+            behavior: "smooth",
+            block: "end"
+        });
+
+        // Hide the "Add Ingredient" button
         document.getElementById("addIngredientButton").style.display = "none";
+
     }
 
     function onIngredientDetailChange(ingredientId) {

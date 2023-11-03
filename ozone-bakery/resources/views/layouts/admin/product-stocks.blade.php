@@ -3,16 +3,24 @@
         /* Align the text to the left */
         border-bottom: 4px solid #c4b7a6;
     }
-    </style>
+</style>
 
 @extends ('layouts.main')
 
 @section('content')
     <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
 
-        <h1 class="mr-auto mt-4 text-3xl font-semibold text-gray-800 dark:text-black">
-            Product Stocks
-        </h1>
+        <div class="flex flex-row mt-3">
+            <h1 class="mr-auto mt-4 text-3xl font-semibold text-gray-800 dark:text-black">
+                Product Stocks
+            </h1>
+
+            <button
+                class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                onclick="onAddStockButtonClicked()" id="addStockButton" style="display: block;">
+                Add Stock
+            </button>
+        </div>
 
         <div class="bg-stone-200 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
 
@@ -81,16 +89,7 @@
                                 onclick="onCancelNewStockButtonClicked()" id="cancleNewStockButton">Cancel</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="4"></td>
-                        <td style="text-align: center;">
-                            <button
-                                class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
-                                onclick="onAddStockButtonClicked()" id="addStockButton" style="display: block;">
-                                Add Stock
-                            </button>
-                        </td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>
