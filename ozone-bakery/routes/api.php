@@ -23,22 +23,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::apiResource('/users', UserController::class);
+Route::apiResource('/users', UserController::class);
 
-// Route::apiResource('/orders', OrderController::class);
+Route::apiResource('/orders', OrderController::class);
 
-// Route::apiResource('/products', ProductController::class);
+Route::apiResource('/products', ProductController::class);
 
-// Route::apiResource('/product-stocks', ProductStockController::class);
+Route::apiResource('/product-stocks', ProductStockController::class);
 
-// Route::apiResource('/order-details', OrderDetailController::class);
+Route::apiResource('/order-details', OrderDetailController::class);
 
-// Route::apiResource('/recipes', RecipeController::class);
+Route::apiResource('/recipes', RecipeController::class);
 
-// Route::apiResource('/ingredients', IngredientController::class);
+Route::apiResource('/ingredients', IngredientController::class);
 
-// Route::apiResource('/recipe-details', RecipeDetailController::class);
+Route::apiResource('/recipe-details', RecipeDetailController::class);
 
-// Route::apiResource('/made-to-orders', MadeToOrderController::class);
+Route::apiResource('/made-to-orders', MadeToOrderController::class);
 
-// Route::apiResource('/carts', CartController::class);
+Route::apiResource('/carts', CartController::class);

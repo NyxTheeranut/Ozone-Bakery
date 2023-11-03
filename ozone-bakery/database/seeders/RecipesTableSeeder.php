@@ -17,14 +17,12 @@ class RecipesTableSeeder extends Seeder
             [
                 'product_id' => 1,
                 'yield' => 4,
-                'duration' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'product_id' => 2,
                 'yield' => 2,
-                'duration' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

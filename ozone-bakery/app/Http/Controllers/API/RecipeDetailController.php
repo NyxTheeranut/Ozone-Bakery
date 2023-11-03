@@ -25,6 +25,15 @@ class RecipeDetailController extends Controller
             'ingredient_id' => 'required|exists:ingredients,id',
             'quantity' => 'required|integer',
         ]);
+        
+
+        if (RecipeDetail::where('recipe_id', $request->get('recipe_id'))
+            ->where('ingredient_id', $request->get('ingredient_id'))->exists()) 
+        {
+            return response([
+                'error' => 'Recipe detail already exists'
+            ], 400);
+        }
 
         $recipeDetail = new RecipeDetail();
 
@@ -44,6 +53,11 @@ class RecipeDetailController extends Controller
             'ingredient_id' => 'nullable|exists:ingredients,id',
             'quantity' => 'nullable|integer',
         ]);
+
+        if ($request->get('quantity')==0) {
+            $recipeDetail->delete();
+            return ["message" => "Deleted successfully"];
+        }
 
         if ($request->has('recipe_id')) $recipeDetail->recipe_id = $request->get('recipe_id');
         if ($request->has('ingredient_id')) $recipeDetail->ingredient_id = $request->get('ingredient_id');

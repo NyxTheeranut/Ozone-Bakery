@@ -42,6 +42,15 @@ class UsersTableSeeder extends Seeder
         $user->password = 'admin';
         $user->is_admin = 1;
         $user->save();
+
+        $user = new User();
+        $user->name = 'user';
+        $user->lastname = 'user';
+        $user->tel = '1234567890';
+        $user->email = 'user@user.com';
+        $user->password = 'user';
+        $user->is_admin = 0;
+        $user->save();
         // $data = [
         //     [
         //         'name' => 'Kan',

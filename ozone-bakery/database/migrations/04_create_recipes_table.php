@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('product_id')->constrained('products');
-            $table->unsignedInteger('yield');
-            $table->time('duration');
+            $table->unsignedInteger('yield')->default(1);
 
             $table->unique('product_id');
 

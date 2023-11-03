@@ -21,7 +21,7 @@ class Product extends Model
         return $this->hasMany(Cart::class);
     }
 
-    public function recipes(){
+    public function recipe(){
         return $this->hasOne(Recipe::class);
     }
 

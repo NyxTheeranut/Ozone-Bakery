@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('ingredient_id')->constrained('ingredients');
             $table->unsignedInteger('quantity');
 
+            $table->unique(['recipe_id', 'ingredient_id']);
+
             $table->timestamps();
         });
     }

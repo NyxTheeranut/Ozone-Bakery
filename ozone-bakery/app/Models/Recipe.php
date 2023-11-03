@@ -13,7 +13,7 @@ class Recipe extends Model
         return $this->hasMany(RecipeDetail::class);
     }
 
-    public function products(){
+    public function product(){
         return $this->belongsTo(Product::class);
     }
 }

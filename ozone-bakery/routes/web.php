@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\View\RecipeController;
 use App\Http\Controllers\View\MadeToOrderController;
 use App\Http\Controllers\View\HistoryController;
 use App\Http\Controllers\View\OrderDetailController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\View\CartController;
 use App\Http\Controllers\View\CheckoutController;
 use App\Http\Controllers\View\IngredientController;
 use App\Http\Controllers\View\ProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 //Wtf laravel
 Route::get('/admin/products/create', [AdminController::class, 'showCreateProductView'])->name('layouts.admin.product.create');
 Route::post('/ingredients', [IngredientController::class, 'store'])->name('layouts.products.ingredient.post');
+Route::get('/admin/recipe/{product}' , [RecipeController::class, 'show'])->name('layouts.admin.recipe');
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('welcome');
@@ -53,7 +56,6 @@ Route::get('/products', [ProductController::class, 'indexView'])->name('layouts.
 Route::get('/admin/products', [AdminController::class, 'index'])->name('layouts.admin.products');
 Route::get('/admin/products/{product}/edit', [AdminController::class, 'showEditProductView'])->name('layouts.admin.products.edit');
 Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
-Route::get('/admin/products/{product}', [AdminController::class, 'showProduct'])->name('layouts.admin.product');
 
 //Cart routes
 Route::get('/mycart', [CartController::class, 'index'])->name('cart')->middleware('auth');
