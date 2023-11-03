@@ -13,7 +13,7 @@
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr>
-                        <th style="width: 5%;" class="text-2xl text-left font-semibold pb-4 p-2">ID</th>
+                        <th style="width: 10%;" class="text-2xl text-left font-semibold pb-4 p-2">ID</th>
                         <th style="width: 30%;" class="text-2xl text-left font-semibold pb-4 p-2">Product</th>
                         <th style="width: 20%;" class="text-2xl text-left font-semibold pb-4 pl-10 p-2">Amount(ea)</th>
                         <th style="width: 20%;" class="text-2xl text-left font-semibold pb-4 pl-8 p-2">Exp. date</th>
@@ -33,7 +33,7 @@
                             <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
                                 type="date" onchange="onStockDetailChange({{ $stock->id }})"
                                     id="stockExpDateInput{{ $stock->id }}" value="{{ $stock->exp_date }}"></td>
-                            <td style="width: 10%;">
+                            <td style="width: 15%;">
                                 <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
                                 onclick="onSaveStockButtonClicked({{ $stock->id }})"
                                     id="saveStockButton{{ $stock->id }}" style="display: none">Save</button>
