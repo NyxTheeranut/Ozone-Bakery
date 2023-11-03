@@ -21,7 +21,7 @@ class ProductStockController extends Controller
     public function store(Request $request)
     {
         $request->validate ([
-            'product_id'    => 'required|exists:product,id',
+            'product_id'    => 'required|exists:products,id',
             'amount'    => 'required|integer|min:0',
             'exp_date'  => 'required|date'
         ]);
@@ -40,7 +40,7 @@ class ProductStockController extends Controller
     public function update(Request $request, ProductStock $productStock)
     {
         $request->validate ([
-            'product_id'    => 'nullable|exists:product,id',
+            'product_id'    => 'nullable|exists:products,id',
             'amount'    => 'nullable|integer|min:0',
             'exp_date'  => 'nullable|date'
         ]);
