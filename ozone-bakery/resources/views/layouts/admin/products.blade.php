@@ -47,20 +47,22 @@
                     <td>
                         <img id="productImage{{ $product->id }}" src="{{ $product->image_path }}" alt="{{ $product->name }}" width="100" height="100" style="display: block; margin: 0 auto;" class="rounded-3xl ">
                         <input type="file" onchange="onProductImageUploaded({{$product->id}})" id="productImageInput{{ $product->id }}" style="display: none">
-                        <label id="fileInputLabel" for="productImageInput{{ $product->id }}">Select an Image</label>
+                        <label class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all" id="fileInputLabel" for="productImageInput{{ $product->id }}">Select an Image</label>
                     </td>
-                    <td class="text-xl pl-2"><input id="name{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" type="text" value="{{ $product->name }}"></td>
-                    <td class="text-lg" style="text-align: left;"><textarea id="description{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})">{{ $product->id }}</textarea></td>
+                    <td class="text-xl pl-2"><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" id="name{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" type="text" value="{{ $product->name }}"></td>
+                    <td class="text-lg" style="text-align: left;"><textarea class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" id="description{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})">{{ $product->id }}</textarea></td>
                     <td class="text-xl" style="text-align: center; width: 10%;">
-                        <input type="number" value="{{ $product->price }}" id="price{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" style="width: 50%;" ]>
+                        <input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="number" value="{{ $product->price }}" id="price{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" style="width: 50%;" ]>
                         Baht
                     </td>
                     <td class="justify-content-center" style="text-align: center; width: 10%;">
                         <a class="block m-2 mt-auto py-2 px-3 ml-12 w-20 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" href="/admin/recipe/{{ $product->id }}">{{ $product->recipe ? 'View' : 'Add' }}</a>
                     </td>
                     <td>
-                        <button id="deleteProductButton{{$product->id}}" onclick="onDeleteProductButtonClicked({{$product->id}})">Delete</button>
-                        <button id="saveProductButton{{$product->id}}" onclick="onSaveProductButtonClicked({{$product->id}})" style="display: none">Save</button>
+                        <button class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" id="deleteProductButton{{$product->id}}" onclick="onDeleteProductButtonClicked({{$product->id}})">
+                            Delete</button>
+                        <button id="saveProductButton{{$product->id}}" onclick="onSaveProductButtonClicked({{$product->id}})" style="display: none">
+                            Save</button>
                     </td>
                     @php
                     $lastProductId = $product->id;
@@ -69,17 +71,22 @@
                 @endforeach
                 <tr id="new-product-row" style="display: none;">
                     <td class="pl-6 text-xl" style="width: 5%;">{{ $lastProductId + 1 }}</td>
-                    <td><input class="block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" type="file" id="new-product-image" style="width: 80%;"></td>
+                    <td><input 
+                         type="file" id="new-product-image" style="width: 80%; display: none;">
+                         <label class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all">
+                             Select an Image</label></td>
                     <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="text" id="new-product-name" style="width: 80%;"></td>
                     <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="text" id="new-product-description" style="width: 80%;"></td>
                     <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="text" id="new-product-price" style="width: 80%;"></td>
                     <td>
                         <div class="flex flex-row">
                             <p>
-                                <button class="block mt-auto py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" onclick="onSaveNewProductButtonClicked()" id="saveProductButton">Save</button>
+                                <button class="block mt-auto py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onSaveNewProductButtonClicked()" id="saveProductButton">
+                                    Save</button>
                             </p>
                             <p>
-                                <button class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" onclick="onCancelNewProductButtonClicked()" id="cancelProductButton">Cancel</button>
+                                <button class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onCancelNewProductButtonClicked()" id="cancelProductButton">
+                                    Cancel</button>
                             </p>
                         </div>
                     </td>
@@ -229,7 +236,7 @@
     }
 
     function onDeleteProductButtonClicked(productId) {
-        if (confirm("Are you sure you want to delete this product? (Very high chance of regret)")) {
+        if (confirm("Are you sure you want to delete this product?")) {
             fetch(`/api/products/${productId}`, {
                     method: 'DELETE',
                     headers: {

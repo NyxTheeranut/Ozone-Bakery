@@ -70,8 +70,10 @@
                     <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="number" id="newStockAmount"></td>
                     <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="date" id="newStockExpDate"></td>
                     <td class="flex flex-row">
-                        <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onSaveNewStockClicked()" id="saveNewStockButton">Save</button>
-                        <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onCancelNewStockButtonClicked()" id="cancleNewStockButton">Cancel</button>
+                        <button class="flex flex-wrap block m-2 mt-10 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onSaveNewStockClicked()" id="saveNewStockButton">
+                            Save</button>
+                        <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onCancelNewStockButtonClicked()" id="cancleNewStockButton">
+                            Cancel</button>
                     </td>
                 </tr>
 
