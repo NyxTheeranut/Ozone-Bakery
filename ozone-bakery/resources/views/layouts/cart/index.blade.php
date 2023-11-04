@@ -82,6 +82,7 @@
 
     <div class="max-w-screen-lg px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
         @if (!$carts->isEmpty())
+        <hr class="mt-3" style="border-color: #c4b7a6; border-width: 2px; width: 100%;">
         <div class="text-3xl font-semibold ml-auto mt-5 flex justify-between">
             <div class="flex items-center">
                 <span class="ml-10 font-bold">Total Price:</span>
