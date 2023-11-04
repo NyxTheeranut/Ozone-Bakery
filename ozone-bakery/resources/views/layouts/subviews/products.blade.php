@@ -30,7 +30,7 @@
                     <h3 class="text-2xl font-semibold mx-auto">{{ $product->name }}</h3>
                     <p class="text-xl font-semibold mx-auto my-2.5">Price: {{ $product->price }} Baht</p>
                     <p class="flex-wrap bg-stone-200 rounded-2xl py-2 px-3 text-xl mx-auto my-2.5"
-                        style="border: 2px solid #c7bcad;">
+                        >
                         Stock: {{ $product->total_stock }}</p>
                 </a>
             </div>
