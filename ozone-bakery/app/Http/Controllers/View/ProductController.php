@@ -4,18 +4,42 @@ namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function indexView()
+    public function indexView(Request $request)
     {
-        $products = Product::get();
+        $pickUpDate = Carbon::now();
+        if ($request->has('pickUpDate')) $pickUpDate = Carbon::parse($request->get('pickUpDate'))->format('Y-m-d');
+
+        $availableProducts = Product::select('products.*', DB::raw('SUM(product_stocks.amount) as total_stock'))
+            ->leftJoin('product_stocks', 'products.id', '=', 'product_stocks.product_id')
+            ->where('product_stocks.amount', '>', 0)
+            ->where('product_stocks.exp_date', '>', $pickUpDate)
+            ->groupBy('products.id', 'products.name')
+            ->get();
+
+        $allProducts = Product::select('products.*', DB::raw('COALESCE(SUM(product_stocks.amount), 0) as total_stock'))
+            ->leftJoin('product_stocks', function ($join) use ($pickUpDate) {
+                $join->on('products.id', '=', 'product_stocks.product_id')
+                    ->where('product_stocks.amount', '>', 0)
+                    ->where('product_stocks.exp_date', '>', $pickUpDate);
+            })
+            ->groupBy('products.id', 'products.name')
+            ->get();
+
+
+        Log::info($availableProducts);
 
         return view('layouts.products.index', [
-            'products' => $products
+            'availableProducts' => $availableProducts,
+            'allProducts' => $allProducts,
+            'pickUpDate' => $pickUpDate
         ]);
     }
 

@@ -29,6 +29,9 @@ Route::apiResource('/users', UserController::class);
 Route::apiResource('/orders', OrderController::class);
 
 Route::apiResource('/products', ProductController::class);
+Route::get('/products/available', 'App\Http\Controllers\API\ProductController@indexAvailableProduct');
+Route::get('/products/all', 'App\Http\Controllers\API\ProductController@indexAllProduct');
+Route::get('/products/{product}/stock', 'App\Http\Controllers\API\ProductController@showProductStock');
 
 Route::apiResource('/product-stocks', ProductStockController::class);
 

@@ -4,19 +4,58 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductStock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+
     public function index()
     {
         return Product::get();
     }
 
+    public function indexAvailableProduct()
+    {
+        $products = Product::select('products.*', DB::raw('SUM(product_stocks.amount) as total_stock'))
+            ->leftJoin('product_stocks', 'products.id', '=', 'product_stocks.product_id')
+            ->where('product_stocks.amount', '>', 0)
+            ->where('product_stocks.exp_date', '>', now()->addDays(3))
+            ->groupBy('products.id', 'products.name')
+            ->get();
+
+        return $products;
+    }
+
+    public function indexAllProduct()
+    {
+        $products = Product::select('products.*', DB::raw('COALESCE(SUM(product_stocks.amount), 0) as total_stock'))
+            ->leftJoin('product_stocks', function ($join) {
+                $join->on('products.id', '=', 'product_stocks.product_id')
+                    ->where('product_stocks.amount', '>', 0)
+                    ->where('product_stocks.exp_date', '>', now()->addDays(3));
+            })
+            ->groupBy('products.id', 'products.name')
+            ->get();
+
+        return $products;
+    }
+
     public function show(Product $product)
     {
         return $product;
+    }
+
+    public function showProductStock($productID)
+    {
+        $totalStock = ProductStock::where('product_id', $productID)
+            ->where('amount', '>', 0)
+            ->where('exp_date', '>', now())
+            ->sum('amount');
+        return $totalStock;
     }
 
     public function store(Request $request)

@@ -66,7 +66,7 @@ Route::put('/update-cart', [CartController::class, 'update'])->name('cart.update
 Route::delete('/cart/reset-on-confirm', [CartController::class, 'resetOnConfirm'])->name('cart.reset-on-confirm');
 
 //Checkout routes
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
 Route::post('/confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm-order');
 
 Route::post('/mto/checkout', [CheckoutController::class, 'mtoCheckout'])->name('mto-checkout');

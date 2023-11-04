@@ -23,20 +23,30 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
+        Log::debug($request);
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'product_id' => 'required|exists:products,id',
             'amount' => 'required|integer|min:0',
         ]);
 
-        $cart = new Cart();
+        $cart = Cart::where('user_id', $request->get('user_id'))
+                             ->where('product_id', $request->get('product_id'))
+                             ->first();
 
-        $cart->user_id = $request->get('user_id');
-        $cart->product_id = $request->get('product_id');
-        $cart->amount = $request->get('amount');
+        if ($cart) {
+            // cart already exists, update the amount
+            $cart->amount += $request->get('amount');
+        }
+        else {
+            $cart = new Cart();
+            $cart->user_id = $request->get('user_id');
+            $cart->product_id = $request->get('product_id');
+            $cart->amount = $request->get('amount');
+        }
 
         $cart->save();
-        $cart->refresh();
+        
         return $cart;
     }
 

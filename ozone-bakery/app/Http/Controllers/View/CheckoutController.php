@@ -6,6 +6,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\QrCodeController;
+use App\Models\Cart;
 use App\Models\MadeToOrder;
 use App\Models\Order;
 use App\Models\Product;
@@ -15,28 +16,28 @@ use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
-    public function index(Request $request)
+    public function show()
     {
         // Get the cart items from the query parameters
-        $totalPrice = 0;
-        $cartItems = $request->input('cart_items');
+        $user_id = auth()->user()->id;
+        $carts = Cart::where('user_id', $user_id)->get();
 
-        $products = collect();
-
-        foreach ($cartItems as $cartItemId => $cartItemData) {
-            $cartItems[$cartItemId]['product'] = Product::find($cartItemData['product']);
-            $cartItems[$cartItemId]['quantity'] = (int) $cartItemData['quantity'];
-            $totalPrice += $cartItems[$cartItemId]['product']->price * $cartItems[$cartItemId]['quantity'];
+        $cartItems = [];
+        foreach ($carts as $cart) {
+            $cartItems[] = [
+                'product' => $cart->product,
+                'quantity' => $cart->amount,
+            ];
         }
 
-        return view('layouts.checkout.index', compact('cartItems', 'totalPrice'));
+        return view('layouts.checkout.index', compact('cartItems'));
     }
 
     public function confirmOrder(Request $request)
     {
         $response = app('request')->create(route('cart.reset-on-confirm'), 'DELETE', $request->all());
         app()->handle($response);
-        
+
         $response = app('request')->create(route('view.orders.post'), 'POST', $request->all());
         app()->handle($response);
         $order = session('order_id');
@@ -78,7 +79,7 @@ class CheckoutController extends Controller
         $request['user_id'] = auth()->user()->id;
         $response = app('request')->create(route('made-to-orders.store'), 'POST', $request->all());
         app()->handle($response);
-        
+
         return redirect()->route('made-to-order.show', ['madeToOrder' => session('made_to_order_id')]);
     }
 }
