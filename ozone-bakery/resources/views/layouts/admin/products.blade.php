@@ -21,7 +21,7 @@
         </h1>
 
         <button onclick="onAddProductButtonClicked()" id="addProductButton" class="block  mt-6 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" style="display: none;">
-            + | Add Product
+            Add Product
         </button>
     </div>
 
@@ -50,7 +50,7 @@
                         <label class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all" id="fileInputLabel" for="productImageInput{{ $product->id }}">Select an Image</label>
                     </td>
                     <td class="text-xl pl-2"><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" id="name{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" type="text" value="{{ $product->name }}"></td>
-                    <td class="text-lg" style="text-align: left;"><textarea class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" id="description{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})">{{ $product->id }}</textarea></td>
+                    <td class="text-lg" style="text-align: left;"><textarea class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" id="description{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})">{{ $product->id }}</textarea></td>
                     <td class="text-xl" style="text-align: center; width: 10%;">
                         <input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="number" value="{{ $product->price }}" id="price{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" style="width: 50%;" ]>
                         Baht
