@@ -6,7 +6,7 @@
     }
 
     tr {
-        height: 110px;
+        height: 130px;
         border-bottom: 1px solid #c4b7a6;
     }
 </style>
@@ -44,16 +44,23 @@
                 @foreach ($products as $product)
                 <tr>
                     <td class="pl-6 text-xl">{{ $product->id }}</td>
-                    <td><img src="{{ $product->image_path }}" alt="{{ $product->name }}" width="100" height="100" style="display: block; margin: 0 auto;" class="rounded-3xl "></td>
-                    <td class="text-xl pl-2">{{ $product->name }}</td>
-                    <td class="text-lg" style="text-align: left;">{{ $product->description }}</td>
-                    <td class="text-xl" style="text-align: center; width: 10%;">{{ $product->price }} Baht</td>
+                    <td>
+                        <img id="productImage{{ $product->id }}" src="{{ $product->image_path }}" alt="{{ $product->name }}" width="100" height="100" style="display: block; margin: 0 auto;" class="rounded-3xl ">
+                        <input type="file" onchange="onProductImageUploaded({{$product->id}})" id="productImageInput{{ $product->id }}" style="display: none">
+                        <label id="fileInputLabel" for="productImageInput{{ $product->id }}">Select an Image</label>
+                    </td>
+                    <td class="text-xl pl-2"><input id="name{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" type="text" value="{{ $product->name }}"></td>
+                    <td class="text-lg" style="text-align: left;"><textarea id="description{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})">{{ $product->id }}</textarea></td>
+                    <td class="text-xl" style="text-align: center; width: 10%;">
+                        <input type="number" value="{{ $product->price }}" id="price{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" style="width: 50%;" ]>
+                        Baht
+                    </td>
                     <td class="justify-content-center" style="text-align: center; width: 10%;">
                         <a class="block m-2 mt-auto py-2 px-3 ml-12 w-20 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" href="/admin/recipe/{{ $product->id }}">{{ $product->recipe ? 'View' : 'Add' }}</a>
                     </td>
                     <td>
-                        <button onclick="onDeleteProductButtonClicked({{$product->id}})">Delete</button>
-                        <button onclick="onSaveProductButtonClicked({{$product->id}})">Save</button>
+                        <button id="deleteProductButton{{$product->id}}" onclick="onDeleteProductButtonClicked({{$product->id}})">Delete</button>
+                        <button id="saveProductButton{{$product->id}}" onclick="onSaveProductButtonClicked({{$product->id}})" style="display: none">Save</button>
                     </td>
                     @php
                     $lastProductId = $product->id;
@@ -87,6 +94,57 @@
         document.getElementById("addProductButton").style.display = "block";
     });
 
+    function onSaveProductButtonClicked(productId) {
+        const name = document.getElementById("name" + productId).value;
+        const description = document.getElementById("description" + productId).value;
+        const price = document.getElementById("price" + productId).value;
+        const imageInput = document.getElementById("productImageInput" + productId);
+
+        const image = imageInput.files[0];
+        const requestBody = {
+            name: name,
+            description: description,
+            price: price,
+        };
+
+        if (image) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageBase64 = e.target.result;
+                requestBody.image = imageBase64;
+                sendPutRequest(productId, requestBody);
+            };
+            reader.readAsDataURL(image); // Read the image file as Base64
+        } else {
+            sendPutRequest(productId, requestBody);
+        }
+
+        setTimeout(function() {
+            location.reload();
+        }, 500); // 1000 milliseconds = 1 second
+    }
+
+    function onProductDetailChange(productId) {
+        hideDeleteButton(productId);
+    }
+
+    function hideDeleteButton(productId) {
+        document.getElementById("deleteProductButton" + productId).style.display = "none";
+        document.getElementById("saveProductButton" + productId).style.display = "block";
+    }
+
+    function showDeleteButton(productId) {
+        document.getElementById("deleteProductButton" + productId).style.display = "block";
+        document.getElementById("saveProductButton" + productId).style.display = "none";
+    }
+
+    function onProductImageUploaded(productId) {
+        onProductDetailChange(productId);
+        const imageInput = document.getElementById("productImageInput" + productId);
+        const productImage = document.getElementById("productImage" + productId);
+        productImage.src = URL.createObjectURL(imageInput.files[0]);
+    }
+
     function onAddProductButtonClicked() {
         // Show the new product row
         const newProductRow = document.getElementById("new-product-row");
@@ -119,7 +177,7 @@
         reader.onload = function(e) {
             const imageBase64 = e.target.result;
             requestBody.image = imageBase64;
-            sendRequest(requestBody);
+            sendPostRequest(requestBody);
         };
         reader.readAsDataURL(image); // Read the image file as Base64
 
@@ -133,7 +191,7 @@
         document.getElementById("addProductButton").style.display = "block";
     }
 
-    function sendRequest(requestBody) {
+    function sendPostRequest(requestBody) {
         fetch("/api/products", {
                 method: 'POST',
                 headers: {
@@ -145,6 +203,25 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function sendPutRequest(productId, requestBody) {
+        fetch(`/api/products/${productId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+                body: JSON.stringify(requestBody),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                location.reload();
             })
             .catch(error => {
                 console.error('Error:', error);

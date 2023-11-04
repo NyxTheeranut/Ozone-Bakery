@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -16,42 +17,72 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return $product;
-        
     }
 
     public function store(Request $request)
     {
-        $request->validate ([
+        $request->validate([
             'name' => 'required|string|min:3',
-            'price' => 'required|integer|min:0'
+            'price' => 'required|integer|min:0',
+            'image' => 'required|string',
+            'description' => 'required|string',
         ]);
 
         $product = new Product();
 
         $product->name = $request->get('name');
         $product->price = $request->get('price');
-        if ($request->has('image_path')) $product->image_path = $request->get('image_path');
-        else $product->image_path = "Ozone-Bakery/public/image/product/default.jpg";
-        if ($request->has('description')) $product->description = $request->get('description');
-        else $product->description = "null";
+        $product->description = $request->get('description');
+        $product->save();
+
+        //Save the image
+        $base64Image = $request->get('image');
+        $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64Image));
+        $imageName = $product->id . '.' . 'jpg';
+        // Save the image using the Storage facade
+        Storage::put('public/image/product/' . $imageName, $imageData);
+        // Update the image path in the database
+        $product->image_path = '/storage/image/product/' . $imageName;
 
         $product->save();
-        $product->refresh();
+
         return $product;
     }
 
     public function update(Request $request, Product $product)
     {
-        $request->validate ([
+        $request->validate([
             'name' => 'nullable|string|min:3',
             'price' => 'nullable|integer|min:0',
-            'image_path' => 'nullable|string',
+            'image' => 'nullable|string',
             'description' => 'nullable|string',
         ]);
 
-        if ($request->has('name')) $product->name = $request->get('name');
-        if ($request->has('price')) $product->price = $request->get('price');
-        if ($request->has('image_path')) $product->image_path = $request->get('image_path');
+
+        if ($request->has('name')) {
+            $product->name = $request->get('name');
+        }
+
+        if ($request->has('price')) {
+            $product->price = $request->get('price');
+        }
+
+        if ($request->has('description')) {
+            $product->description = $request->get('description');
+        }
+
+        if ($request->has('image')) {
+            $base64Image = $request->get('image');
+            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64Image));
+            $imageName = $product->id . '.' . 'jpg';
+
+            // Save the image using the Storage facade
+            Storage::put('public/image/product/' . $imageName, $imageData);
+
+            // Update the image path in the database
+            $product->image_path = '/storage/image/product/' . $imageName;
+        }
+
         $product->save();
         $product->refresh();
         return $product;
