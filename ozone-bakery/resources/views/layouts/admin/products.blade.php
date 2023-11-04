@@ -38,6 +38,9 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                $lastProductId = 0;
+                @endphp
                 @foreach ($products as $product)
                 <tr>
                     <td class="pl-6 text-xl">{{ $product->id }}</td>
@@ -47,6 +50,10 @@
                     <td class="text-xl" style="text-align: center; width: 10%;">{{ $product->price }} Baht</td>
                     <td class="justify-content-center" style="text-align: center; width: 10%;">
                         <a class="block m-2 mt-auto py-2 px-3 ml-12 w-20 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" href="/admin/recipe/{{ $product->id }}">{{ $product->recipe ? 'View' : 'Add' }}</a>
+                    </td>
+                    <td>
+                        <button onclick="onDeleteProductButtonClicked({{$product->id}})">Delete</button>
+                        <button onclick="onSaveProductButtonClicked({{$product->id}})">Save</button>
                     </td>
                     @php
                     $lastProductId = $product->id;
@@ -62,10 +69,10 @@
                     <td>
                         <div class="flex flex-row">
                             <p>
-                                <button class="block mt-auto py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" onclick="onSaveProductButtonClicked()" id="saveProductButton">Save</button>
+                                <button class="block mt-auto py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" onclick="onSaveNewProductButtonClicked()" id="saveProductButton">Save</button>
                             </p>
                             <p>
-                                <button class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" onclick="onCancelProductButtonClicked()" id="cancelProductButton">Cancel</button>
+                                <button class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" onclick="onCancelNewProductButtonClicked()" id="cancelProductButton">Cancel</button>
                             </p>
                         </div>
                     </td>
@@ -94,7 +101,7 @@
         document.getElementById("addProductButton").style.display = "none";
     }
 
-    function onSaveProductButtonClicked() {
+    function onSaveNewProductButtonClicked() {
         // Get the values of the new product from the input fields
         const name = document.getElementById("new-product-name").value;
         const description = document.getElementById("new-product-description").value;
@@ -121,7 +128,7 @@
         }, 500); // 1000 milliseconds = 1 second
     }
 
-    function onCancelProductButtonClicked() {
+    function onCancelNewProductButtonClicked() {
         document.getElementById("new-product-row").style.display = "none";
         document.getElementById("addProductButton").style.display = "block";
     }
@@ -142,5 +149,25 @@
             .catch(error => {
                 console.error('Error:', error);
             });
+    }
+
+    function onDeleteProductButtonClicked(productId) {
+        if (confirm("Are you sure you want to delete this product? (Very high chance of regret)")) {
+            fetch(`/api/products/${productId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
     }
 </script>

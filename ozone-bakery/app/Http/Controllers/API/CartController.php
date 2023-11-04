@@ -43,17 +43,12 @@ class CartController extends Controller
     public function update(Request $request, Cart $cart)
     {
         $request->validate([
-            'user_id' => 'nullable|exists:users,id',
-            'product_id' => 'nullable|exists:products,id',
             'amount' => 'nullable|integer|min:0',
         ]);
 
-        if ($request->has('user_id')) $cart->user_id = $request->get('user_id');
-        if ($request->has('product_id')) $cart->product_id = $request->get('product_id');
         if ($request->has('amount')) $cart->amount = $request->get('amount');
-
         $cart->save();
-        $cart->refresh();
+        if ($cart->amount == 0) $cart->delete();
         return $cart;
     }
 

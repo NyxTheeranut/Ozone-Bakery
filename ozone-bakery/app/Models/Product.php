@@ -29,8 +29,4 @@ class Product extends Model
         return $this->hasMany(MadeToOrderDetail::class);
     }
 
-    public function made_to_order_carts(){
-        return $this->hasMany(MadeToOrderCart::class);
-    }
-
 }

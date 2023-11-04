@@ -23,6 +23,5 @@ class DatabaseSeeder extends Seeder
         $this->call(MadeToOrdersTableSeeder::class);
         $this->call(CartTableSeeder::class);
         $this->call(MadeToOrderDetailSeeder::class);
-        $this->call(MadeToOrderCartSeeder::class);
     }
 }
