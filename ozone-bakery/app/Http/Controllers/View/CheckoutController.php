@@ -44,38 +44,41 @@ class CheckoutController extends Controller
         return redirect()->route('view.orders.show', ['order' => $order]);
     }
 
-    public function mtoIndex(Request $request)
+    public function mtoCheckout(Request $request)
     {
-        Log::debug($request->all());
-
         $discount = MadeToOrder::getDiscount();
         $pickup_date = $request->input('pickup_date');
         $description = $request->input('description');
 
-        $items = new Collection();
-        foreach (request('items') as $item) {
+        $items = json_decode($request->input('items'), true);
+
+        $itemsCollection = new Collection();
+        foreach ($items as $item) {
             $product = Product::find($item['product_id']);
             $amount = $item['amount'];
-
-            if ($amount <= 0) {
+            if ($amount == 0) {
                 continue;
             }
-
-            $items->push([
+            $itemsCollection->push([
                 'product' => $product,
                 'amount' => $amount,
             ]);
         }
 
-        return view('layouts.made-to-order.checkout', compact('pickup_date', 'description', 'items', 'discount'));
+        return view('layouts.made-to-order.checkout', [
+            'items' => $itemsCollection,
+            'pickup_date' => $pickup_date,
+            'description' => $description,
+            'discount' => $discount,
+        ]);
     }
 
     public function mtoConfirmOrder(Request $request)
     {
-        $response = app('request')->create(route('made-to-order.post'), 'POST', $request->all());
+        $request['user_id'] = auth()->user()->id;
+        $response = app('request')->create(route('made-to-orders.store'), 'POST', $request->all());
         app()->handle($response);
-        $madeToOrder = session('made_to_order_id');
-
-        return redirect()->route('made-to-order.show', ['madeToOrder' => $madeToOrder]);
+        
+        return redirect()->route('made-to-order.show', ['madeToOrder' => session('made_to_order_id')]);
     }
 }

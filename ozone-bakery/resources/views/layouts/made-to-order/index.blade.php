@@ -98,17 +98,19 @@
                     </p>
                 </div>
 
-                <input type='hidden' name='pickup_date' id='pickup_date' value=''>
-
                 <button id="estimateDateButton" onclick="onEstimateDateButtonClicked()" class="flex flex-wrap block mb-auto py-2 px-3 mr-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
                     Estimate Pick-up Date
                 </button>
 
-                <button id="checkoutButton" type="submit" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto mr-20 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
-                    <p class="">
+                <form action="/mto/checkout" method="POST">
+                    @csrf
+                    <input type='hidden' name="items" id='items' value=''>
+                    <input type='hidden' name="pickup_date" id='pickupDate' value=''>
+                    <input type='hidden' name="description" id='description' value=''>
+                    <button id="checkoutButton" type="submit" class="flex flex-wrap block mb-auto py-2 px-3 mr-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
                         Checkout
-                    </p>
-                </button>
+                    </button>
+                </form>
             </div>
 
         </div>
@@ -120,6 +122,27 @@
         document.getElementById("estimateDateButton").style.display = "none";
         document.getElementById("checkoutButton").style.display = "none";
     });
+
+    function updateCheckoutForm() {
+        var items = [];
+        var quantityInputs = document.getElementsByClassName("quantityInput");
+        for (var i = 0; i < quantityInputs.length; i++) {
+            var quantity = quantityInputs[i].value;
+            if (quantity == 0) {
+                continue;
+            }
+            var productId = quantityInputs[i].getAttribute("data-product-id");
+            items.push({
+                product_id: productId,
+                amount: quantity
+            });
+        }
+        console.log(items, document.getElementById("pickupDate").value, document.getElementById("description").value, );
+
+        document.getElementById("items").value = JSON.stringify(items);
+        document.getElementById("pickupDate").value = document.getElementById("pickupDate").textContent;
+        document.getElementById("description").value = document.getElementById("description").value;
+    }
 
     function onEstimateDateButtonClicked() {
         var items = [];
@@ -139,7 +162,8 @@
         fetch('/mto/estimate-date', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
                 },
                 body: JSON.stringify({
                     items: items
@@ -147,16 +171,20 @@
             })
             .then(response => response.json())
             .then(data => {
+                document.getElementById("estimateDateButton").style.display = "none";
                 document.getElementById("estimatedDate").textContent = data.estimatedDate;
-                document.getElementById("datePane").style.display = "block";
+                document.getElementById("pickupDate").value = data.estimatedDate;
                 document.getElementById("checkoutButton").style.display = "block";
             })
             .catch(error => {
                 console.error('Error:', error);
             });
+
+        updateCheckoutForm();
     }
 
     function onValid() {
+        document.getElementById("checkoutButton").style.display = "none";
         document.getElementById("estimateDateButton").style.display = "block";
     }
 

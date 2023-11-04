@@ -18,7 +18,6 @@ class MadeToOrderController extends Controller
 
     public function index()
     {
-        Log::info('index');
         // $items = Product::get();
         // return $items;
         $products = Product::get();
@@ -37,29 +36,6 @@ class MadeToOrderController extends Controller
         ]);
     }
 
-    public function store(Request $request)
-    {
-        $madeToOrder = new MadeToOrder();
-        $madeToOrder->user_id = auth()->user()->id;
-        $madeToOrder->pickup_date = $request->get('pickup_date');
-        $madeToOrder->description = $request->get('description');
-        $madeToOrder->save();
-        $madeToOrder->refresh();
-
-        foreach (request('items') as $item) { // Use 'items' to access the order details.
-            $madeToOrderDetail = new MadeToOrderDetail();
-            $madeToOrderDetail->made_to_order_id = $madeToOrder->id;
-            $madeToOrderDetail->product_id = $item['product_id'];
-            $madeToOrderDetail->amount = $item['amount'];
-            $madeToOrderDetail->save();
-            $madeToOrderDetail->refresh();
-        }
-
-        session()->put('made_to_order_id', $madeToOrder->id);
-
-        return;
-    }
-
     public function itemshow($id)
     {
         $product = Product::find($id);
@@ -70,33 +46,8 @@ class MadeToOrderController extends Controller
         ]);
     }
 
-    public function continue(Request $request)
-    {
-        $items = new Collection();
-        foreach (request('items') as $item) {
-            $product = Product::find($item['product_id']);
-            $amount = $item['amount'];
-            if ($amount == 0) {
-                continue;
-            }
-
-            $items->push([
-                'product' => $product,
-                'amount' => $amount,
-            ]);
-
-            Log::info($product . ' ' . $amount);
-        }
-
-        return view('layouts.made-to-order.continue', [
-            'discount' => MadeToOrder::getDiscount(),
-            'items' => $items,
-        ]);
-    }
-
     public function estimateDate(Request $request)
     {
-        Log::info("test");
         $date = 0;
         $items = new Collection();
         foreach (request('items') as $item) {
