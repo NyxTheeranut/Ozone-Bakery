@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>Shopping Cart</h1>
     <form method="POST" action="{{ route('cart.update') }}" id="cart-form">
         @csrf
         @method('PUT')
@@ -9,7 +8,8 @@
         @php
             $totalPrice = 0;
         @endphp
-        <div>
+        <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
+            <h1 class="text-3xl font-semibold mt-10 ml-10">Shopping Cart</h1>
             @if ($carts->isEmpty())
                 <!-- No products message -->
                 <div class="flex flex-col">
@@ -60,9 +60,10 @@
                                         {{ $item->product->price }} Baht
                                     </span>
                                     <h1 class="text-2xl font-semibold mt-auto mb-3">
-                                        Quantities: <input type="number" class="quantity-input text-center rounded-xl"
+                                        Quantity: <input type="number"  style="border-width: 2px;"
+                                            class="quantity-input text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
                                             name="cart_items[{{ $item->id }}][amount]" value="{{ $item->amount }}"
-                                            min="0" max="100"> pieces
+                                            min="0" max="100">
                                     </h1>
                                 </section>
                                 <section class="flex flex-col items-stretch w-[20%] ml-auto mt-auto max-md:w-full">
@@ -70,7 +71,7 @@
                                         {{ $item->product->price * $item->amount }} Baht
                                     </span>
                                 </section>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -81,18 +82,23 @@
             @endif
         </div>
         </div>
-        <div class="flex flex-row">
-            <div
-                class=" black mt-auto py-2 px-3 ml-10 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl transition-all text-sm rounded-3xl p-5 mr-10">
-                <h class="font-bold">Total Price:</h>
-                <h id="total-price">{{ $totalPrice }} Baht</h>
+        <div class="max-w-screen-lg px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
+            
+            <div class="text-3xl font-semibold ml-auto mt-5 flex justify-between">
+                <div class="flex items-center">
+                    <span class="ml-10 font-bold">Total Price:</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-10" id="total-price">{{ $totalPrice }} Baht</span>
+                </div>
             </div>
             <button type="submit"
-                class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all text-sm rounded-3xl p-5 mr-10"
+                class="flex flex-wrap block mt-7 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all p-5 mr-10"
                 style="display: none;">
                 Confirm Changes
             </button>
         </div>
+
     </form>
 
     <form method="GET" action="{{ route('checkout') }}" id="checkout-form">
@@ -100,10 +106,15 @@
             <input type="hidden" name="cart_items[{{ $item->id }}][product]" value="{{ $item->product->id }}">
             <input type="hidden" name="cart_items[{{ $item->id }}][quantity]" value="{{ $item->amount }}">
         @endforeach
-        <button type="submit" id="checkout-button"
-            class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all text-sm rounded-3xl p-5 mr-10">
-            Checkout
-        </button>
+        <div class="max-w-screen-lg ml-auto mr-auto px-4 py-1 sm:px-2 lg:px-2 lg:py-1">
+            <div class="text-3xl font-semibold ml-auto mb-5 flex justify-between">
+                <button type="submit" id="checkout-button"
+                    class="flex flex-wrap block mt-5 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all p-5 mr-10">
+                    Checkout
+                </button>
+            </div>
+        </div>
+
     </form>
 
 

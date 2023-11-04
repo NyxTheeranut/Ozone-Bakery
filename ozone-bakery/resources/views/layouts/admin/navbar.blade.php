@@ -84,6 +84,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ url('/orders') }}" class="nav-menu {{ request()->is('customer-orders') ? 'active' : '' }}">
+                        Orders
+                    </a>
+                </li>
+                <li>
                     <a href="{{ url('/admin/products') }}" class="nav-menu {{ request()->is('products') ? 'active' : '' }}">
                         Products
                     </a>
@@ -94,13 +99,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/orders') }}" class="nav-menu {{ request()->is('customer-orders') ? 'active' : '' }}">
-                        orders
-                    </a>
-                </li>
-                <li>
                     <a href="{{ url('/stocks') }}" class="nav-menu {{ request()->is('stocks') ? 'active' : '' }}">
-                        stocks
+                        Stocks
                     </a>
                 </li>
             </ul>

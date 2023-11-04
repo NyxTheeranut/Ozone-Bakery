@@ -3,9 +3,18 @@
 @section('content')
     <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
 
-        <h1 class="mr-auto mt-4 text-3xl font-semibold text-gray-800 dark:text-black">
-            Ingredients
-        </h1>
+        <div class="flex flex-row mt-3">
+            <h1 class="mr-auto mt-4 text-3xl font-semibold text-gray-800 dark:text-black">
+                Ingredients
+            </h1>
+
+            <button
+                class="inline-block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                onclick="onAddIngredientButtonClicked()" id="addIngredientButton" style="display: none;">
+                Add Ingredient
+            </button>
+        </div>
+
 
         <div class="bg-stone-200 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
 
@@ -21,19 +30,23 @@
                     @foreach ($ingredients as $ingredient)
                         <tr>
                             <td class="text-xl pl-4">{{ $ingredient->id }}</td>
-                            <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
-                                type="text" onchange="onIngredientDetailChange({{ $ingredient->id }})"
+                            <td><input
+                                    class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                    type="text" onchange="onIngredientDetailChange({{ $ingredient->id }})"
                                     id="ingredientNameInput{{ $ingredient->id }}" value="{{ $ingredient->name }}"></td>
-                            <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
-                                type="text" onchange="onIngredientDetailChange({{ $ingredient->id }})"
+                            <td><input
+                                    class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                    type="text" onchange="onIngredientDetailChange({{ $ingredient->id }})"
                                     id="ingredientQuantityUnitInput{{ $ingredient->id }}"
                                     value="{{ $ingredient->quantity_unit }}"></td>
                             <td style="width: 10%;">
-                                <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
-                                onclick="onSaveIngredientButtonClicked({{ $ingredient->id }})"
+                                <button
+                                    class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                    onclick="onSaveIngredientButtonClicked({{ $ingredient->id }})"
                                     id="saveIngredientButton{{ $ingredient->id }}" style="display: none">Save</button>
-                                <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
-                                onclick="onDeleteIngredientButtonClicked({{ $ingredient->id }})"
+                                <button
+                                    class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                    onclick="onDeleteIngredientButtonClicked({{ $ingredient->id }})"
                                     id="deleteIngredientButton{{ $ingredient->id }}">Delete</button>
                             </td>
                             @php
@@ -45,30 +58,26 @@
                         <td style="width: 5%;" class="text-xl pl-4">
                             {{ $lastIngredientId + 1 }}</td>
                         <td style="width: 40%;">
-                            <input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
-                            type="text" id="new-ingredient-name"></td>
+                            <input
+                                class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                type="text" id="new-ingredient-name">
+                        </td>
                         <td style="width: 30%;">
-                            <input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
-                            type="text" id="new-ingredient-quantity-unit"></td>
+                            <input
+                                class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                type="text" id="new-ingredient-quantity-unit">
+                        </td>
                         <td class="flex flex-row">
-                            <button class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
-                            onclick="onSaveNewIngredientButtonClicked()" 
-                            id="saveNewIngredientButton">Save</button>
-                            <button class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
-                            onclick="onCancelNewIngredientButtonClicked()"
+                            <button
+                                class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                onclick="onSaveNewIngredientButtonClicked()" id="saveNewIngredientButton">Save</button>
+                            <button
+                                class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                onclick="onCancelNewIngredientButtonClicked()"
                                 id="cancleNewIngredientButton">Cancel</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                        <td style="text-align: right; width: 70%;">
-                            <button class="inline-block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
-                            onclick="onAddIngredientButtonClicked()" id="addIngredientButton"
-                                style="display: none;">
-                                Add Ingredient
-                            </button>
-                        </td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>
@@ -153,8 +162,19 @@
     }
 
     function onAddIngredientButtonClicked() {
-        ingredientTable = document.getElementById("new-ingredient-row").style.display = "table-row";
+        // Show the new-ingredient-row
+        const ingredientRow = document.getElementById("new-ingredient-row");
+        ingredientRow.style.display = "table-row";
+
+        // Scroll to the new-ingredient-row
+        ingredientRow.scrollIntoView({
+            behavior: "smooth",
+            block: "end"
+        });
+
+        // Hide the "Add Ingredient" button
         document.getElementById("addIngredientButton").style.display = "none";
+
     }
 
     function onIngredientDetailChange(ingredientId) {
