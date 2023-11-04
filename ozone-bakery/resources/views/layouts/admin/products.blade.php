@@ -47,10 +47,11 @@
                     <td>
                         <img id="productImage{{ $product->id }}" src="{{ $product->image_path }}" alt="{{ $product->name }}" width="100" height="100" style="display: block; margin: 0 auto;" class="rounded-3xl ">
                         <input type="file" onchange="onProductImageUploaded({{$product->id}})" id="productImageInput{{ $product->id }}" style="display: none">
-                        <label class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all" id="fileInputLabel" for="productImageInput{{ $product->id }}">Select an Image</label>
+                        <label style="cursor: pointer;"
+                        class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all" id="fileInputLabel" for="productImageInput{{ $product->id }}">Select an Image</label>
                     </td>
                     <td class="text-xl pl-2"><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" id="name{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" type="text" value="{{ $product->name }}"></td>
-                    <td class="text-lg" style="text-align: left;"><textarea class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" id="description{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})">{{ $product->id }}</textarea></td>
+                    <td class="text-lg" style="text-align: left;"><textarea class="w-full text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" id="description{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})">{{ $product->id }}</textarea></td>
                     <td class="text-xl" style="text-align: center; width: 10%;">
                         <input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="number" value="{{ $product->price }}" id="price{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" style="width: 50%;" ]>
                         Baht
@@ -73,7 +74,8 @@
                     <td class="pl-6 text-xl" style="width: 5%;">{{ $lastProductId + 1 }}</td>
                     <td><input 
                          type="file" id="new-product-image" style="width: 80%; display: none;">
-                         <label class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all">
+                         <label style="cursor: pointer;"
+                         class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all">
                              Select an Image</label></td>
                     <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="text" id="new-product-name" style="width: 80%;"></td>
                     <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="text" id="new-product-description" style="width: 80%;"></td>
