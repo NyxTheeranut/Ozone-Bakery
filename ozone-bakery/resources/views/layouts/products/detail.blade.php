@@ -6,7 +6,7 @@
         <a onclick="goBack()" style="cursor: pointer;"
             class="flex flex-row mr-auto mt-6 text-2xl font-semibold text-gray-800 dark:text-black">
             <img src="https://cdn-icons-png.flaticon.com/512/3683/3683627.png" alt="" class="h-6 w-6 mr-2 mt-1 mb-2">
-            All roducts
+            All Products
         </a>
         <!-- Card -->
         <div class="bg-white rounded-xl shadow-lg mt-5 p-4 sm:p-7 ">
