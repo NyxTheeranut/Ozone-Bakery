@@ -33,9 +33,11 @@
             </section>
 
             <section class="flex flex-col items-stretch w-[20%] mr-5 ml-auto mt-auto max-md:w-full">
-                <div>
-                    <span id="stock" class="text-3xl font-semibold mt-auto mb-3"></span>
-                </div>
+                <p>
+                    Pickup Date :
+                    <input type="date" value="{{$pickupDate}}" id="pickupDate" onchange="onPickupDateChange()">
+                </p>
+                <span id="stock" class="text-3xl font-semibold mt-auto mb-3"></span>
                 </text>
                 <input type="number" onchange="onAmountChange()" id="amount" value="1" min="1" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto 
                     text-center rounded-3xl border border-stone-200 
@@ -62,30 +64,35 @@
 </div>
 <!-- End Card Section -->
 
-<script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    fetch('/api/products/{{$product->id}}/stock', {
-            method: 'GET',
+    document.addEventListener("DOMContentLoaded", function(event) {
+        let stock = "{{$product->getStock($pickupDate)}}";
+        document.getElementById("stock").textContent = "Stock: " + stock;
+        document.getElementById("amount").max = stock;
+        if (document.getElementById("amount").value > stock) {
+            document.getElementById("amount").value = stock;
+        }
+
+        const now = new Date().toISOString().slice(0, 10);
+        document.getElementById("pickupDate").setAttribute('min', now);
+    });
+
+    function onPickupDateChange() {
+        fetch('/pickupDate', {
+            method: 'PUT',
             headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                "X-CSRF-TOKEN": "{{ csrf_token() }}",
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({
+                pickupDate: document.getElementById('pickupDate').value
+            })
+        }).then(response => {
+            location.reload();
         })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("stock").textContent = "Stock: " + data;
-            document.getElementById("amount").max = data;
-            if (document.getElementById("amount").value > data) {
-                document.getElementById("amount").value = data;
-            }
-        });
+    }
 
     function onAmountChange() {
         if (document.getElementById("amount").value > document.getElementById("amount").max) {
@@ -102,8 +109,8 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    user_id: {{ Auth::user()->id }},
-                    product_id: {{ $product->id }},
+                    user_id: "{{Auth::user()->id}}",
+                    product_id: "{{$product->id}}",
                     amount: document.getElementById("amount").value,
                 })
             })
@@ -116,6 +123,10 @@
                 // Handle errors if any
                 console.error("Error: " + error);
             });
+    }
+
+    function goBack() {
+        window.history.back();
     }
 </script>
 @endsection

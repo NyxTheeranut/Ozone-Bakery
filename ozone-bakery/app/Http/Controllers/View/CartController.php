@@ -4,6 +4,7 @@ namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -21,9 +22,11 @@ class CartController extends Controller
 
         // Get the cart items of the authenticated user
         $carts = Cart::where('user_id', $user->id)->get();
+        $pickupDate = Carbon::parse(session('pickupDate'))->format('Y-m-d');
     
         return view('layouts.cart.index', [
-            'carts' => $carts
+            'carts' => $carts,
+            'pickupDate' => $pickupDate
         ]);
     }
 

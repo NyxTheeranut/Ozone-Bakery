@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductStock;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -47,15 +48,6 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return $product;
-    }
-
-    public function showProductStock($productID)
-    {
-        $totalStock = ProductStock::where('product_id', $productID)
-            ->where('amount', '>', 0)
-            ->where('exp_date', '>', now())
-            ->sum('amount');
-        return $totalStock;
     }
 
     public function store(Request $request)

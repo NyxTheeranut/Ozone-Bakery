@@ -81,6 +81,8 @@ $totalPrice = 0;
             Baht
         </div>
     </div>
+    Pickup Date:
+    <input type="date" value="{{$pickupDate}}" id="pickupDate" onchange="onPickupDateChange()">
     <button onclick="onConfirmChangeButtonClicked()" id="confirmChangeButton" class="flex flex-wrap block mt-7 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all p-5 mr-10" style="display: none;">
         Confirm Changes
     </button>
@@ -97,30 +99,35 @@ $totalPrice = 0;
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        if ("{{ $carts->isEmpty() ? 'true' : 'false' }}") {
+            document.getElementById('checkoutButton').style.display = 'none';
+        }
+        fetchData();
+    });
+
+    function fetchData() {
         const quantityInputs = document.getElementsByClassName("quantityInput");
         for (const quantityInput of quantityInputs) {
             const cart = JSON.parse(quantityInput.getAttribute('data-cart'));
-            fetch('/api/products/' + cart.product_id + '/stock', {
+            fetch('/products/' + cart.product_id + '/stocks', {
                     method: 'GET',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         'Content-Type': 'application/json'
-                    }
+                    },
                 })
                 .then(response => response.json())
                 .then(data => {
+                    console.log(cart.product_id + " stock : " + data);
                     if (quantityInput.value > data) {
                         quantityInput.value = data;
-                        console.log(quantityInput.value);
                     }
                     quantityInput.max = data;
                 })
                 .catch(error => console.error(error));
         }
-        setTimeout(function() {
-            updateTotalPrice();
-        }, 100); // 1000 milliseconds = 1 second
-    });
+        updateTotalPrice();
+    }
 
     function onCheckoutButtonClicked() {
         location.href = "/checkout";
@@ -130,7 +137,9 @@ $totalPrice = 0;
         const quantityInputs = document.getElementsByClassName("quantityInput");
         for (const quantityInput of quantityInputs) {
             let cart = JSON.parse(quantityInput.getAttribute('data-cart'));
-            let amount = quantityInput.value;
+            let amount = Math.min(quantityInput.value, quantityInput.max);
+            console.log("amount: " + amount);
+            console.log("quantityInput.max: " + quantityInput.max);
             fetch('/api/carts/' + cart.id, {
                     method: 'PUT',
                     headers: {
@@ -173,7 +182,6 @@ $totalPrice = 0;
         const quantityInputs = document.getElementsByClassName("quantityInput");
         let totalPrice = 0;
         for (const quantityInput of quantityInputs) {
-            console.log("test" + quantityInput.value);
             cart = JSON.parse(quantityInput.getAttribute('data-cart'));
             let price = quantityInput.getAttribute('data-price');
             let totalProductPrice = parseFloat(price) * parseFloat(quantityInput.value);
@@ -181,6 +189,24 @@ $totalPrice = 0;
             totalPrice += totalProductPrice;
         }
         document.getElementById('totalPrice').textContent = totalPrice;
+    }
+
+    function onPickupDateChange() {
+        fetch('/pickupDate', {
+            method: 'PUT',
+            headers: {
+                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                pickupDate: document.getElementById('pickupDate').value
+            })
+        }).then(response => {
+            fetchData();
+            setTimeout(function() {
+                onConfirmChangeButtonClicked();
+            }, 500); // 1000 milliseconds = 1 second
+        })
     }
 </script>
 @endsection

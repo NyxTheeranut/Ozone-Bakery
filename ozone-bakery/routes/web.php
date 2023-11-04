@@ -87,6 +87,9 @@ Route::get('/mto/{madeToOrder}', [MadeToOrderController::class, 'show'])->name('
 //Product routes
 Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');
 Route::post('/products', [ProductController::class, 'store'])->name('products.post');
+Route::get('/products/{product}/stocks', [ProductController::class, 'getStock'])->name('products.stocks.get');
+
+Route::put('/pickupDate', [ProductController::class, 'setPickupDate'])->name('pickupDate.set');
 
 //Ingredient routes
 Route::get('/custom-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
