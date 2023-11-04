@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin/products/create', [AdminController::class, 'showCreateProductView'])->name('layouts.admin.product.create');
 Route::post('/ingredients', [IngredientController::class, 'store'])->name('layouts.products.ingredient.post');
 Route::get('/admin/recipe/{product}' , [RecipeController::class, 'show'])->name('layouts.admin.recipe');
+Route::post('/mto/estimate-date', [MadeToOrderController::class, 'estimateDate'])->name('mto-estimate-date');
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('welcome');
@@ -68,7 +69,7 @@ Route::delete('/cart/reset-on-confirm', [CartController::class, 'resetOnConfirm'
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm-order');
 
-Route::get('/mto-checkout', [CheckoutController::class, 'mtoIndex'])->name('mto-checkout');
+Route::post('/mto/checkout', [CheckoutController::class, 'mtoCheckout'])->name('mto-checkout');
 
 //Order routes
 Route::post('/orders', [OrderController::class, 'store'])->name('view.orders.post');
@@ -79,8 +80,7 @@ Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admi
 Route::get('/custom-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
 Route::post('/mto-post', [MadeToOrderController::class, 'store'])->name('made-to-order.post');
 //Route::get('/mto-continue', [MadeToOrderController::class, 'continue'])->name('mto-continue');
-Route::post('/mto/checkout', [CheckoutController::class, 'mtoConfirmOrder'])->name('mto-confirm-order');
-Route::post('/mto/estimate-date', [MadeToOrderController::class, 'estimateDate'])->name('mto-estimate-date');
+Route::post('/mto/confirm', [CheckoutController::class, 'mtoConfirmOrder'])->name('mto-confirm-order');
 Route::get('/mto/{madeToOrder}', [MadeToOrderController::class, 'show'])->name('made-to-order.show');
 //Route::get('/mto/products/{id}', [MadeToOrderController::class, 'productShow'])->name('made-to-order-product.show');
 
@@ -89,6 +89,8 @@ Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('l
 Route::post('/products', [ProductController::class, 'store'])->name('products.post');
 
 //Ingredient routes
+Route::get('/custom-orders', [MadeToOrderController::class, 'index'])->name('layouts.products.made-to-order');
+
 Route::get('/ingredients', [IngredientController::class, 'index'])->name('layouts.products.ingredient');
 
 //Stock routes

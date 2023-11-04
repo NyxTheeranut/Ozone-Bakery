@@ -13,15 +13,15 @@
                 <p class="ml-3 mb-5 text-2xl font-semibold">
                     Order #{{ $order->id }}
                 </p>
-                
+
                 <hr class="mt-0 mb-4" style="border-color: #c4b7a6; border-width: 2px;">
 
                 <p class="ml-3 mb-5 text-2xl font-semibold">
-                    Date: {{ $order->created_at }}
+                    Customer Name: {{ $order->user->name }}
                 </p>
 
                 <p class="ml-3 mb-5 text-2xl font-semibold">
-                    Customer Name: {{ $order->user->name }}
+                    Date: {{ $order->created_at }}
                 </p>
 
                 <p class="ml-3 mb-5 text-2xl font-semibold">

@@ -96,9 +96,9 @@ class MadeToOrderController extends Controller
 
     public function estimateDate(Request $request)
     {
+        Log::info("test");
         $date = 0;
         $items = new Collection();
-        Log::info(request('items'));
         foreach (request('items') as $item) {
             $product = Product::find($item['product_id']);
             $amount = $item['amount'];
@@ -113,7 +113,7 @@ class MadeToOrderController extends Controller
 
             $date += ceil($amount/100);
         }
-        $date += 1;
+        $date += 2;
 
         $estimatedDate = Date::now()->addDays($date);
 
