@@ -193,9 +193,8 @@
                 console.error('Error:', error);
             });
 
-        setTimeout(function() {
-            location.reload();
-        }, 500); // 1000 milliseconds = 1 second
+        document.getElementById("saveButton" + recipeDetail.id).style.display = "none";
+        document.getElementById("deleteButton" + recipeDetail.id).style.display = "block";
     }
 
     function onQuantityInputChange(id) {

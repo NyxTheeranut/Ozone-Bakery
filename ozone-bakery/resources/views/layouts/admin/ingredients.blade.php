@@ -119,9 +119,12 @@
                 console.error('Error:', error);
             });
 
-        setTimeout(function() {
-            location.reload();
-        }, 500); // 1000 milliseconds =
+        document.getElementById("saveIngredientButton" + ingredientId).style.display = "none";
+        document.getElementById("deleteIngredientButton" + ingredientId).style.display = "block";
+
+        // setTimeout(function() {
+        //     location.reload();
+        // }, 500); // 1000 milliseconds =
     }
 
     function onDeleteIngredientButtonClicked(ingredientId) {

@@ -165,7 +165,8 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                location.reload();
+                document.getElementById(`saveStockButton${stockId}`).style.display = "none";
+                document.getElementById(`deleteStockButton${stockId}`).style.display = "block";
             })
             .catch((error) => {
                 console.error('Error:', error);
