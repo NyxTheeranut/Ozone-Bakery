@@ -83,7 +83,6 @@
 
                         <form method="POST" action="{{ route('mto-confirm-order') }}">
                             @csrf
-                            <input type="hidden" name="pickup_date" value="{{ $pickup_date }}">
                             <input type="hidden" name="description" value="{{ $description }}">
                             @foreach ($items as $item)
                                 <input type="hidden" name="items[{{ $item['product']->id }}][product_id]"

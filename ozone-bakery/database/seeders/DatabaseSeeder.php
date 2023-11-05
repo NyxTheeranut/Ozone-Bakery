@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Queue;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,5 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call(MadeToOrdersTableSeeder::class);
         //$this->call(CartTableSeeder::class);
         $this->call(MadeToOrderDetailSeeder::class);
+
+        $queue = new Queue();
+        $queue->date = Carbon::now()->format('Y-m-d');
+        $queue->save();
     }
 }

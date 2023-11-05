@@ -100,7 +100,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($madeToOrder->madeToOrderDetails as $detail)
+                        @foreach ($madeToOrder->made_to_order_details as $detail)
                             <tr>
                                 <td class="text-left pl-3">{{ $detail->product->name }}</td>
                                 <td class="text-center pl-3">{{ $detail->product->price * $discount }}</td>

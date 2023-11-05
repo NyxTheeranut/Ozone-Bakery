@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\MadeToOrder;
 use App\Models\Product;
+use App\Models\Queue;
+use Carbon\Carbon;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -25,14 +27,21 @@ class MadeToOrderController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'pickup_date' => 'required|date',
             'description' => 'nullable|string',
         ]);
 
         $madeToOrder = new MadeToOrder();
 
+        $day=1;
+
+        foreach (request('items') as $item) {
+            $day += ceil($item['amount']/100);
+        }
+
+        $pickupDate = Queue::first()->queue($day);
+
         $madeToOrder->user_id = $request->get('user_id');
-        $madeToOrder->pickup_date = $request->get('pickup_date');
+        $madeToOrder->pickup_date = $pickupDate;
         $madeToOrder->description = $request->get('description');
         $madeToOrder->save();
 
@@ -59,7 +68,7 @@ class MadeToOrderController extends Controller
 
         $madeToOrder->status = $request->get('status');
         $madeToOrder->save();
-        
+
         return $madeToOrder;
     }
 
