@@ -224,6 +224,11 @@
         for (var i = 0; i < productTotalPrices.length; i++) {
             totalPrice += parseFloat(productTotalPrices[i].textContent);
         }
+        if (totalPrice<1000) {
+            document.getElementById("totalPrice").style = "color: red;";
+        } else {
+            document.getElementById("totalPrice").style = "color: black;";
+        }
         document.getElementById("totalPrice").textContent = totalPrice.toFixed(2);
     }
 
@@ -235,7 +240,6 @@
             }
         }
         if (document.getElementById("totalPrice").textContent < 1000) {
-            document.getElementById("totalPrice").style = "color: red;"
             return false;
         }
         return true;
