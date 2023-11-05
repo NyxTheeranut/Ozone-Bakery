@@ -19,6 +19,27 @@ class ProductController extends Controller
         return Product::get();
     }
 
+    public function showProduct($productId)
+    {
+        $product = Product::find($productId);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        if (session()->has('pickupDate')) {
+            $pickupDate = Carbon::parse(session('pickupDate'))->format('Y-m-d');
+        } else {
+            session(['pickupDate' => Carbon::now()->format('Y-m-d')]);
+            $pickupDate = Carbon::now()->format('Y-m-d');
+        }
+
+        return response()->json([
+            'product' => $product,
+            'pickupDate' => $pickupDate
+        ]);
+    }
+
     public function indexAvailableProduct()
     {
         $products = Product::select('products.*', DB::raw('SUM(product_stocks.amount) as total_stock'))
@@ -73,7 +94,7 @@ class ProductController extends Controller
         $product_stocks = $product_stocks->where('exp_date', '>=', $pickupDate);
         $product_stocks = $product_stocks->sortBy('exp_date');
 
-        $data=[];
+        $data = [];
 
         foreach ($product_stocks as $stock) {
             if ($amount > 0) {
