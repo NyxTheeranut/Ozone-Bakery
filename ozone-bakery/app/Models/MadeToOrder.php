@@ -15,7 +15,7 @@ class MadeToOrder extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function madeToOrderDetails(){
+    public function made_to_order_details(){
         return $this->hasMany(MadeToOrderDetail::class);
     }
 

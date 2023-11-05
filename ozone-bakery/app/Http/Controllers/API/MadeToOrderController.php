@@ -54,23 +54,12 @@ class MadeToOrderController extends Controller
     public function update(Request $request, MadeToOrder $madeToOrder)
     {
         $request->validate([
-            'user_id' => 'nullable|exists:users,id',
-            'recipe_id' => 'nullable|exists:recipes,id',
-            'price' => 'nullable|integer',
-            'order_status' => 'nullable|in:Evaluating,Negotiating,In Progress,Waiting,Complete,Rejected',
-            'pickup_date' => 'nullable|date',
-            'description' => 'nullable|string',
+            'status' => 'required|in:Pending Confirmation,In Progress,Ready for pickup,Complete,Rejected'
         ]);
 
-        if ($request->filled('user_id')) $madeToOrder->user_id = $request->get('user_id');
-        if ($request->filled('recipe_id')) $madeToOrder->recipe_id = $request->get('recipe_id');
-        if ($request->filled('price')) $madeToOrder->price = $request->get('price');
-        if ($request->filled('order_status')) $madeToOrder->order_status = $request->get('order_status');
-        if ($request->filled('pickup_date')) $madeToOrder->pickup_date = $request->get('pickup_date');
-        if ($request->filled('description')) $madeToOrder->description = $request->get('description');
-
+        $madeToOrder->status = $request->get('status');
         $madeToOrder->save();
-        $madeToOrder->refresh();
+        
         return $madeToOrder;
     }
 

@@ -22,7 +22,7 @@ class OrderController extends Controller
         $order = new Order();
         $order->user_id = auth()->user()->id;
         $order->save();
-    
+
         foreach (request('items') as $item) { // Use 'items' to access the order details.
             $order_detail = new OrderDetail();
             $order_detail->order_id = $order->id;
@@ -37,14 +37,19 @@ class OrderController extends Controller
         return;
     }
 
-    public function indexView() {
-        $orders = Order::get();
-        $madeToOrderData = MadeToOrder::get();
+    public function indexView()
+    {
+        $activeOrders = Order::whereIn('status', ['Pending', 'Waiting'])->get();
+        $inactiveOrders = Order::whereIn('status', ['Completed', 'Failed'])->get();
 
-        return view('layouts.admin.order', [
-            'orders' => $orders,
-            'madeToOrderData' => $madeToOrderData
+        $activeMadeToOrders = MadeToOrder::whereIn('status', ['Pending Confirmation', 'In Progress', 'Ready for pickup'])->get();
+        $inactiveMadeToOrders = MadeToOrder::whereIn('status', ['Complete', 'Rejected'])->get();
+
+        return view('layouts.admin.orders', [
+            'activeOrders' => $activeOrders,
+            'inactiveOrders' => $inactiveOrders,
+            'activeMadeToOrders' => $activeMadeToOrders,
+            'inactiveMadeToOrders' => $inactiveMadeToOrders
         ]);
     }
-    
 }

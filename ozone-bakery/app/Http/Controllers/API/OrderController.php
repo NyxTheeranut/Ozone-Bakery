@@ -112,17 +112,12 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $request->validate([
-            'user_id' => 'nullable|exists:users,id',
-            'amount' => 'nullable|integer|min:0',
-            'payment_status' => 'nullable|in:Pending,Completed,Failed'
+            'status' => 'required|in:Pending,Waiting,Completed,Failed'
         ]);
 
-        if ($request->has('user_id')) $order->user_id = $request->get('user_id');
-        if ($request->has('amount')) $order->amount = $request->get('amount');
-        if ($request->has('payment_status')) $order->payment_status = $request->get('payment_status');
-
+        $order->status = $request->get('status');
         $order->save();
-        $order->refresh();
+        
         return $order;
     }
 
