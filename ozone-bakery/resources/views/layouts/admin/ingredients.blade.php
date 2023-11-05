@@ -1,3 +1,15 @@
+<style>
+    th {
+        /* Align the text to the left */
+        border-bottom: 4px solid #c4b7a6;
+    }
+
+    tr {
+        height: 130px;
+        border-bottom: 1px solid #c4b7a6;
+    }
+</style>
+
 @extends ('layouts.main')
 
 @section('content')
@@ -69,10 +81,10 @@
                         </td>
                         <td class="flex flex-row">
                             <button
-                                class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                class="flex flex-wrap block m-2 mt-10 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
                                 onclick="onSaveNewIngredientButtonClicked()" id="saveNewIngredientButton">Save</button>
                             <button
-                                class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                class="block m-2 py-2 px-3 mt-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
                                 onclick="onCancelNewIngredientButtonClicked()"
                                 id="cancleNewIngredientButton">Cancel</button>
                         </td>

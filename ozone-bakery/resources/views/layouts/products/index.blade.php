@@ -5,19 +5,18 @@ Pickup Date :
 <input type="date" value="{{$pickupDate}}" id="pickupDate" name="pickupDate" onchange="onPickupDateChange()" min="{{ date('Y-m-d') }}">
 
     @include('layouts.subviews.products', [
-    'title' => 'Available Products',
-    'products' => $availableProducts,
-    'pickupDate' => $pickupDate
+        'title' => 'Available Products',
+        'products' => $availableProducts,
+        'pickupDate' => $pickupDate,
     ])
     @include('layouts.subviews.products', [
-    'title' => 'All Products',
-    'products' => $allProducts,
-    'pickupDate' => $pickupDate
+        'title' => 'All Products',
+        'products' => $allProducts,
+        'pickupDate' => $pickupDate,
     ])
 
     <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const now = new Date().toISOString().slice(0, 10);
             document.getElementById("pickupDate").setAttribute('min', now);
         });
@@ -38,5 +37,4 @@ Pickup Date :
             })
         }
     </script>
-
-    @endsection
+@endsection

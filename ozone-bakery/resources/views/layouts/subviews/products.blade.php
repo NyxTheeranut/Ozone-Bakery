@@ -4,6 +4,15 @@
             <div class="flex flex-col items-stretch w-6/12 max-md:w-full">
                 <div id="scrollTarget" class="relative shrink-0 box-border h-auto text-3xl grow-0 w-auto ml-20 mt-5 mb-2.5 pl-20">
                     {{$title}}
+                    @if ($title == 'Available Products')
+                    <p class="text-lg ml-4 mt-2 text-stone-500">
+                        * Feel free to choose from available products within the current in-stock limits.
+                    </p>
+                    @else
+                    <p class="text-lg ml-4 mt-2 text-stone-500">
+                        * This is all products in our shop, some items may currently be out of stock.
+                    </p>
+                    @endif
                 </div>
             </div>
 
@@ -19,8 +28,10 @@
                     <img src="{{ asset($product->image_path) }}" alt="{{ $product->name }} " class="aspect-[1.46] object-cover object-center w-[250px] h-[250px] mx-auto my-5 rounded-2xl border-0 border-solid">
 
                     <h3 class="text-2xl font-semibold mx-auto">{{ $product->name }}</h3>
-                    <p class="text-xl mx-auto my-2.5">Price: {{ $product->price }} Baht</p>
-                    <p class="text-xl mx-auto my-2.5">Stock: {{ $product->total_stock }}</p>
+                    <p class="text-xl font-semibold mx-auto my-2.5">Price: {{ $product->price }} Baht</p>
+                    <p class="flex-wrap bg-stone-200 rounded-2xl py-2 px-3 text-xl mx-auto my-2.5"
+                        >
+                        Stock: {{ $product->total_stock }}</p>
                 </a>
             </div>
             @endforeach

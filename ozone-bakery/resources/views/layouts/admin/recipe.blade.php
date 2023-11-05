@@ -1,66 +1,126 @@
-<table style="width: 50%">
-    <thead>
-        <tr style="width: 100%">
-            <th style="width: 5%">No.</th>
-            <th style="width: 55%">Ingredient Name</th>
-            <th style="width: 35%">Quantity</th>
-            <th style="width: 10%"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @php
-        $recipe_details = $recipe->recipe_details;
-        $recipe_detail_count = 0;
-        @endphp
-        @foreach($recipe_details as $recipe_detail)
-        <tr style="width: 100%">
-            <td style="width: 5%">{{ ++$recipe_detail_count }}</td>
-            <td style="width: 55%">{{ $recipe_detail->ingredient->name }}</td>
-            <td style="width: 35%; display: flex;">
-                <input type="number" onchange="onQuantityInputChange({{$recipe_detail->id}})" id="quantityInput{{ $recipe_detail->id }}" value="{{ $recipe_detail->quantity }}" style="width: 50%; flex: 1;">
-                <div style="width: 50%; flex: 1;">{{ $recipe_detail->ingredient->quantity_unit }}</div>
-            </td>
+<style>
+    th {
+        /* Align the text to the left */
+        border-bottom: 4px solid #c4b7a6;
+    }
 
-            <td style="width: 10%;">
-                <button id="saveButton{{ $recipe_detail->id }}" onclick="onSaveIngredientButtonClicked({{ $recipe_detail }})" style="display: none">
-                    Save
-                </button>
-            </td>
-        </tr>
-        @endforeach
-        <tr id="new-ingredient-row">
-            <td>{{ ++$recipe_detail_count }}</td>
-            <td>
-                <select id="new-ingredient" onchange="onIngredientSelected()">
-                    @foreach($ingredients as $ingredient)
-                    <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
+    tr {
+        height: 130px;
+        border-bottom: 1px solid #c4b7a6;
+    }
+</style>
+
+@extends ('layouts.main')
+
+@section('content')
+    <div class="max-w-screen-xl px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
+
+        <div class="flex flex-row mt-3">
+            <h1 class="mr-auto mt-4 mb-4 text-3xl font-semibold text-gray-800 dark:text-black">
+                Recipes
+            </h1>
+
+            <tr>
+                <td colspan="3"></td>
+                <td style="text-align: right;">
+                    <button
+                        class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                        onclick="onAddIngredientButtonClicked()" id="addIngredientButton" style="display: none;">
+                        Add Ingredient
+                    </button>
+                </td>
+            </tr>
+        </div>
+
+        <div class="bg-stone-200 rounded-xl shadow-lg mt-7 p-4 sm:p-7" style="width: 100%;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="width: 5%" class="text-2xl text-center font-semibold pb-4 p-2">No.</th>
+                        <th style="width: 40%" class="text-2xl text-center font-semibold pb-4 p-2">Ingredient Name</th>
+                        <th style="width: 30%" class="text-2xl text-center font-semibold pb-4 p-2">Quantity</th>
+                        <th style="width: 15%" class="text-2xl text-left font-semibold pb-4 p-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $recipe_details = $recipe->recipe_details;
+                        $recipe_detail_count = 0;
+                    @endphp
+                    @foreach ($recipe_details as $recipe_detail)
+                        <tr style="width: 100%">
+                            <td style="width: 5%;" class="text-center text-xl">{{ ++$recipe_detail_count }}</td>
+                            <td style="width: 35%;" class="text-center text-xl pl-3">{{ $recipe_detail->ingredient->name }}
+                            </td>
+                            <td style="width: 30%;" class="text-center">
+                                <div class="flex items-center justify-center">
+                                    <input
+                                        class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                        type="number" onchange="onQuantityInputChange({{ $recipe_detail->id }})"
+                                        id="quantityInput{{ $recipe_detail->id }}" value="{{ $recipe_detail->quantity }}"
+                                        style="width: 50%;">
+                                    <div class="text-xl" style="width: 50%;">{{ $recipe_detail->ingredient->quantity_unit }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="width: 10%;">
+                                <button id="saveButton{{ $recipe_detail->id }}"
+                                    onclick="onSaveIngredientButtonClicked({{ $recipe_detail }})"
+                                    class="flex flex-wrap block mt-4 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                    style="display: none">
+                                    Save
+                                </button>
+                            </td>
+                        </tr>
                     @endforeach
-                </select>
-            </td>
-            <td style="width: 35%; display: flex;">
-                <input type="number" id="new-ingredient-quantity" style="width: 50%">
-                <span id="new-quantity-unit" style="width: 50%"></span>
-            </td>
-            <td>
-                <button onclick="onSaveNewIngredientButtonClicked()" id="saveIngredientButton">Save</button>
-                <button onclick="onCancelNewIngredientButtonClicked()" id="cancelIngredientButton">Cancel</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3"></td>
-            <td style="text-align: right;">
-                <button onclick="onAddIngredientButtonClicked()" id="addIngredientButton" style="display: none;">
-                    Add Ingredient
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" style="text-align: right;">
-                <span id="errorMessage" style="color: red"><span> 
-            </td>
-        </tr>
-    </tbody>
-</table>
+                    <tr id="new-ingredient-row">
+                        <td class="text-xl text-center">{{ ++$recipe_detail_count }}</td>
+                        <td class="text-xl text-center">
+                            <select style="width: 50%;"
+                                class="text-left text-lg rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                id="new-ingredient" onchange="onIngredientSelected()">
+                                @foreach ($ingredients as $ingredient)
+                                    <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td style="width: 30%;" class="text-center">
+                            <div class="flex items-center justify-center">
+                                <input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                type="number" id="new-ingredient-quantity" style="width: 50%; line-height: 100%;">
+                            <span class="text-xl mr-auto pl-10 ml-8" id="new-quantity-unit" style="width: 20%;"></span>
+                            </div>
+                            
+                        </td>
+                        
+                        
+                        
+                        <td class="justify-center">
+                            <div class="flex flex-row">
+                               <button
+                               class="flex flex-wrap block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                               onclick="onSaveNewIngredientButtonClicked()" id="saveIngredientButton">
+                                Save</button>
+                            <button
+                            class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                            onclick="onCancelNewIngredientButtonClicked()" id="cancelIngredientButton">
+                                Cancel</button> 
+                            </div>
+                            
+                        </td>
+                        
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" style="text-align: right;">
+                            <span id="errorMessage" style="color: red"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
