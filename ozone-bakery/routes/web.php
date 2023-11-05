@@ -85,7 +85,7 @@ Route::get('/mto/{madeToOrder}', [MadeToOrderController::class, 'show'])->name('
 //Route::get('/mto/products/{id}', [MadeToOrderController::class, 'productShow'])->name('made-to-order-product.show');
 
 //Product routes
-Route::get('/products/{id}', [ProductController::class, 'showProduct'])->name('layouts.products.detail');
+Route::get('/products/{id}', [ProductController::class, 'showProductDetail'])->name('product.detail');
 Route::post('/products', [ProductController::class, 'store'])->name('products.post');
 Route::get('/api/products/{product_id}/stocks', [ProductController::class, 'getStock'])->name('products.stocks.get');
 
@@ -103,3 +103,4 @@ Route::get('/stocks', [ProductStockController::class, 'index'])->name('layouts.a
 Route::get('/history', [HistoryController::class, 'index'])->name('layouts.orders.history');
 
 Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admin.order');
+

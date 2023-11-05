@@ -19,26 +19,17 @@ class ProductController extends Controller
         return Product::get();
     }
 
-    public function showProduct($productId)
+    public function show($id)
     {
-        $product = Product::find($productId);
+        $product = Product::find($id);
 
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
 
-        if (session()->has('pickupDate')) {
-            $pickupDate = Carbon::parse(session('pickupDate'))->format('Y-m-d');
-        } else {
-            session(['pickupDate' => Carbon::now()->format('Y-m-d')]);
-            $pickupDate = Carbon::now()->format('Y-m-d');
-        }
-
-        return response()->json([
-            'product' => $product,
-            'pickupDate' => $pickupDate
-        ]);
+        return response()->json($product);
     }
+
 
     public function indexAvailableProduct()
     {
@@ -115,11 +106,6 @@ class ProductController extends Controller
             'message' => 'Successfully reduce stock',
             'data' => $data,
         ], 200);
-    }
-
-    public function show(Product $product)
-    {
-        return $product;
     }
 
     public function getStock($product_id)

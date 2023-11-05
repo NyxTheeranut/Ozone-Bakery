@@ -15,29 +15,26 @@
                 <section class="flex flex-col items-stretch w-[30%] max-md:w-full">
 
                     <div class="flex flex-wrap items-start mt-3 ml-4">
-                        <img src="{{ asset($product->image_path) }}" class="h-90 w-90 rounded-3xl">
+                        <img id="product-image" class="h-90 w-90 rounded-3xl">
                     </div>
                 </section>
 
                 <section class="flex flex-col items-stretch w-[40%] ml-8 max-md:w-full">
-                    <h2 class="mt-2 text-3xl font-bold text-gray-800 text-black" style="font-size: 2.5em;">
-                        {{ $product->name }}
+                    <h2 id="product-name" class="mt-2 text-3xl font-bold text-gray-800 text-black"
+                        style="font-size: 2.5em;">
                     </h2>
 
                     <hr class="mt-4" style="border-color: #c4b7a6; border-width: 2px; width: 100%;">
 
-                    <p class="text-xl pl-6 mt-4 mb-10 flex flex-wrap">
-                        {{ $product->description }}
+                    <p id="product-description" class="text-xl pl-6 mt-4 mb-10 flex flex-wrap">
                     </p>
-
 
                     <div class="flex flex-col mt-auto">
                         <span id="stock" class="text-xl mt-10 mb-2"></span>
                         <div class="flex flex-row mt-auto">
                             <h1 class="text-3xl font-semibold mt-auto mb-3">
-                                Price: {{ $product->price }} Baht
+                                Price: <span id="product-price"></span> Baht
                             </h1>
-
                         </div>
                     </div>
                 </section>
@@ -50,40 +47,30 @@
                         </span>
                         <input type="number" onchange="onAmountChange()" id="amount" value="1" min="1"
                             class="flex flex-wrap block mt-auto py-2 px-3 mr-auto ml-9 
-                    text-center rounded-3xl border border-stone-200 
-                    font-semibold text-xl bg-stone-100 hover:bg-stone-200 transition-all 
-                    text-sm rounded-3xl text-center mb-4"
+                        text-center rounded-3xl border border-stone-200 
+                        font-semibold text-xl bg-stone-100 hover-bg-stone-200 transition-all 
+                        text-sm rounded-3xl text-center mb-4"
                             style="border-width: 4px;">
                     </div>
 
                     <div class="flex flex-row">
                         <span class="text-xl font-semibold mr-5 mt-2">Pickup Date: </span>
                         <input
-                            class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                            class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover-bg-white transition-all"
                             style="border-width: 4px;" type="date" value="{{ $pickupDate }}" id="pickupDate"
                             onchange="onPickupDateChange()">
                     </div>
 
                     <button onclick="onAddToCartButtonClicked()"
-                        class="flex flex-wrap block mt-3 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
+                        class="flex flex-wrap block mt-3 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all text-sm rounded-3xl">
                         + | Add to Cart
                     </button>
                 </section>
             </div>
-
-
-            <div class="pl-5">
-
-
-            </div>
-
-
-
         </div>
-
     </div>
     <!-- End Card -->
-    </div>
+
     <!-- End Card Section -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -96,18 +83,17 @@
                 .then(response => response.json())
                 .then(data => {
                     // Update the product details in your HTML
-                    document.getElementById("product-name").textContent = data.product.name;
-                    document.getElementById("product-description").textContent = data.product.description;
-                    document.getElementById("product-price").textContent = "Price: " + data.product.price +
-                        " Baht";
+                    document.getElementById("product-name").textContent = data.name;
+                    document.getElementById("product-description").textContent = data.description;
+                    document.getElementById("product-price").textContent = data.price + " Baht";
+                    document.getElementById("product-image").src = data.image_path; // Set the image source
+
 
                     // Handle other data as needed
                 })
                 .catch(error => {
                     console.error("Error fetching product data: " + error);
                 });
-
-            // ... Rest of your JavaScript code ...
         });
         document.addEventListener("DOMContentLoaded", function(event) {
             let stock = "{{ $product->getStock($pickupDate) }}";

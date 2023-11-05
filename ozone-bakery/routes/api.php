@@ -34,6 +34,7 @@ Route::get('/api/user', [UserController::class, 'getUserData']);
 Route::apiResource('/orders', OrderController::class);
 
 Route::apiResource('/products', ProductController::class);
+Route::get('/api/products/{id}', 'API\ProductController@show');
 Route::get('/products/available', 'App\Http\Controllers\API\ProductController@indexAvailableProduct');
 Route::get('/products/all', 'App\Http\Controllers\API\ProductController@indexAllProduct');
 

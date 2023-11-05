@@ -58,9 +58,18 @@ class ProductController extends Controller
         ]);
     }
 
-    public function showProduct($productId)
+    public function showProductDetail($id)
     {
-        return view('layouts.products.detail');
+        // Fetch the product details by ID
+        $product = Product::find($id);
+
+        if (!$product) {
+            abort(404);
+        }
+        $pickupDate = session()->has('pickupDate') ? Carbon::parse(session('pickupDate'))->format('Y-m-d') : Carbon::now()->format('Y-m-d');
+
+
+        return view('layouts.products.detail', compact('product', 'pickupDate'));
     }
 
 
