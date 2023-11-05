@@ -53,7 +53,7 @@
                                 <tr>
                                     <td colspan="5"><strong class="text-lg text-center pb-4 p-2">Active Order</strong>
                                     </td>
-                                <tr>
+                                </tr>
                                     @foreach ($activeOrders as $order)
                                 <tr>
                                     <td class="text-lg font-semibold text-center">{{ $order->id }}</td>
@@ -125,7 +125,7 @@
                                 <tr>
                                     <td colspan="5"><strong class="text-lg text-center pb-4 p-2">Inactive Order</strong>
                                     </td>
-                                <tr>
+                                </tr>
                                     @foreach ($inactiveOrders as $order)
                                 <tr>
                                     <td class="text-lg font-semibold text-center">{{ $order->id }}</td>
@@ -138,23 +138,6 @@
                                                 onclick="onShowOrderDetailButtonClicked('{{ $order->id }}')"
                                                 id="showOrderDetailButton{{ $order->id }}">Show Detail</button>
                                         </div>
-                                    </td>
-                                    <td>
-                                        @if ($order->status === 'Pending')
-                                            <p><button
-                                                    class="py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
-                                                    onclick="onOrderActionButtonClicked('{{ $order->id }}', 'Waiting')"
-                                                    id="confirmOrderButton{{ $order->id }}">Confirm Payment</button></p>
-                                            <p><button
-                                                    class="py-2 px-3 rounded-md border border-transparent font-semibold  bg-black text-white text-lg hover:bg-red-700 transition-all"
-                                                    onclick="onOrderActionButtonClicked('{{ $order->id }}', 'Failed')"
-                                                    id="rejectOrderButton{{ $order->id }}">Reject Order</button></p>
-                                        @elseif ($order->status === 'Waiting')
-                                            <button
-                                                class="py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
-                                                onclick="onOrderActionButtonClicked('{{ $order->id }}', 'Completed')"
-                                                id="completeOrderButton{{ $order->id }}">Complete Order</button>
-                                        @endif
                                     </td>
                                 </tr>
                                 <tr id="orderDetail{{ $order->id }}" style="display: none">
@@ -170,15 +153,17 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($order->order_details as $orderDetail)
-                                                <tr class="bg-stone-300">
-                                                    <td class="text-lg font-semibold text-center">
-                                                        {{ $orderDetail->product_id }}</td>
-                                                    <td class="text-lg font-semibold text-center">{{ $orderDetail->product->name }}
-                                                    </td>
-                                                    <td class="text-lg font-semibold text-center">{{ $orderDetail->amount }}</td>
-                                                    <td class="text-lg font-semibold text-center">
-                                                        {{ $orderDetail->price() }}</td>
-                                                </tr>
+                                                    <tr class="bg-stone-300">
+                                                        <td class="text-lg font-semibold text-center">
+                                                            {{ $orderDetail->product_id }}</td>
+                                                        <td class="text-lg font-semibold text-center">
+                                                            {{ $orderDetail->product->name }}
+                                                        </td>
+                                                        <td class="text-lg font-semibold text-center">
+                                                            {{ $orderDetail->amount }}</td>
+                                                        <td class="text-lg font-semibold text-center">
+                                                            {{ $orderDetail->price() }}</td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -212,57 +197,58 @@
                                     <tr>
                                         <td class="text-lg font-semibold text-center">{{ $made_to_order->id }}</td>
                                         <td class="text-lg font-semibold text-center">{{ $made_to_order->status }}</td>
-                                        <td class="text-lg font-semibold text-center">{{ $made_to_order->pickup_date }}</td>
-                                        <td class="text-lg font-semibold text-center">{{ $made_to_order->description }}</td>
-                                        <td><div style="display: flex; justify-content: center;">
-                                            <button
-                                                class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
-                                                
-                                                onclick="onShowMadeToOrderDetailButtonClicked('{{ $made_to_order->id }}')"
-                                                id="showMadeToOrderDetailButton{{ $made_to_order->id }}">Show
-                                                Detail</button>
-                                        </div></td>
+                                        <td class="text-lg font-semibold text-center">{{ $made_to_order->pickup_date }}
+                                        </td>
+                                        <td class="text-lg font-semibold text-center">{{ $made_to_order->description }}
+                                        </td>
                                         <td>
                                             <div style="display: flex; justify-content: center;">
-                                            <a class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
-                                            href="/admin/made-to-orders/{{ $made_to_order->id }}/ingredients">Show
-                                                Ingredient</a>
-                                            </div></td>
+                                                <button
+                                                    class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
+                                                    onclick="onShowMadeToOrderDetailButtonClicked('{{ $made_to_order->id }}')"
+                                                    id="showMadeToOrderDetailButton{{ $made_to_order->id }}">Show
+                                                    Detail</button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; justify-content: center;">
+                                                <a class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
+                                                    href="/admin/made-to-orders/{{ $made_to_order->id }}/ingredients">Show
+                                                    Ingredient</a>
+                                            </div>
+                                        </td>
                                         <td>
                                             @if ($made_to_order->status === 'Pending Confirmation')
-                                            <div style="display: flex; justify-content: center;">
-                                                <button class="py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
-                                                    
-                                                    onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'In Progress')"
-                                                    id="confirmMadeToOrderButton{{ $made_to_order->id }}">Confirm
-                                                    Payment</button>
-                                            </div>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold  bg-black text-white text-lg hover:bg-red-700 transition-all"
-                                                    
-                                                    onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Rejected')"
-                                                    id="rejectMadeToOrderButton{{ $made_to_order->id }}">Reject
-                                                    Order</button>
-                                            </div>
-                                                
+                                                <div style="display: flex; justify-content: center;">
+                                                    <button
+                                                        class="py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
+                                                        onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'In Progress')"
+                                                        id="confirmMadeToOrderButton{{ $made_to_order->id }}">Confirm
+                                                        Payment</button>
+                                                </div>
+                                                <div style="display: flex; justify-content: center;">
+                                                    <button
+                                                        class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold  bg-black text-white text-lg hover:bg-red-700 transition-all"
+                                                        onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Rejected')"
+                                                        id="rejectMadeToOrderButton{{ $made_to_order->id }}">Reject
+                                                        Order</button>
+                                                </div>
                                             @elseif ($made_to_order->status === 'In Progress')
-                                            <div style="display: flex; justify-content: center;">
-                                                <button class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
-                                                    
-                                                    onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Ready for pickup')"
-                                                    id="completeMadeToOrderButton{{ $made_to_order->id }}">Ready for
-                                                    pickup</button>
-                                            </div>
-                                                
+                                                <div style="display: flex; justify-content: center;">
+                                                    <button
+                                                        class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
+                                                        onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Ready for pickup')"
+                                                        id="completeMadeToOrderButton{{ $made_to_order->id }}">Ready for
+                                                        pickup</button>
+                                                </div>
                                             @elseif ($made_to_order->status === 'Ready for pickup')
-                                            <div style="display: flex; justify-content: center;">
-                                                <button class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
-                                                    
-                                                    onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Complete')"
-                                                    id="completeMadeToOrderButton{{ $made_to_order->id }}">Complete
-                                                    Order</button>
-                                            </div>
-                                                
+                                                <div style="display: flex; justify-content: center;">
+                                                    <button
+                                                        class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
+                                                        onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Complete')"
+                                                        id="completeMadeToOrderButton{{ $made_to_order->id }}">Complete
+                                                        Order</button>
+                                                </div>
                                             @endif
                                         </td>
                                     </tr>
@@ -271,19 +257,26 @@
                                             <table style="width: 100%">
                                                 <thead>
                                                     <tr class="bg-stone-300">>
-                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Product ID</th>
-                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Product Name</th>
-                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Quantity</th>
+                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Product ID
+                                                        </th>
+                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Product Name
+                                                        </th>
+                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Quantity
+                                                        </th>
                                                         <th class="text-xl text-center font-semibold pb-4 p-2">Price</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($made_to_order->made_to_order_details as $made_to_order_detail)
-                                                    <tr class="bg-stone-300">
-                                                            <td class="text-lg font-semibold text-center">{{ $made_to_order_detail->product_id }}</td>
-                                                            <td class="text-lg font-semibold text-center">{{ $made_to_order_detail->product->name }}</td>
-                                                            <td class="text-lg font-semibold text-center">{{ $made_to_order_detail->amount }}</td>
-                                                            <td class="text-lg font-semibold text-center">{{ $made_to_order_detail->price() }}</td>
+                                                        <tr class="bg-stone-300">
+                                                            <td class="text-lg font-semibold text-center">
+                                                                {{ $made_to_order_detail->product_id }}</td>
+                                                            <td class="text-lg font-semibold text-center">
+                                                                {{ $made_to_order_detail->product->name }}</td>
+                                                            <td class="text-lg font-semibold text-center">
+                                                                {{ $made_to_order_detail->amount }}</td>
+                                                            <td class="text-lg font-semibold text-center">
+                                                                {{ $made_to_order_detail->price() }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -298,60 +291,42 @@
                                     <tr>
                                         <td class="text-lg font-semibold text-center">{{ $made_to_order->id }}</td>
                                         <td class="text-lg font-semibold text-center">{{ $made_to_order->status }}</td>
-                                        <td class="text-lg font-semibold text-center">{{ $made_to_order->pickup_date }}</td>
-                                        <td class="text-lg font-semibold text-center">{{ $made_to_order->description }}</td>
-                                        <td><button class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
+                                        <td class="text-lg font-semibold text-center">{{ $made_to_order->pickup_date }}
+                                        </td>
+                                        <td class="text-lg font-semibold text-center">{{ $made_to_order->description }}
+                                        </td>
+                                        <td><button
+                                                class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
                                                 onclick="onShowMadeToOrderDetailButtonClicked('{{ $made_to_order->id }}')"
                                                 id="showMadeToOrderDetailButton{{ $made_to_order->id }}">Show
                                                 Detail</button></td>
                                         <td>
                                             <div style="display: flex; justify-content: center;">
-                                                    <a class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
+                                                <a class="mt-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
                                                     href="/admin/made-to-orders/{{ $made_to_order->id }}/ingredients">Show
-                                                Ingredient</a></td>
-                                        <td>
-                                            @if ($made_to_order->status === 'Pending Confirmation')
-                                                <button class="py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
-                                                    
-                                                    onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'In Progress')"
-                                                    id="confirmMadeToOrderButton{{ $made_to_order->id }}">Confirm
-                                                    Payment</button>
-                                                <button class="py-2 px-3 rounded-md border border-transparent font-semibold  bg-black text-white text-lg hover:bg-red-700 transition-all"
-                                                    
-                                                    onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Rejected')"
-                                                    id="rejectMadeToOrderButton{{ $made_to_order->id }}">Reject
-                                                    Order</button>
-                                            @elseif ($made_to_order->status === 'In Progress')
-                                                <button class="py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
-                                                    
-                                                    onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Ready for pickup')"
-                                                    id="completeMadeToOrderButton{{ $made_to_order->id }}">Ready for
-                                                    pickup</button>
-                                            @elseif ($made_to_order->status === 'Ready for pickup')
-                                                <button class="py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-lg hover:bg-stone-600 transition-all"
-                                                    
-                                                    onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Complete')"
-                                                    id="completeMadeToOrderButton{{ $made_to_order->id }}">Complete
-                                                    Order</button>
-                                            @endif
+                                                    Ingredient</a>
                                         </td>
+
                                     </tr>
                                     <tr id="madeToOrderDetail{{ $made_to_order->id }}" style="display: none">
                                         <td colspan="7">
                                             <table style="width: 100%">
                                                 <thead>
                                                     <tr class="bg-stone-300">
-                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Product ID</th>
-                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Product Name</th>
-                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Quantity</th>
+                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Product ID
+                                                        </th>
+                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Product Name
+                                                        </th>
+                                                        <th class="text-xl text-center font-semibold pb-4 p-2">Quantity
+                                                        </th>
                                                         <th class="text-xl text-center font-semibold pb-4 p-2">Price</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($made_to_order->made_to_order_details as $made_to_order_detail)
-                                                    <tr class="bg-stone-300">
-                                                        <td class="text-lg font-semibold text-center">
-                                                            {{ $made_to_order_detail->product_id }}</td>
+                                                        <tr class="bg-stone-300">
+                                                            <td class="text-lg font-semibold text-center">
+                                                                {{ $made_to_order_detail->product_id }}</td>
                                                             <td class="text-lg font-semibold text-center">
                                                                 {{ $made_to_order_detail->product->name }}</td>
                                                             <td class="text-lg font-semibold text-center">
