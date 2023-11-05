@@ -11,6 +11,9 @@ class Queue extends Model
     use HasFactory;
 
     function queue($day){
+        if (Carbon::parse($this->date) < Carbon::now()){
+            $this->date = Carbon::now()->format('Y-m-d');
+        }
         $date = Carbon::parse($this->date)->addDays($day)->format('Y-m-d');
         $this->date = $date;
         $this->save();
@@ -18,6 +21,9 @@ class Queue extends Model
     }
 
     function estimateDate($day){
+        if (Carbon::parse($this->date) < Carbon::now()){
+            $this->date = Carbon::now()->format('Y-m-d');
+        }
         $date = Carbon::parse($this->date)->addDays($day)->format('Y-m-d');
         return $date;
     }
