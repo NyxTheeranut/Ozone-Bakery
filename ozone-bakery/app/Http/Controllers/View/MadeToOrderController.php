@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Queue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Log;
 
@@ -20,6 +21,9 @@ class MadeToOrderController extends Controller
 
     public function index()
     {
+        if (Auth::user()==null) {
+            return redirect()->route('login');
+        }
         // $items = Product::get();
         // return $items;
         $products = Product::get();

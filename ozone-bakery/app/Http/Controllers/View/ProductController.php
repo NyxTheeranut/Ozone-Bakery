@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductStock;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -60,6 +61,10 @@ class ProductController extends Controller
 
     public function showProduct($productId)
     {
+        if (Auth::user()==null) {
+            return redirect()->route('login');
+        }
+
         $product = Product::find($productId);
         if (session()->has('pickupDate')) {
             $pickupDate = Carbon::parse(session('pickupDate'))->format('Y-m-d');
