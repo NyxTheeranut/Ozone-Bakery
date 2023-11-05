@@ -24,7 +24,7 @@ class ProductController extends Controller
         $products = Product::select('products.*', DB::raw('SUM(product_stocks.amount) as total_stock'))
             ->leftJoin('product_stocks', 'products.id', '=', 'product_stocks.product_id')
             ->where('product_stocks.amount', '>', 0)
-            ->where('product_stocks.exp_date', '>', now()->addDays(3))
+            ->where('product_stocks.exp_date', '>=', now())
             ->groupBy('products.id', 'products.name')
             ->get();
 
@@ -37,7 +37,7 @@ class ProductController extends Controller
             ->leftJoin('product_stocks', function ($join) {
                 $join->on('products.id', '=', 'product_stocks.product_id')
                     ->where('product_stocks.amount', '>', 0)
-                    ->where('product_stocks.exp_date', '>', now()->addDays(3));
+                    ->where('product_stocks.exp_date', '>=', now());
             })
             ->groupBy('products.id', 'products.name')
             ->get();
@@ -45,9 +45,70 @@ class ProductController extends Controller
         return $products;
     }
 
+
+
+    public function selectProductsFromStock(Request $request)
+    {
+        Log::info($request->all());
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'amount' => 'required|integer|min:1',
+            'pickup_date' => 'required|date|after:yesterday',
+        ]);
+        Log::info("pass the validate");
+
+        $stock = $this->getStock($request->input('product_id'));
+        Log::info("stock: " . $stock);
+        if ($stock < $request->input('amount')) {
+            return response()->json([
+                'message' => 'Not enough stock',
+            ], 400);
+        }
+
+        $product = Product::find($request->input('product_id'));
+        $amount = $request->input('amount');
+        $pickupDate = Carbon::parse($request->input('pickup_date'))->format('Y-m-d');
+
+        $product_stocks = $product->product_stocks;
+        $product_stocks = $product_stocks->where('exp_date', '>=', $pickupDate);
+        $product_stocks = $product_stocks->sortBy('exp_date');
+
+        $data=[];
+
+        foreach ($product_stocks as $stock) {
+            if ($amount > 0) {
+                $reduceAmount = min($stock->amount, $amount);
+                $stock->amount -= $reduceAmount;
+                $stock->save();
+                $amount -= $reduceAmount;
+                Log::info("Reduce stock amount: " . $stock->id . " by " . $reduceAmount);
+                $data[] = [
+                    'product_stock_id' => $stock->id,
+                    'amount' => $reduceAmount,
+                ];
+            } else {
+                break; // No need to reduce further
+            }
+        }
+        return response()->json([
+            'message' => 'Successfully reduce stock',
+            'data' => $data,
+        ], 200);
+    }
+
     public function show(Product $product)
     {
         return $product;
+    }
+
+    public function getStock($product_id)
+    {
+        $pickupDate = Carbon::now()->format('Y-m-d');
+        $totalStock = ProductStock::where('product_id', $product_id)
+            ->where('amount', '>', 0)
+            ->where('exp_date', '>=', $pickupDate)
+            ->sum('amount');
+        return $totalStock;
     }
 
     public function store(Request $request)

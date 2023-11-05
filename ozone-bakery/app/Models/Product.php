@@ -13,9 +13,31 @@ class Product extends Model
     {
         $totalStock = ProductStock::where('product_id', $this->id)
             ->where('amount', '>', 0)
-            ->where('exp_date', '>', $pickupDate)
+            ->where('exp_date', '>=', $pickupDate)
             ->sum('amount');
         return $totalStock;
+    }
+
+    public function withdrawStock($pickupDate, $amount){
+        $productStocks = ProductStock::where('product_id', $this->id)
+            ->where('exp_date', '>=', $pickupDate)
+            ->orderBy('exp_date')
+            ->get();
+
+        $withdrawnAmount = 0;
+        foreach($productStocks as $stock){
+            if($withdrawnAmount < $amount){
+                if($stock->amount > $amount - $withdrawnAmount){
+                    $stock->amount -= $amount - $withdrawnAmount;
+                    $stock->save();
+                    $withdrawnAmount = $amount;
+                }else{
+                    $withdrawnAmount += $stock->amount;
+                    $stock->amount = 0;
+                    $stock->save();
+                }
+            }
+        }
     }
 
     public function order_details(){

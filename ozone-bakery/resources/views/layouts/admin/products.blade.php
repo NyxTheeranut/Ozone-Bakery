@@ -50,7 +50,7 @@
                         <label id="fileInputLabel" for="productImageInput{{ $product->id }}">Select an Image</label>
                     </td>
                     <td class="text-xl pl-2"><input id="name{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" type="text" value="{{ $product->name }}"></td>
-                    <td class="text-lg" style="text-align: left;"><textarea id="description{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})">{{ $product->id }}</textarea></td>
+                    <td class="text-lg" style="text-align: left;"><textarea id="description{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})">{{ $product->description }}</textarea></td>
                     <td class="text-xl" style="text-align: center; width: 10%;">
                         <input type="number" value="{{ $product->price }}" id="price{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" style="width: 50%;" ]>
                         Baht

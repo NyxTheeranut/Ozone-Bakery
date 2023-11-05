@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('product_stock_id')
                 ->constrained()
                 ->onDelete('cascade');
+            $table->integer('amount')->min(1);
 
             $table->timestamps();
         });

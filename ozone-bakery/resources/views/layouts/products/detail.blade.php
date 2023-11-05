@@ -43,7 +43,7 @@
                     text-center rounded-3xl border border-stone-200 
                     font-semibold text-xl bg-stone-100 hover:bg-stone-200 transition-all 
                     text-sm rounded-3xl text-center mb-4" style="border-width: 4px;">
-                <button onclick="onAddToCartButtonClicked()" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
+                <button onclick="onAddToCartButtonClicked()" id="addToCardButton" class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
                     + | Add to Cart
                 </button>
             </section>
@@ -70,6 +70,11 @@
     document.addEventListener("DOMContentLoaded", function(event) {
         let stock = "{{$product->getStock($pickupDate)}}";
         document.getElementById("stock").textContent = "Stock: " + stock;
+        if (stock == 0) {
+            document.getElementById("stock").textContent = "Out of stock";
+            document.getElementById("amount").style.display = "none";
+            document.getElementById("addToCardButton").style.display = "none";
+        }
         document.getElementById("amount").max = stock;
         if (document.getElementById("amount").value > stock) {
             document.getElementById("amount").value = stock;

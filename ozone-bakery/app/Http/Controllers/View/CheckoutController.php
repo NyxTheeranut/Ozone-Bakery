@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\MadeToOrder;
 use App\Models\Order;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -30,7 +31,12 @@ class CheckoutController extends Controller
             ];
         }
 
-        return view('layouts.checkout.index', compact('cartItems'));
+        $pickupDate = Carbon::parse(session('pickupDate'))->format('Y/m/d');
+
+        return view('layouts.checkout.index', [
+            'cartItems' => $cartItems,
+            'pickupDate' => $pickupDate,
+        ]);
     }
 
     public function confirmOrder(Request $request)

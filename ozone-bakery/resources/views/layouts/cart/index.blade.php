@@ -52,7 +52,7 @@ $totalPrice = 0;
                         {{ $item->product->price }} Baht
                     </span>
                     <h1 class="text-2xl font-semibold mt-auto mb-3">
-                        Quantity: <input type="number" class="quantityInput" data-cart="{{$item}}" data-price="{{$item->product->price}}" onchange="onQuantityInputChange()" style="border-width: 2px;" class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" name="cart_items[{{ $item->id }}][amount]" value="{{ $item->amount }}" min="0" max="100">
+                        Quantity: <input type="number" class="quantityInput" data-cart="{{$item}}" data-price="{{$item->product->price}}" onchange="onQuantityInputChange()" style="border-width: 2px;" class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" name="cart_items[{{ $item->id }}][amount]" value="{{ $item->amount }}">
                     </h1>
                 </section>
                 <section class="flex flex-col items-stretch w-[20%] ml-auto mt-auto max-md:w-full">
@@ -96,14 +96,35 @@ $totalPrice = 0;
     </div>
 </div>
 
+@if ($carts->isEmpty())
+<script>
+    document.getElementById('checkoutButton').style.display = 'none';
+</script>
+@endif
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        if ("{{ $carts->isEmpty() ? 'true' : 'false' }}") {
-            document.getElementById('checkoutButton').style.display = 'none';
-        }
         fetchData();
+
+        setTimeout(function() {
+            if (checkCarts()) {
+                hideCheckoutButton();
+            }
+        }, 100); // 1000 milliseconds = 1 second        
     });
+
+    function checkCarts() {
+        const quantityInputs = document.getElementsByClassName("quantityInput");
+        for (const quantityInput of quantityInputs) {
+            const cart = JSON.parse(quantityInput.getAttribute('data-cart'))
+            console.log(quantityInput.value, cart['amount']);
+            if (quantityInput.value != cart['amount']) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     function fetchData() {
         const quantityInputs = document.getElementsByClassName("quantityInput");
@@ -118,22 +139,26 @@ $totalPrice = 0;
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(cart.product_id + " stock : " + data);
-                    if (quantityInput.value > data) {
-                        quantityInput.value = data;
+                    const stock = data;
+                    console.log(cart.product_id + " stock: " + stock);
+                    quantityInput.max = stock;
+                    quantityInput.value = cart.amount;
+                    if (quantityInput.value > stock) {
+                        quantityInput.value = stock;
                     }
-                    quantityInput.max = data;
                 })
                 .catch(error => console.error(error));
         }
-        updateTotalPrice();
+        setTimeout(function() {
+            updateTotalPrice();
+        }, 100); // 1000 milliseconds = 1 second
     }
 
     function onCheckoutButtonClicked() {
         location.href = "/checkout";
     }
 
-    function onConfirmChangeButtonClicked() {
+    function confirmChange() {
         const quantityInputs = document.getElementsByClassName("quantityInput");
         for (const quantityInput of quantityInputs) {
             let cart = JSON.parse(quantityInput.getAttribute('data-cart'));
@@ -155,12 +180,12 @@ $totalPrice = 0;
                     console.error(error);
                 });
         }
+    }
 
+    function onConfirmChangeButtonClicked() {
+        confirmChange();
         showCheckoutButton();
-
-        setTimeout(function() {
-            location.reload();
-        }, 500); // 1000 milliseconds = 1 second
+        refresh();
     }
 
     function hideCheckoutButton() {
@@ -203,10 +228,14 @@ $totalPrice = 0;
             })
         }).then(response => {
             fetchData();
-            setTimeout(function() {
-                onConfirmChangeButtonClicked();
-            }, 500); // 1000 milliseconds = 1 second
+            hideCheckoutButton();
         })
+    }
+
+    function refresh() {
+        setTimeout(function() {
+            location.reload();
+        }, 500); // 1000 milliseconds = 1 second
     }
 </script>
 @endsection

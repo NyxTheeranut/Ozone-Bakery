@@ -2,8 +2,7 @@
 
 @section('content')
 Pickup Date :
-<form method="post" action="{{ route('pickupDate.set') }}">
-    <input type="date" value="{{$pickupDate}}" id="pickupDate" name="pickupDate" onchange="onPickupDateChange()">
+<input type="date" value="{{$pickupDate}}" id="pickupDate" name="pickupDate" onchange="onPickupDateChange()" min="{{ date('Y-m-d') }}">
 
     @include('layouts.subviews.products', [
     'title' => 'Available Products',

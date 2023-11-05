@@ -6,6 +6,7 @@ use App\Http\Controllers\API\MadeToOrderController;
 use App\Http\Controllers\API\MadeToOrderDetailController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\OrderDetailController;
+use App\Http\Controllers\API\OrderStockDetailController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProductStockController;
 use App\Http\Controllers\API\RecipeController;
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::put('/products/select-products', 'App\Http\Controllers\API\ProductController@selectProductsFromStock');
 
 Route::apiResource('/users', UserController::class);
 
@@ -47,3 +50,5 @@ Route::apiResource('/made-to-orders', MadeToOrderController::class);
 Route::apiResource('/made-to-order-details', MadeToOrderDetailController::class);
 
 Route::apiResource('/carts', CartController::class);
+
+Route::apiResource('/order-stock-details', OrderStockDetailController::class);

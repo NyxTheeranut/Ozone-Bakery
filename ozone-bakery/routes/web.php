@@ -73,7 +73,7 @@ Route::post('/mto/checkout', [CheckoutController::class, 'mtoCheckout'])->name('
 
 //Order routes
 Route::post('/orders', [OrderController::class, 'store'])->name('view.orders.post');
-Route::get('/order/{order}', [OrderController::class, 'show'])->name('view.orders.show');
+Route::get('/orders/{order}', [OrderController::class, 'show'])->name('view.orders.show');
 Route::get('/orders', [OrderController::class, 'indexView'])->name('layouts.admin.order');
 
 //Made to order routes

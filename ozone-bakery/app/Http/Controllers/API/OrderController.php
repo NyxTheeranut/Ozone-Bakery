@@ -4,7 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\OrderStockDetail;
+use App\Models\Product;
+use App\Models\ProductStock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -16,7 +21,7 @@ class OrderController extends Controller
     public function indexView()
     {
         $orders = Order::get();
-        
+
         return view('layouts.admin.order', [
             'products' => $orders
         ]);
@@ -29,26 +34,84 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate ([
+        Log::info($request->all());
+        $request->validate([
             'user_id' => 'required|exists:users,id',
-            'amount' => 'required|integer|min:0',
-            'payment_status' => 'required|in:Pending,Completed,Failed',
+            'pickup_date' => 'required|date|after:yesterday',
+            'order_details' => 'required|array',
+            'order_details.*.product_id' => 'required|integer|exists:products,id',
+            'order_details.*.amount' => 'required|integer|min:1',
         ]);
+        Log::info("pass the validate");
+
+        $order = [];
+        $unsaveStocks = [];
+        $orderDetails = [];
+        $orderStockDetails = [];
 
         $order = new Order();
-
         $order->user_id = $request->get('user_id');
-        $order->amount = $request->get('amount');
-        $order->payment_status = $request->get('payment_status');
+
+        $pickupDate = $request->get('pickup_date');
+        $orderDetails = $request->get('order_details');
+
+        foreach ($orderDetails as $detail) {
+            $product = Product::find($detail['product_id']);
+            $amount = $detail['amount'];
+            if ($product->getStock($pickupDate) < $detail['amount']) {
+                return response()->json([
+                    'message' => 'Not enough stock for ' . $product->name
+                ], 400);
+            }
+
+            $productStocks = ProductStock::where('product_id', $product->id)
+                ->where('exp_date', '>=', $pickupDate)
+                ->orderBy('exp_date')
+                ->get();
+
+            foreach ($productStocks as $stock) {
+                $reduceAmount = min($stock->amount, $amount);
+                $stock->amount -= $reduceAmount;
+                $amount -= $reduceAmount;
+                $unsaveStocks[] = $stock; //To be save later
+                $orderStockDetail = new OrderStockDetail();
+                $orderStockDetail->product_stock_id = $stock->id;
+                $orderStockDetail->amount = $reduceAmount;
+                $orderStockDetails[] = $orderStockDetail; //To be save later
+
+                Log::info("Reduce stock amount: " . $stock->id . " by " . $reduceAmount);
+
+                if ($amount == 0) break;
+            }
+
+            $orderDetail = new OrderDetail();
+            $orderDetail->product_id = $product->id;
+            $orderDetail->amount = $detail['amount'];
+            $orderDetails[] = $orderDetail; //To be save later
+        }
 
         $order->save();
-        $order->refresh();
-        return $order;
+        Log::info("Save order: " . $order->id);
+
+        foreach ($orderStockDetails as $orderStockDetail) {
+            $orderStockDetail->order_id = $order->id;
+            $orderStockDetail->save();
+            Log::info("Save order stock detail: " . $orderStockDetail->id);
+        }
+        foreach ($orderDetails as $orderDetail) {
+            $orderDetail->order_id = $order->id;
+            $orderDetail->save();
+            Log::info("Save order detail: " . $orderDetail->id);
+        }
+        foreach ($unsaveStocks as $stock) {
+            $stock->save();
+            Log::info("Save stock: " . $stock->id);
+        }
     }
 
     public function update(Request $request, Order $order)
     {
-        $request->validate ([
+        $request->validate([
             'user_id' => 'nullable|exists:users,id',
             'amount' => 'nullable|integer|min:0',
             'payment_status' => 'nullable|in:Pending,Completed,Failed'

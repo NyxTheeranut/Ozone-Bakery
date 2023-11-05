@@ -37,7 +37,7 @@ class ProductController extends Controller
         $availableProducts = Product::select('products.*', DB::raw('SUM(product_stocks.amount) as total_stock'))
             ->leftJoin('product_stocks', 'products.id', '=', 'product_stocks.product_id')
             ->where('product_stocks.amount', '>', 0)
-            ->where('product_stocks.exp_date', '>', $pickupDate)
+            ->where('product_stocks.exp_date', '>=', $pickupDate)
             ->groupBy('products.id', 'products.name')
             ->get();
 
@@ -45,7 +45,7 @@ class ProductController extends Controller
             ->leftJoin('product_stocks', function ($join) use ($pickupDate) {
                 $join->on('products.id', '=', 'product_stocks.product_id')
                     ->where('product_stocks.amount', '>', 0)
-                    ->where('product_stocks.exp_date', '>', $pickupDate);
+                    ->where('product_stocks.exp_date', '>=', $pickupDate);
             })
             ->groupBy('products.id', 'products.name')
             ->get();
@@ -80,7 +80,7 @@ class ProductController extends Controller
         Log::info('Pickup date: ' . $pickupDate);
         $totalStock = ProductStock::where('product_id', $product)
             ->where('amount', '>', 0)
-            ->where('exp_date', '>', $pickupDate)
+            ->where('exp_date', '>=', $pickupDate)
             ->sum('amount');
         Log::info('Total stock: ' . $totalStock);
         return $totalStock;
