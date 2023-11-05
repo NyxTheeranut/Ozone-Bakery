@@ -38,7 +38,7 @@
                         <td>
                             @if ($order->status === 'Pending')
                             <p><button onclick="onOrderActionButtonClicked('{{ $order->id }}', 'Waiting')" id="confirmOrderButton{{$order->id}}">Confirm Payment</button></p>
-                            <p><button onclick="onOrderActionButtonClicked('{{ $order->id }}', 'Failed')" id="rejectOrderButton{{$order->id}}">Reject Order</button></p>
+                            <p><button onclick="onOrderRejectButtonClicked('{{ $order->id }}')" id="rejectOrderButton{{$order->id}}">Reject Order</button></p>
                             @elseif ($order->status === 'Waiting')
                             <button onclick="onOrderActionButtonClicked('{{ $order->id }}', 'Completed')" id="completeOrderButton{{$order->id}}">Complete Order</button>
                             @endif
@@ -78,14 +78,6 @@
                         <td>{{ $order->status }}</td>
                         <td>{{ $order->created_at }}</td>
                         <td><button onclick="onShowOrderDetailButtonClicked('{{ $order->id }}')" id="showOrderDetailButton{{$order->id}}">Show Detail</button></td>
-                        <td>
-                            @if ($order->status === 'Pending')
-                            <p><button onclick="onOrderActionButtonClicked('{{ $order->id }}', 'Waiting')" id="confirmOrderButton{{$order->id}}">Confirm Payment</button></p>
-                            <p><button onclick="onOrderActionButtonClicked('{{ $order->id }}', 'Failed')" id="rejectOrderButton{{$order->id}}">Reject Order</button></p>
-                            @elseif ($order->status === 'Waiting')
-                            <button onclick="onOrderActionButtonClicked('{{ $order->id }}', 'Completed')" id="completeOrderButton{{$order->id}}">Complete Order</button>
-                            @endif
-                        </td>
                     </tr>
                     <tr id="orderDetail{{$order->id}}" style="display: none">
                         <td colspan="5">
@@ -144,12 +136,12 @@
                         <td><a href="/admin/made-to-orders/{{ $made_to_order->id }}/ingredients">Show Ingredient</a></td>
                         <td>
                             @if ($made_to_order->status === 'Pending Confirmation')
-                            <button onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'In Progress')" id="confirmMadeToOrderButton{{$made_to_order->id}}">Confirm Payment</button>
-                            <button onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Rejected')" id="rejectMadeToOrderButton{{$made_to_order->id}}">Reject Order</button>
+                            <button onclick="onMadeToOrderActionButtonClicked('{{ $made_to_order->id }}', 'In Progress')" id="confirmMadeToOrderButton{{$made_to_order->id}}">Confirm Payment</button>
+                            <button onclick="onMadeToOrderActionButtonClicked('{{ $made_to_order->id }}', 'Rejected')" id="rejectMadeToOrderButton{{$made_to_order->id}}">Reject Order</button>
                             @elseif ($made_to_order->status === 'In Progress')
-                            <button onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Ready for pickup')" id="completeMadeToOrderButton{{$made_to_order->id}}">Ready for pickup</button>
+                            <button onclick="onMadeToOrderActionButtonClicked('{{ $made_to_order->id }}', 'Ready for pickup')" id="completeMadeToOrderButton{{$made_to_order->id}}">Ready for pickup</button>
                             @elseif ($made_to_order->status === 'Ready for pickup')
-                            <button onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Complete')" id="completeMadeToOrderButton{{$made_to_order->id}}">Complete Order</button>
+                            <button onclick="onMadeToOrderActionButtonClicked('{{ $made_to_order->id }}', 'Complete')" id="completeMadeToOrderButton{{$made_to_order->id}}">Complete Order</button>
                             @endif
                         </td>
                     </tr>
@@ -189,16 +181,6 @@
                         <td>{{ $made_to_order->description }}</td>
                         <td><button onclick="onShowMadeToOrderDetailButtonClicked('{{ $made_to_order->id }}')" id="showMadeToOrderDetailButton{{$made_to_order->id}}">Show Detail</button></td>
                         <td><a href="/admin/made-to-orders/{{ $made_to_order->id }}/ingredients">Show Ingredient</a></td>
-                        <td>
-                            @if ($made_to_order->status === 'Pending Confirmation')
-                            <button onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'In Progress')" id="confirmMadeToOrderButton{{$made_to_order->id}}">Confirm Payment</button>
-                            <button onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Rejected')" id="rejectMadeToOrderButton{{$made_to_order->id}}">Reject Order</button>
-                            @elseif ($made_to_order->status === 'In Progress')
-                            <button onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Ready for pickup')" id="completeMadeToOrderButton{{$made_to_order->id}}">Ready for pickup</button>
-                            @elseif ($made_to_order->status === 'Ready for pickup')
-                            <button onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'Complete')" id="completeMadeToOrderButton{{$made_to_order->id}}">Complete Order</button>
-                            @endif
-                        </td>
                     </tr>
                     <tr id="madeToOrderDetail{{$made_to_order->id}}" style="display: none">
                         <td colspan="7">
@@ -233,6 +215,26 @@
 </div>
 
 <script>
+
+    function onOrderRejectButtonClicked(orderId) {
+        if (confirm("Are you sure you want to change the status of this order to " + status + "?"))
+            fetch('/api/orders/reject/' + orderId, {
+                method: 'PUT',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                reloadPageWithCategory('order');
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     function onOrderActionButtonClicked(orderId, status) {
         if (confirm("Are you sure you want to change the status of this order to " + status + "?"))
             fetch('/api/orders/' + orderId, {
@@ -255,7 +257,7 @@
             });
     }
 
-    function onMadeToOrderButtonActionClicked(madeToOrderId, status) {
+    function onMadeToOrderActionButtonClicked(madeToOrderId, status) {
         if (confirm("Are you sure you want to change the status of this made to order to " + status + "?"))
             fetch('/api/made-to-orders/' + madeToOrderId, {
                 method: 'PUT',

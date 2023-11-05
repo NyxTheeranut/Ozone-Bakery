@@ -82,9 +82,6 @@
 
     </div>
 
-    <form method="GET" id="orderShowForm">
-    </form>
-
     <script>
         const confirmOrderButton = document.getElementById('confirmOrderButton');
         const orderShowForm = document.getElementById('orderShowForm');
@@ -121,8 +118,6 @@
                 order_details: orderDetails,
             });
 
-            console.log(body);
-
             fetch('/api/orders', {
                     method: 'POST',
                     headers: {
@@ -133,9 +128,9 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Success:');
                     console.log(data);
-                    orderShowForm.action = '/orders/' + data['id'];
-                    orderShowForm.submit();
+                    window.location.href = '/orders/' + data['order_id'];
                 })
                 .catch((error) => {
                     console.error('Error:', error);

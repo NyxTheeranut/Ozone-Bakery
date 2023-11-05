@@ -17,9 +17,6 @@
                         </span>
                     </a>
                 </div>
-                <a class="ml-auto" href="{{ route('cart', ['user' => Auth::user()]) }}" class="nav-menu {{ request()->is('cart') ? 'active' : '' }}">
-                    <img src="https://cdn.icon-icons.com/icons2/2714/PNG/512/shopping_cart_thin_icon_171537.png" class="h- mr-3 sm:h-7" alt="Logo">
-                </a>
                 @if (Auth::check())
                 <div class="mx-4 font-semibold" style="color: black;">
                     <div class="dropdown">
@@ -78,11 +75,6 @@
         </div>
         <div class="items-center justify-between w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-                <li>
-                    <a href="{{ url('/') }}" class="nav-menu {{ request()->is('/') ? 'active' : '' }}">
-                        Home
-                    </a>
-                </li>
                 <li>
                     <a href="{{ url('/orders') }}" class="nav-menu {{ request()->is('customer-orders') ? 'active' : '' }}">
                         Orders

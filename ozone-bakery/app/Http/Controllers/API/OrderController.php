@@ -109,6 +109,11 @@ class OrderController extends Controller
             $stock->save();
             Log::info("Save stock: " . $stock->id);
         }
+
+        return response()->json([
+            'message' => 'Order created successfully',
+            'order_id' => $order->id
+        ], 201);
     }
 
     public function update(Request $request, Order $order)
@@ -120,6 +125,21 @@ class OrderController extends Controller
         $order->status = $request->get('status');
         $order->save();
         
+        return $order;
+    }
+
+    public function rejectOrder(Order $order)
+    {
+        $order_stock_details = OrderStockDetail::where('order_id', $order->id)->get();
+        foreach ($order_stock_details as $order_stock_detail) {
+            $product_stock = ProductStock::find($order_stock_detail->product_stock_id);
+            $product_stock->amount += $order_stock_detail->amount;
+            $product_stock->save();
+        }
+
+        $order->status = 'Failed';
+        $order->save();
+
         return $order;
     }
 

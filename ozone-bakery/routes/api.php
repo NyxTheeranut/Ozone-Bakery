@@ -30,6 +30,7 @@ Route::put('/products/select-products', 'App\Http\Controllers\API\ProductControl
 Route::apiResource('/users', UserController::class);
 
 Route::apiResource('/orders', OrderController::class);
+Route::put('/orders/reject/{order}', 'App\Http\Controllers\API\OrderController@rejectOrder');
 
 Route::apiResource('/products', ProductController::class);
 Route::get('/products/available', 'App\Http\Controllers\API\ProductController@indexAvailableProduct');
