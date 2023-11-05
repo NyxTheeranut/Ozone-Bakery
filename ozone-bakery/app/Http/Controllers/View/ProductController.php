@@ -60,10 +60,7 @@ class ProductController extends Controller
 
     public function showProduct($productId)
     {
-        $product = Product::find($productId);
-        $pickupDate = session()->has('pickupDate') ? Carbon::parse(session('pickupDate'))->format('Y-m-d') : Carbon::now()->format('Y-m-d');
-
-        return view('layouts.products.detail', compact('product', 'pickupDate'));
+        return view('layouts.products.detail');
     }
 
 

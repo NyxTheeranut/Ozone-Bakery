@@ -1,7 +1,7 @@
 <section class="bg-neutral-100 flex flex-col text-4xl pt-8 pb-20">
     <div class="flex flex-col">
-        <div class="flex justify-content-between">
-            <div class="flex flex-col items-stretch w-6/12 max-md:w-full">
+        <div class="">
+            <div class="flex flex-col items-stretch max-md:w-full">
                 <div id="scrollTarget" class="relative shrink-0 box-border h-auto text-3xl grow-0 w-auto ml-20 mt-5 mb-2.5 pl-20">
                     {{$title}}
                     @if ($title == 'Available Products')
@@ -14,9 +14,6 @@
                     </p>
                     @endif
                 </div>
-            </div>
-
-            <div class="flex flex-col items-stretch w-6/12 ml-5 max-md:w-full">
             </div>
         </div>
 

@@ -30,16 +30,16 @@
                         {{ $product->description }}
                     </p>
 
-                    <span id="stock" class="text-xl mt-10 mb-2"></span>
-                    </text>
 
-                    <div class="flex flex-row mt-auto">
-                        <h1 class="text-3xl font-semibold mt-auto mb-3">
-                            Price: {{ $product->price }} Baht
-                        </h1>
+                    <div class="flex flex-col mt-auto">
+                        <span id="stock" class="text-xl mt-10 mb-2"></span>
+                        <div class="flex flex-row mt-auto">
+                            <h1 class="text-3xl font-semibold mt-auto mb-3">
+                                Price: {{ $product->price }} Baht
+                            </h1>
 
+                        </div>
                     </div>
-
                 </section>
 
                 <section class="flex flex-col items-stretch w-[25%] mr-5 ml-auto mt-auto max-md:w-full">

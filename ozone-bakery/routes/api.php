@@ -28,6 +28,8 @@ use Illuminate\Support\Facades\Route;
 Route::put('/products/select-products', 'App\Http\Controllers\API\ProductController@selectProductsFromStock');
 
 Route::apiResource('/users', UserController::class);
+Route::get('/api/user', [UserController::class, 'getUserData']);
+
 
 Route::apiResource('/orders', OrderController::class);
 

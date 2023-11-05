@@ -17,7 +17,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Banana Cake',
                 'price' => 10,
-                'image_path' => '/storage/image/product/1.jpg',
+                'image_path' => '/storage/image/product/bananacake.jpg',
                 'description' => 'Hey! Nice piece of cake',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -25,7 +25,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Brownie Cube',
                 'price' => 35,
-                'image_path' => '/storage/image/product/2.jpg',
+                'image_path' => '/storage/image/product/browniecube.jpg',
                 'description' => 'Hey! Nice piece of muffin',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -33,7 +33,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Chocolate Fudge Cake',
                 'price' => 30,
-                'image_path' => '/storage/image/product/3.jpg',
+                'image_path' => '/storage/image/product/chocolatefudge.jpg',
                 'description' => 'Hey! Nice piece of croissant',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -41,7 +41,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Coconut Cake',
                 'price' => 35,
-                'image_path' => '/storage/image/product/4.jpg',
+                'image_path' => '/storage/image/product/coconutcake.jpg',
                 'description' => 'Hey! Nice piece cake',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -49,7 +49,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Coconut Cake Egg FLoss',
                 'price' => 35,
-                'image_path' => '/storage/image/product/5.jpg',
+                'image_path' => '/storage/image/product/coconutegg.jpg',
                 'description' => 'Hey! Nice piece cake',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -57,7 +57,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Grean Tea Fudge Cake',
                 'price' => 35,
-                'image_path' => '/storage/image/product/6.jpg',
+                'image_path' => '/storage/image/product/greenteafudge.jpg',
                 'description' => 'Hey! Nice piece cake',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -65,7 +65,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Mamon Cake Egg FLoss',
                 'price' => 20,
-                'image_path' => '/storage/image/product/7.jpg',
+                'image_path' => '/storage/image/product/mamonegg.jpg',
                 'description' => 'Hey! Nice piece cake',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -73,7 +73,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Orange Fudge Cake',
                 'price' => 35,
-                'image_path' => '/storage/image/product/8.jpg',
+                'image_path' => '/storage/image/product/orangefudge.jpg',
                 'description' => 'Hey! Nice piece cake',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -81,7 +81,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Sausage Bun',
                 'price' => 12,
-                'image_path' => '/storage/image/product/9.jpg',
+                'image_path' => '/storage/image/product/sausagebun.jpg',
                 'description' => 'Hey! Nice piece cake',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -89,7 +89,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Taiwanese Castella Cake',
                 'price' => 25,
-                'image_path' => '/storage/image/product/10.jpg',
+                'image_path' => '/storage/image/product/taiwanegg.jpg',
                 'description' => 'Hey! Nice piece cake',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -97,7 +97,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Thai Tea Fudge',
                 'price' => 35,
-                'image_path' => '/storage/image/product/11.jpg',
+                'image_path' => '/storage/image/product/thaiteafudge.jpg',
                 'description' => 'Hey! Nice piece cake',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -105,7 +105,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Vanilla Strawberry Cake',
                 'price' => 35,
-                'image_path' => '/storage/image/product/12.jpg',
+                'image_path' => '/storage/image/product/vanillastrawberry.jpg',
                 'description' => 'Hey! Nice piece cake',
                 'created_at' => now(),
                 'updated_at' => now(),

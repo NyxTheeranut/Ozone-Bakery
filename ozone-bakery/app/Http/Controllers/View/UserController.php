@@ -6,15 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index(Request $request): View
     {
-        return view('profile.index', [
-            'user' => $request->user(),
-        ]);
+        $user = Auth::user(); // Example: Get the currently authenticated user
+
+        return view('profile.index', compact('user'));
     }
     public function update(Request $request)
     {

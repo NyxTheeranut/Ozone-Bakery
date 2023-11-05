@@ -10,11 +10,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $products = Product::get();
-
-        return view('welcome', [
-            'products' => $products
-        ]);
-
+        return view('welcome');
     }
 }
