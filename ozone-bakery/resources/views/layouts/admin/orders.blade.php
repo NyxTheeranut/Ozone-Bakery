@@ -126,12 +126,13 @@
                         <th>Pickup Date</th>
                         <th>Description</th>
                         <th>Detail</th>
+                        <th>Ingredient</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="6"><strong>Active Made to Order</strong></td>
+                        <td colspan="7"><strong>Active Made to Order</strong></td>
                     </tr>
                     @foreach ($activeMadeToOrders as $made_to_order)
                     <tr>
@@ -140,6 +141,7 @@
                         <td>{{ $made_to_order->pickup_date }}</td>
                         <td>{{ $made_to_order->description }}</td>
                         <td><button onclick="onShowMadeToOrderDetailButtonClicked('{{ $made_to_order->id }}')" id="showMadeToOrderDetailButton{{$made_to_order->id}}">Show Detail</button></td>
+                        <td><a href="/admin/made-to-orders/{{ $made_to_order->id }}/ingredients">Show Ingredient</a></td>
                         <td>
                             @if ($made_to_order->status === 'Pending Confirmation')
                             <button onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'In Progress')" id="confirmMadeToOrderButton{{$made_to_order->id}}">Confirm Payment</button>
@@ -152,7 +154,7 @@
                         </td>
                     </tr>
                     <tr id="madeToOrderDetail{{$made_to_order->id}}" style="display: none">
-                        <td colspan="6">
+                        <td colspan="7">
                             <table style="width: 100%">
                                 <thead>
                                     <tr>
@@ -177,7 +179,7 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td colspan="6"><strong>Inactive Made to Order</strong></td>
+                        <td colspan="7"><strong>Inactive Made to Order</strong></td>
                     </tr>
                     @foreach ($inactiveMadeToOrders as $made_to_order)
                     <tr>
@@ -186,6 +188,7 @@
                         <td>{{ $made_to_order->pickup_date }}</td>
                         <td>{{ $made_to_order->description }}</td>
                         <td><button onclick="onShowMadeToOrderDetailButtonClicked('{{ $made_to_order->id }}')" id="showMadeToOrderDetailButton{{$made_to_order->id}}">Show Detail</button></td>
+                        <td><a href="/admin/made-to-orders/{{ $made_to_order->id }}/ingredients">Show Ingredient</a></td>
                         <td>
                             @if ($made_to_order->status === 'Pending Confirmation')
                             <button onclick="onMadeToOrderButtonActionClicked('{{ $made_to_order->id }}', 'In Progress')" id="confirmMadeToOrderButton{{$made_to_order->id}}">Confirm Payment</button>
@@ -198,7 +201,7 @@
                         </td>
                     </tr>
                     <tr id="madeToOrderDetail{{$made_to_order->id}}" style="display: none">
-                        <td colspan="6">
+                        <td colspan="7">
                             <table style="width: 100%">
                                 <thead>
                                     <tr>
@@ -306,9 +309,9 @@
         let toggleOrderTypeButton = document.getElementById("toggleOrderTypeButton");
 
         if (toggleOrderTypeButton.getAttribute("data-status") === '0') {
-            toggle(true);
+            reloadPageWithCategory('order');
         } else {
-            toggle(false);
+            reloadPageWithCategory('made-to-order');
         }
     }
 
