@@ -53,9 +53,9 @@ class OrderController extends Controller
         $order->user_id = $request->get('user_id');
 
         $pickupDate = $request->get('pickup_date');
-        $orderDetails = $request->get('order_details');
+        $details = $request->get('order_details');
 
-        foreach ($orderDetails as $detail) {
+        foreach ($details as $detail) {
             $product = Product::find($detail['product_id']);
             $amount = $detail['amount'];
             if ($product->getStock($pickupDate) < $detail['amount']) {
@@ -94,11 +94,13 @@ class OrderController extends Controller
         Log::info("Save order: " . $order->id);
 
         foreach ($orderStockDetails as $orderStockDetail) {
+            Log::info($orderStockDetail);
             $orderStockDetail->order_id = $order->id;
             $orderStockDetail->save();
             Log::info("Save order stock detail: " . $orderStockDetail->id);
         }
         foreach ($orderDetails as $orderDetail) {
+            Log::info($orderDetail);
             $orderDetail->order_id = $order->id;
             $orderDetail->save();
             Log::info("Save order detail: " . $orderDetail->id);
