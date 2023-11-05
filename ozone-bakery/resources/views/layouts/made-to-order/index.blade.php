@@ -59,7 +59,7 @@
                     </div>
 
                 </a>
-                <spam id="isValid{{$product->id}}" class="isValid" value="1"></spam>
+                <span id="isValid{{$product->id}}" class="isValid" value="1"></span>
                 <span id="errorMessage{{$product->id}}" class="text-sm" style="color: rgb(184, 60, 60);"></span>
 
             </div>
@@ -207,9 +207,9 @@
             errorMessage.textContent = "";
         } else if (price < 500) {
             isValid.value = 0;
-            errorMessage.textContent = "The minimum purchase requirement is 500 Baht per product.";
+            totalPrice.style = "color: red;";
         } else {
-            errorMessage.textContent = "";
+            totalPrice.style = "color: black;";
         }
         totalPrice.textContent = price;
         updateTotalPrice();
@@ -235,6 +235,7 @@
             }
         }
         if (document.getElementById("totalPrice").textContent < 1000) {
+            document.getElementById("totalPrice").style = "color: red;"
             return false;
         }
         return true;
