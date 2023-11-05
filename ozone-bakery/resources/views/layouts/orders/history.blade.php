@@ -102,9 +102,9 @@
                                 <p class="ml-3 mb-2 text-xl font-semibold">
                                     Products:
                                 <p class="ml-3 mb-2 text-xl">
-                                    @foreach ($madeToOrder->madeToOrderDetails as $index => $detail)
+                                    @foreach ($madeToOrder->made_to_order_details as $index => $detail)
                                         {{ $detail->product->name }} ({{ $detail->amount }} ea)
-                                        @if ($index < count($madeToOrder->madeToOrderDetails) - 1)
+                                        @if ($index < count($madeToOrder->made_to_order_details) - 1)
                                             ,
                                         @endif
                                     @endforeach
