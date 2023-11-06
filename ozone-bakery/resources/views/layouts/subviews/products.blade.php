@@ -29,9 +29,11 @@
                     <p class="flex-wrap bg-stone-200 rounded-2xl py-2 px-3 text-xl mx-auto my-2.5"
                         >
                         Stock: {{ $product->total_stock }}</p>
+                        
                 </a>
             </div>
             @endforeach
+            
         </div>
     </div>
 </section>

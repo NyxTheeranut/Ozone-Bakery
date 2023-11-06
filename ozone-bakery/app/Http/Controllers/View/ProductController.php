@@ -61,6 +61,9 @@ class ProductController extends Controller
 
     public function showProductDetail($id)
     {
+        if (Auth::user()==null) {
+            return redirect()->route('login');
+        }
         // Fetch the product details by ID
         $product = Product::find($id);
 
@@ -72,7 +75,6 @@ class ProductController extends Controller
 
         return view('layouts.products.detail', compact('product', 'pickupDate'));
     }
-
 
     public function getStock($product)
     {
