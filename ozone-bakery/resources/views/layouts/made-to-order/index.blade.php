@@ -24,7 +24,7 @@
 
                         <hr class="mt-3" style="border-color: #c4b7a6; border-width: 2px; width: 90%;">
 
-                        <p class="text-lg mt-5 bg-stone-200 py-3 p-2 rounded-xl" style="max-width: 35%;">
+                        <p class="text-lg mt-5 bg-stone-200 py-3 p-2 rounded-xl" style="max-width: 40%;">
                             1. Select the type of products and specify the quantity you want.
                         </p>
                     </div>
@@ -45,7 +45,7 @@
 
             <div class="flex flex-row w-full justify-center">
 
-                <div class="flex flex-row ml-20 mb-auto w-[60%]">
+                <div class="flex flex-row ml-20 mb-auto w-[60%]">  
                     <h1 class="text-3xl ml-20">
                         Description:
                     </h1>

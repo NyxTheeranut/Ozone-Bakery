@@ -46,11 +46,11 @@
                     <td>
                         <img src="" alt="New Product Image" width="100" height="100"
                             style="display: block; margin: 0 auto;" class="rounded-3xl" id="new-product-image-preview">
-                        <input type="file" class="hidden" id="new-product-image" style="width: 80%;"
-                            onchange="previewImage()">
-                        <label style="cursor: pointer;"
-                            class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all"
+                        <!-- Change id to something unique -->
+                        <input type="file" class="hidden" id="new-product-image" style="display: none;" onchange="previewImage()">
+                        <label style="cursor: pointer;" class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all"
                             for="new-product-image">Select an Image</label>
+                        
                     </td>
                     <td><input
                             class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
@@ -96,7 +96,8 @@
             };
             reader.readAsDataURL(input.files[0]);
         }
-    
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         fetchProducts();
 
@@ -132,8 +133,9 @@
                     row.innerHTML = `
                     <td class="pl-6 text-xl">${product.id}</td>
                     <td>
-                        <img src="${product.image_path}" alt="${product.name}" width="100" height="100" style="display: block; margin: 0 auto;" class="rounded-3xl ">
-                        <input type="file" onchange="onProductImageUploaded(${product.id})" id="productImageInput${product.id}" style="display: none">
+                        <img src="${product.image_path}" alt="${product.name}" width="100" height="100" style="display: block; margin: 0 auto;" class="rounded-3xl"
+    id="productImage${product.id}"> <!-- Use a unique id based on productId -->
+<input type="file" onchange="onProductImageUploaded(${product.id})" id="productImageInput${product.id}" style="display: none">
                         <label style="cursor: pointer;" class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all" id="fileInputLabel" for="productImageInput${product.id}">Select an Image</label>
                     </td>
                     <td class="text-xl pl-2"><input id="name${product.id}" onchange="onProductDetailChange(${product.id})" type="text" value="${product.name}" class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"></td>
