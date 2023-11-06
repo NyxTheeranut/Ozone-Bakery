@@ -45,7 +45,7 @@
 
             <div class="flex flex-row w-full justify-center">
 
-                <div class="flex flex-row ml-20 mb-auto w-[60%]">  
+                <div class="flex flex-row ml-20 mb-auto w-[60%]">
                     <h1 class="text-3xl ml-20">
                         Description:
                     </h1>
@@ -166,7 +166,7 @@
                 errorMessage.textContent = "";
             } else if (totalPrice < 500) {
                 isValid.value = 0;
-                errorMessage.textContent = "The minimum purchase requirement is 500 Baht per product.";
+                errorMessage.textContent = "";
             } else {
                 errorMessage.textContent = "";
             }
@@ -261,24 +261,32 @@
         }
 
         function onQuantityChange(product) {
-            var quantity = document.getElementById("quantity" + product.id).value;
-            var totalPrice = document.getElementById("totalPrice" + product.id);
+            var quantityInput = document.getElementById("quantity" + product.id);
+            var totalPriceElement = document.getElementById("totalPrice" + product.id);
             var errorMessage = document.getElementById("errorMessage" + product.id);
             var isValid = document.getElementById("isValid" + product.id);
 
+            var quantity = quantityInput.value;
+            var price = parseFloat(quantityInput.getAttribute("data-price"));
+
             isValid.value = 1;
 
-            price = (product.price * {{ $discount }} * quantity).toFixed(2);
+            var totalPrice = quantity * price;
 
             if (quantity == 0) {
                 errorMessage.textContent = "";
-            } else if (price < 500) {
+            } else if (totalPrice < 500) {
                 isValid.value = 0;
-                errorMessage.textContent = "The minimum purchase requirement is 500 Baht per product.";
+                errorMessage.textContent = "";
+                // Change the text color to red
+                totalPriceElement.style.color = 'red';
             } else {
                 errorMessage.textContent = "";
+                // Change the text color to green
+                totalPriceElement.style.color = 'green';
             }
-            totalPrice.textContent = price;
+
+            totalPriceElement.textContent = totalPrice;
             updateTotalPrice();
 
             if (checkValid()) onValid();
@@ -301,8 +309,13 @@
                     return false;
                 }
             }
-            if (document.getElementById("totalPrice").textContent < 1000) {
+            if (parseFloat(document.getElementById("totalPrice").textContent) < 1000) {
+                // Change the text color to red
+                document.getElementById("totalPrice").style.color = 'red';
                 return false;
+            } else {
+                // Change the text color to green
+                document.getElementById("totalPrice").style.color = 'green';
             }
             return true;
         }
