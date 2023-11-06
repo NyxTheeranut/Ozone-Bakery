@@ -40,70 +40,83 @@
                     </tr>
                 </thead>
                 <tbody id="productTable">
-
-                    <tr id="productTable" style="display: none;">
-
-                    </tr>
                 </tbody>
+                <tr id="new-product-row" style="display: none;">
+                    <td class="pl-6 text-xl" style="width: 5%;"></td>
+                    <td>
+                        <img src="" alt="New Product Image" width="100" height="100"
+                            style="display: block; margin: 0 auto;" class="rounded-3xl" id="new-product-image-preview">
+                        <input type="file" class="hidden" id="new-product-image" style="width: 80%;"
+                            onchange="previewImage()">
+                        <label style="cursor: pointer;"
+                            class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all"
+                            for="new-product-image">Select an Image</label>
+                    </td>
+                    <td><input
+                            class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                            type="text" id="new-product-name" style="width: 80%;"></td>
+                    <td><input
+                            class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                            type="text" id="new-product-description" style="width: 80%;"></td>
+                    <td><input
+                            class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                            type="text" id="new-product-price" style="width: 80%;"></td>
+                    <td>
+                        <div class="flex flex-row">
+                            <p>
+                                <button
+                                    class="block mt-auto py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                    onclick="onSaveNewProductButtonClicked()" id="saveProductButton">
+                                    Save
+                                </button>
+                            </p>
+                            <p>
+                                <button
+                                    class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                                    onclick="onCancelNewProductButtonClicked()" id="cancelProductButton">
+                                    Cancel
+                                </button>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
 @endsection
 <script>
+    function previewImage() {
+        const input = document.getElementById("new-product-image");
+        const preview = document.getElementById("new-product-image-preview");
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     document.addEventListener("DOMContentLoaded", function() {
-        let lastProductId = 0; // Initialize lastProductId
         fetchProducts();
 
         function onAddProductButtonClicked() {
-            lastProductId += 1;
-            // Create a new row for the product
-            const productTable = document.getElementById("productTable");
-            const newRow = document.createElement("tr");
-            newRow.innerHTML = `
-            @php
-                $lastProductId = 0;
-            @endphp
-        <td class="pl-6 text-xl" style="width: 5%;">{{ $lastProductId + 1 }}</td>
-        <td>
-    <input type="file" class ="hidden" id="new-product-image" style="width: 80%;">
-    <label style="cursor: pointer;" class="block m-1 py-1 px-1 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-sm hover:bg-stone-600 transition-all" for="new-product-image">Select an Image</label>
-</td>
-                        <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="text" id="new-product-name" style="width: 80%;"></td>
-                        <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="text" id="new-product-description" style="width: 80%;"></td>
-                        <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="text" id="new-product-price" style="width: 80%;"></td>
-                        <td>
-                            <div class="flex flex-row">
-                                <p>
-                                    <button class="block mt-auto py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onSaveNewProductButtonClicked()" id="saveProductButton">
-                                        Save</button>
-                                </p>
-                                <p>
-                                    <button class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onCancelNewProductButtonClicked()" id="cancelProductButton">
-                                        Cancel</button>
-                                </p>
-                            </div>
-                        </td>
-        `;
-
-            // Append the new row to the table
-            productTable.appendChild(newRow);
-
             // Show the new product row
-            newRow.style.display = "table-row";
+            const newProductRow = document.getElementById("new-product-row");
+            newProductRow.style.display = "table-row";
 
             // Scroll to the new product row
-            newRow.scrollIntoView({
+            newProductRow.scrollIntoView({
                 behavior: "smooth"
             });
 
-            // Hide the "Add Product" button (if needed)
+            // Hide the "Add Product" button
             document.getElementById("addProductButton").style.display = "none";
         }
 
         // Attach the event listener to the button after the DOM is loaded
         const addProductButton = document.getElementById("addProductButton");
         addProductButton.addEventListener("click", onAddProductButtonClicked);
-
     });
 
     function fetchProducts() {
@@ -143,17 +156,6 @@
             .catch(error => console.error('Error:', error));
     }
 
-    function onCancelNewProductButtonClicked() {
-        // Get the new product row element
-        const newProductRow = document.getElementById("new-product-row");
-
-        if (newProductRow) {
-            newProductRow.remove();
-        }
-
-        // Show the "Add Product" button
-        document.getElementById("addProductButton").style.display = "block";
-    }
 
     function onSaveProductButtonClicked(productId) {
         const name = document.getElementById("name" + productId).value;
@@ -232,23 +234,23 @@
             price: price,
         };
 
-        if (image) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const imageBase64 = e.target.result;
-                requestBody.image = imageBase64;
-                sendPostRequest(requestBody);
-            };
-            reader.readAsDataURL(image); // Read the image file as Base64
-        } else {
-            sendPostRequest(requestBody); // No image, so send the request without it
-        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imageBase64 = e.target.result;
+            requestBody.image = imageBase64;
+            sendPostRequest(requestBody);
+        };
+        reader.readAsDataURL(image); // Read the image file as Base64
 
         setTimeout(function() {
             location.reload();
         }, 500); // 1000 milliseconds = 1 second
     }
 
+    function onCancelNewProductButtonClicked() {
+        document.getElementById("new-product-row").style.display = "none";
+        document.getElementById("addProductButton").style.display = "block";
+    }
 
     function sendPostRequest(requestBody) {
         fetch("/api/products", {
