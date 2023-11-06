@@ -13,9 +13,10 @@
 
             <section class="flex flex-col items-stretch w-[30%] max-md:w-full">
 
-                <div class="flex flex-wrap items-start mt-3 ml-4">
-                    <img src="{{ asset($product->image_path) }}" class="h-90 w-90 rounded-3xl">
+                <div style="width: 350px; height: 350px; overflow: hidden;">
+                    <img src="{{ asset($product->image_path) }}" class="rounded-3xl" style="object-fit: cover; width: 100%; height: 100%;">
                 </div>
+
             </section>
 
             <section class="flex flex-col items-stretch w-[40%] ml-8 max-md:w-full">
@@ -29,7 +30,6 @@
                     {{ $product->description }}
                 </p>
 
-                <span id="stock" class="text-xl mt-10 mb-2"></span>
                 </text>
 
                 <div class="flex flex-row mt-auto">
@@ -42,15 +42,12 @@
             </section>
 
             <section class="flex flex-col items-stretch w-[25%] mr-5 ml-auto mt-auto max-md:w-full">
-
+                <span id="stock" class="text-xl mt-10 mb-2 font-bold"></span>
                 <div class="flex flex-row">
-                    <span class="text-xl font-semibold mr-5 mt-2">
+                    <span id="quantityLabel" style="margin-right: 58px;" class="text-xl font-semibold mr-5 mt-2">
                         Amount:
                     </span>
-                    <input type="number" id="amount" value="1" min="1" class="flex flex-wrap block mt-auto py-2 px-3 mr-auto ml-9 
-                    text-center rounded-3xl border border-stone-200 
-                    font-semibold text-xl bg-stone-100 hover:bg-stone-200 transition-all 
-                    text-sm rounded-3xl text-center mb-4" style="border-width: 4px;">
+                    <input type="number" id="amount" value="1" min="1" class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" style="border-width: 4px;">
                 </div>
 
                 <div class="flex flex-row">
@@ -58,7 +55,7 @@
                     <input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" style="border-width: 4px;" type="date" value="{{ $pickupDate }}" id="pickupDate" onchange="onPickupDateChange()">
                 </div>
 
-                <button onclick="onAddToCartButtonClicked()" class="flex flex-wrap block mt-3 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
+                <button onclick="onAddToCartButtonClicked()" id="addToCartButton" class="flex flex-wrap block mt-3 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all text-sm rounded-3xl">
                     + | Add to Cart
                 </button>
             </section>
@@ -89,7 +86,8 @@
         if (stock == 0) {
             document.getElementById("stock").textContent = "Out of stock";
             document.getElementById("amount").style.display = "none";
-            document.getElementById("addToCardButton").style.display = "none";
+            document.getElementById("addToCartButton").style.display = "none";
+            document.getElementById("quantityLabel").style.display = "none";
         }
         document.getElementById("amount").max = stock;
         if (document.getElementById("amount").value > stock) {
