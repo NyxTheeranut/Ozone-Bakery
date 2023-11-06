@@ -69,6 +69,11 @@
             </div>
         </div>
     </div>
+    <div id="popup" class="fixed top-0 left-0 w-full h-full flex items-center justify-center hidden">
+        <div class="absolute w-60 p-4 bg-green-500 text-white rounded-md">
+            Product has been added
+        </div>
+    </div>
     <!-- End Card -->
 
     <!-- End Card Section -->
@@ -85,7 +90,7 @@
                     // Update the product details in your HTML
                     document.getElementById("product-name").textContent = data.name;
                     document.getElementById("product-description").textContent = data.description;
-                    document.getElementById("product-price").textContent = data.price + " Baht";
+                    document.getElementById("product-price").textContent = data.price ;
                     document.getElementById("product-image").src = data.image_path; // Set the image source
 
 
@@ -145,6 +150,15 @@
                 .then(data => {
                     // Handle the response as needed, e.g., update the UI
                     console.log("Success: " + data);
+
+                    // Show the pop-up
+                    const popup = document.getElementById('popup');
+                    popup.style.display = 'block';
+
+                    // Automatically hide the pop-up after 3 seconds
+                    setTimeout(function() {
+                        popup.style.display = 'none';
+                    }, 3000);
                 })
                 .catch(error => {
                     // Handle errors if any
