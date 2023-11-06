@@ -23,8 +23,8 @@
             </h1>
 
             <button id="addProductButton"
-                class="block mt-6 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all">Add
-                Product</button>
+                class="inline-block m-2 mt-4 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all">
+                Add Product</button>
 
         </div>
 
@@ -132,7 +132,7 @@
                     const row = document.createElement("tr");
 
                     row.innerHTML = `
-                    <td class="pl-6 text-xl">${product.id}</td>
+                    <td class="pl-6 text-xl pr-5">${product.id}</td>
                     <td>
                         <img src="${product.image_path}" alt="${product.name}" width="100" height="100" style="display: block; margin: 0 auto;" class="rounded-3xl"
     id="productImage${product.id}"> <!-- Use a unique id based on productId -->
