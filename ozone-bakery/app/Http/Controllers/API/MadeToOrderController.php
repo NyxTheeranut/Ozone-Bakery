@@ -13,7 +13,13 @@ class MadeToOrderController extends Controller
 {
     public function index()
     {
-        return MadeToOrder::get();
+        $products = Product::get();
+        $discount = MadeToOrder::getDiscount();
+
+        return response()->json([
+            'products' => $products,
+            'discount' => $discount,
+        ]);
     }
 
     public function show(MadeToOrder $madeToOrder)
