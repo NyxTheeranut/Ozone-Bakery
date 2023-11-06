@@ -64,14 +64,13 @@
                     <td style="width: 5%;" class="text-center text-xl">{{ ++$recipe_detail_count }}</td>
                     <td style="width: 35%;" class="text-center text-xl pl-3">{{ $recipe_detail->ingredient->name }}
                     </td>
-                    <td style="width: 30%;" class="text-center">
+                    <td style="width: 20%;" class="text-center">
                         <div class="flex items-center justify-center">
-                            <input value={{$recipe}} class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="number" onchange="onQuantityInputChange({{ $recipe_detail->id }})" id="quantityInput{{ $recipe_detail->id }}" value="{{ $recipe_detail->quantity }}" style="width: 50%;">
-                            <div class="text-xl" style="width: 50%;">{{ $recipe_detail->ingredient->quantity_unit }}
-                            </div>
+                            <input style="width: 80%;" class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="number" onchange="onQuantityInputChange({{ $recipe_detail->id }})" id="quantityInput{{ $recipe_detail->id }}" value="{{ $recipe_detail->quantity }}">
+                            <div style="width: 20%; text-align: left; margin-left: 10px;" class="text-xl"">{{ $recipe_detail->ingredient->quantity_unit }}</div>
                         </div>
                     </td>
-                    <td style="width: 10%;">
+                    <td style="width: 20%;">
                         <button id="saveButton{{ $recipe_detail->id }}" onclick="onSaveIngredientButtonClicked({{ $recipe_detail }})" class="flex flex-wrap block py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" style="display: none">
                             Save
                         </button>

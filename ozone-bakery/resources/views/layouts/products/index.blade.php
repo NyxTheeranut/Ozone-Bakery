@@ -8,7 +8,7 @@
         <form method="post" action="{{ route('pickupDate.set') }}">
             <input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
             style="border-width: 4px;"
-            type="date" value="{{ $pickupDate }}" id="pickupDate" name="pickupDate" onchange="onPickupDateChange()">
+            type="date" min="{{date('Y-m-d')}}" value="{{ $pickupDate }}" id="pickupDate" name="pickupDate" onchange="onPickupDateChange()">
         </form>
     </div>
 </div>

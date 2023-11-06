@@ -317,6 +317,7 @@ class IngredientsTableSeeder extends Seeder
             
         ];
 
+
         Ingredient::insert($data);
     }
 }

@@ -5,7 +5,7 @@
     }
 
     tr {
-        height: 130px;
+        height: 70px;
         border-bottom: 1px solid #c4b7a6;
     }
 </style>
