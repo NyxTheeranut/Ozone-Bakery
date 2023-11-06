@@ -21,6 +21,9 @@ class MadeToOrderController extends Controller
 
     public function index()
     {
+        if (Auth::user()==null) {
+            return redirect()->route('login');
+        }
         return view('layouts.made-to-order.index', [
             'discount' => MadeToOrder::getDiscount(),
         ]);

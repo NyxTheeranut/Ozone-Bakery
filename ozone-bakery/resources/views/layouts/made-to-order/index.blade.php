@@ -309,13 +309,8 @@
                     return false;
                 }
             }
-            if (parseFloat(document.getElementById("totalPrice").textContent) < 1000) {
-                // Change the text color to red
-                document.getElementById("totalPrice").style.color = 'red';
+            if (document.getElementById("totalPrice").textContent < 1000) {
                 return false;
-            } else {
-                // Change the text color to green
-                document.getElementById("totalPrice").style.color = 'green';
             }
             return true;
         }
