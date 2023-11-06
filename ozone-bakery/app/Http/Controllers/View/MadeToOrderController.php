@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\QueueController;
 use App\Models\MadeToOrder;
 use App\Models\MadeToOrderDetail;
 use App\Models\Product;
+use App\Models\Queue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Log;
 
@@ -59,10 +62,10 @@ class MadeToOrderController extends Controller
 
             $date += ceil($amount/100);
         }
-        $date += 2;
+        $date += 1;
 
-        $estimatedDate = Date::now()->addDays($date);
+        $estimatedDate = Queue::first()->estimateDate($date);
 
-        return response()->json(['estimatedDate' => $estimatedDate->toDateString()]);
+        return response()->json(['estimatedDate' => $estimatedDate]);
     }
 }

@@ -23,7 +23,7 @@ class RecipeDetailController extends Controller
         $request->validate([
             'recipe_id' => 'required|exists:recipes,id',
             'ingredient_id' => 'required|exists:ingredients,id',
-            'quantity' => 'required|integer',
+            'quantity' => 'required|numeric',
         ]);
         
 
@@ -51,7 +51,7 @@ class RecipeDetailController extends Controller
         $request->validate([
             'recipe_id' => 'nullable|exists:recipes,id',
             'ingredient_id' => 'nullable|exists:ingredients,id',
-            'quantity' => 'nullable|integer',
+            'quantity' => 'nullable|numeric',
         ]);
 
         if ($request->get('quantity')==0) {

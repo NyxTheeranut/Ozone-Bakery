@@ -1,11 +1,12 @@
 <style>
     th {
-        text-align: left;
+        text-align: center;
         /* Align the text to the left */
         border-bottom: 4px solid #c4b7a6;
     }
 
     tr {
+        text-align: center;
         height: 130px;
         border-bottom: 1px solid #c4b7a6;
     }

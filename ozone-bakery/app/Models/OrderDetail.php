@@ -9,6 +9,10 @@ class OrderDetail extends Model
 {
     use HasFactory;
 
+    public function price(){
+        return $this->amount * $this->product->price;
+    }
+
     public function order(){
         return $this->belongsTo(Order::class);
     }

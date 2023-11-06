@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class IngredientController extends Controller
 {
@@ -53,6 +54,11 @@ class IngredientController extends Controller
 
     public function destroy(Ingredient $ingredient)
     {
+        if (!$ingredient->isDeletable()) {
+            return response()->json([
+                'message' => 'Cannot delete ingredient because it is used in a recipe detail',
+            ], 400);
+        }
         $ingredient->delete();
         return ["message" => "Deleted successfully"];
     }

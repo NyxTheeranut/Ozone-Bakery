@@ -15,11 +15,19 @@ class MadeToOrder extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function madeToOrderDetails(){
+    public function made_to_order_details(){
         return $this->hasMany(MadeToOrderDetail::class);
     }
 
     public static function getDiscount(){
         return 1 - self::$discount;
+    }
+
+    public function totalPrice(){
+        $totalPrice = 0;
+        foreach ($this->made_to_order_details as $made_to_order_detail) {
+            $totalPrice += $made_to_order_detail->price();
+        }
+        return $totalPrice;
     }
 }

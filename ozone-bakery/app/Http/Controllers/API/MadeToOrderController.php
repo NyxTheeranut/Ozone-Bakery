@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\MadeToOrder;
 use App\Models\Product;
+use App\Models\Queue;
+use Carbon\Carbon;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -31,14 +33,21 @@ class MadeToOrderController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'pickup_date' => 'required|date',
             'description' => 'nullable|string',
         ]);
 
         $madeToOrder = new MadeToOrder();
 
+        $day=1;
+
+        foreach (request('items') as $item) {
+            $day += ceil($item['amount']/100);
+        }
+
+        $pickupDate = Queue::first()->queue($day);
+
         $madeToOrder->user_id = $request->get('user_id');
-        $madeToOrder->pickup_date = $request->get('pickup_date');
+        $madeToOrder->pickup_date = $pickupDate;
         $madeToOrder->description = $request->get('description');
         $madeToOrder->save();
 
@@ -60,23 +69,12 @@ class MadeToOrderController extends Controller
     public function update(Request $request, MadeToOrder $madeToOrder)
     {
         $request->validate([
-            'user_id' => 'nullable|exists:users,id',
-            'recipe_id' => 'nullable|exists:recipes,id',
-            'price' => 'nullable|integer',
-            'order_status' => 'nullable|in:Evaluating,Negotiating,In Progress,Waiting,Complete,Rejected',
-            'pickup_date' => 'nullable|date',
-            'description' => 'nullable|string',
+            'status' => 'required|in:Pending Confirmation,In Progress,Ready for pickup,Complete,Rejected'
         ]);
 
-        if ($request->filled('user_id')) $madeToOrder->user_id = $request->get('user_id');
-        if ($request->filled('recipe_id')) $madeToOrder->recipe_id = $request->get('recipe_id');
-        if ($request->filled('price')) $madeToOrder->price = $request->get('price');
-        if ($request->filled('order_status')) $madeToOrder->order_status = $request->get('order_status');
-        if ($request->filled('pickup_date')) $madeToOrder->pickup_date = $request->get('pickup_date');
-        if ($request->filled('description')) $madeToOrder->description = $request->get('description');
-
+        $madeToOrder->status = $request->get('status');
         $madeToOrder->save();
-        $madeToOrder->refresh();
+
         return $madeToOrder;
     }
 

@@ -20,4 +20,12 @@ class Order extends Model
     public function order_stock_details(){
         return $this->hasMany(OrderStockDetail::class);
     }
+
+    public function totalPrice(){
+        $totalPrice = 0;
+        foreach ($this->order_details as $order_detail) {
+            $totalPrice += $order_detail->product->price * $order_detail->amount;
+        }
+        return $totalPrice;
+    }
 }

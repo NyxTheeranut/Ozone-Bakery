@@ -32,6 +32,7 @@ Route::get('/api/user', [UserController::class, 'getUserData']);
 
 
 Route::apiResource('/orders', OrderController::class);
+Route::put('/orders/reject/{order}', 'App\Http\Controllers\API\OrderController@rejectOrder');
 
 Route::apiResource('/products', ProductController::class);
 Route::get('/api/products/{id}', 'API\ProductController@show');

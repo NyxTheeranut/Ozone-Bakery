@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id')->constrained('users');
-            $table->enum('status', ['Pending Confirmation', 'Payment await', 'In Progress', 'Ready for pickup', 'Complete', 'Rejected'])->default('Pending Confirmation');
+            $table->enum('status', ['Pending Confirmation', 'In Progress', 'Ready for pickup', 'Complete', 'Rejected'])->default('Pending Confirmation');
             $table->date('pickup_date');
             $table->text('description')->nullable();
 

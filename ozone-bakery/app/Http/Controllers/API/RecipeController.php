@@ -21,9 +21,7 @@ class RecipeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:3|max:256',
             'yield' => 'required|integer',
-            'duration' => 'required|date_format:H:i:s',
         ]);
 
         $recipe = new Recipe();
@@ -40,17 +38,12 @@ class RecipeController extends Controller
     public function update(Request $request, Recipe $recipe)
     {
         $request->validate([
-            'name' => 'nullable|min:3|max:256',
-            'yield' => 'nullable|integer',
-            'duration' => 'nullable|date_format:H:i:s',
+            'yield' => 'required|integer',
         ]);
 
-        if ($request->has('name')) $recipe->name = $request->get('name');
-        if ($request->has('yield')) $recipe->yield = $request->get('yield');
-        if ($request->has('duration')) $recipe->duration = $request->get('duration');
+        $recipe->yield = $request->get('yield');
 
         $recipe->save();
-        $recipe->refresh();
         return $recipe;
     }
 

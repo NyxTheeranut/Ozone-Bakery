@@ -1,7 +1,13 @@
 @extends('layouts.main')
 
 @section('content')
+
 <x-guest-layout>
+    <h1 class="text-center text-3xl font-semibold mt-3 mb-3">
+        Register
+    </h1>
+    <hr class="mt-7 mb-5" style="border-color: #c4b7a6; border-width: 2px; width: 100%;">
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

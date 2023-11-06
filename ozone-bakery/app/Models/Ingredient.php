@@ -12,4 +12,12 @@ class Ingredient extends Model
     public function recipe_details(){
         return $this->hasMany(RecipeDetail::class);
     }
+
+    public function isDeletable(){
+        $recipe_details = $this->recipe_details;
+        if($recipe_details->count() > 0){
+            return false;
+        }
+        return true;
+    }
 }

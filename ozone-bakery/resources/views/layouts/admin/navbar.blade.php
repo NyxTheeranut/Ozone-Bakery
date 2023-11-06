@@ -17,9 +17,6 @@
                         </span>
                     </a>
                 </div>
-                <a class="ml-auto" href="{{ route('cart', ['user' => Auth::user()]) }}" class="nav-menu {{ request()->is('cart') ? 'active' : '' }}">
-                    <img src="https://cdn.icon-icons.com/icons2/2714/PNG/512/shopping_cart_thin_icon_171537.png" class="h- mr-3 sm:h-7" alt="Logo">
-                </a>
                 @if (Auth::check())
                 <div class="mx-4 font-semibold" style="color: black;">
                     <div class="dropdown">
@@ -27,14 +24,11 @@
                         <div class="dropdown-content">
 
                             <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-stone-500">
-                                <p class="text-sm text-gray-500 dark:text-gray-300">Signed in as</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">Logged in as</p>
                                 <p class="text-sm font-medium text-gray-800 dark:text-gray-400">
                                     {{ Auth::user()->email }}
                                 </p>
                             </div>
-
-                            <a href="{{ route('layouts.orders.history') }}">Order History</a>
-
                             <a href=" {{ route('profile.index', ['user' => Auth::user()]) }} ">Profile</a>
 
                             <form action="{{ route('logout') }}" method="POST">
@@ -56,7 +50,7 @@
 
 
 
-                            <a href="login">Sign in</a>
+                            <a href="login">Log in</a>
                             <a href="register">Register</a>
 
                         </div>
@@ -78,11 +72,6 @@
         </div>
         <div class="items-center justify-between w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-                <li>
-                    <a href="{{ url('/') }}" class="nav-menu {{ request()->is('/') ? 'active' : '' }}">
-                        Home
-                    </a>
-                </li>
                 <li>
                     <a href="{{ url('/orders') }}" class="nav-menu {{ request()->is('customer-orders') ? 'active' : '' }}">
                         Orders

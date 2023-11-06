@@ -41,8 +41,8 @@ $totalPrice = 0;
         <div class="bg-white rounded-xl shadow-lg mt-7 p-4 sm:p-7 ">
             <div class="mb-3 flex flex-wrap">
                 <section class="flex flex-col items-center justify-center w-[25%] max-md:w-full">
-                    <div class="flex flex-wrap items-center">
-                        <img src="{{ asset($item->product->image_path) }}" class="h-40 w-40 rounded-3xl">
+                    <div style="width: 200px; height: 200px; overflow: hidden;">
+                        <img src="{{ asset($item->product->image_path) }}" class="rounded-3xl" style="object-fit: cover; width: 100%; height: 100%;">
                     </div>
                 </section>
 
@@ -88,7 +88,7 @@ $totalPrice = 0;
     <div class="mt-5 ml-10">
         <span class="text-2xl font-semibold">Pickup Date: </span>
         <input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" style="border-width: 4px;" type="date" value="{{ $pickupDate }}" id="pickupDate" onchange="onPickupDateChange()">
-        <button onclick="onConfirmChangeButtonClicked()" id="confirmChangeButton" class="flex flex-wrap block mt-7 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all p-5 mr-10" style="display: none;">
+        <button onclick="onConfirmChangeButtonClicked()" id="confirmChangeButton" class="flex flex-wrap block mt-7 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" style="display: none;">
             Confirm Changes
         </button>
     </div>
@@ -98,7 +98,8 @@ $totalPrice = 0;
 <div class="max-w-screen-lg ml-auto mr-auto px-4 py-1 sm:px-2 lg:px-2 lg:py-1">
     @if (!$carts->isEmpty())
     <div class="text-3xl font-semibold ml-auto mb-5 flex justify-between">
-        <button id="checkoutButton" onclick="onCheckoutButtonClicked()" class="flex flex-wrap block mt-5 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all p-5 mr-10">
+        <button id="checkoutButton" onclick="onCheckoutButtonClicked()" 
+        class="flex flex-wrap block mt-5 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all">
             Checkout
         </button>
     </div>

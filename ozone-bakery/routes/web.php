@@ -58,6 +58,7 @@ Route::get('/products', [ProductController::class, 'indexView'])->name('layouts.
 Route::get('/admin/products', [AdminController::class, 'index'])->name('layouts.admin.products');
 Route::get('/admin/products/{product}/edit', [AdminController::class, 'showEditProductView'])->name('layouts.admin.products.edit');
 Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
+Route::get('/admin/made-to-orders/{id}/ingredients', [AdminController::class, 'showIngredients'])->name('layouts.admin.made-to-orders.ingredients');
 
 //Cart routes
 Route::get('/mycart', [CartController::class, 'index'])->name('cart')->middleware('auth');
