@@ -96,7 +96,7 @@
             };
             reader.readAsDataURL(input.files[0]);
         }
-    }
+    
     document.addEventListener("DOMContentLoaded", function() {
         fetchProducts();
 
