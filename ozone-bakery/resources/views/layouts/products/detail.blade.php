@@ -41,7 +41,7 @@
 
                 <section class="flex flex-col items-stretch w-[25%] mr-5 ml-auto mt-auto max-md:w-full">
 
-                    <div class="flex flex-row">
+                    <div class="flex flex-row" id="productAmount">
                         <span class="text-xl font-semibold mr-5 mt-2">
                             Amount:
                         </span>
@@ -53,7 +53,7 @@
 
                     </div>
 
-                    <div class="flex flex-row">
+                    <div class="flex flex-row" id="pickupDate">
                         <span class="text-xl font-semibold mr-5 mt-2">Pickup Date: </span>
                         <input
                             class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover-bg-white transition-all"
@@ -61,7 +61,7 @@
                             onchange="onPickupDateChange()">
                     </div>
 
-                    <button onclick="onAddToCartButtonClicked()"
+                    <button onclick="onAddToCartButtonClicked()" id="addToCardButton"
                         class="flex flex-wrap block mt-3 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all text-sm rounded-3xl">
                         + | Add to Cart
                     </button>
@@ -110,8 +110,9 @@
             document.getElementById("stock").textContent = "Stock: " + stock;
             if (stock == 0) {
                 document.getElementById("stock").textContent = "Out of stock";
-                document.getElementById("amount").style.display = "none";
+                document.getElementById("productAmount").style.display = "none";
                 document.getElementById("addToCardButton").style.display = "none";
+                document.getElementById("pickupDate").style.display = "none";
             }
             document.getElementById("amount").max = stock;
             if (document.getElementById("amount").value > stock) {
