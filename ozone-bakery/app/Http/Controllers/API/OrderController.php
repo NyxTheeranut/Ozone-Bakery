@@ -63,6 +63,7 @@ class OrderController extends Controller
                     'message' => 'Not enough stock for ' . $product->name
                 ], 400);
             }
+            Log::info("Enough stock for " . $product->name);
 
             $productStocks = ProductStock::where('product_id', $product->id)
                 ->where('exp_date', '>=', $pickupDate)
@@ -79,7 +80,7 @@ class OrderController extends Controller
                 $orderStockDetail->amount = $reduceAmount;
                 $orderStockDetails[] = $orderStockDetail; //To be save later
 
-                Log::info("Reduce stock amount: " . $stock->id . " by " . $reduceAmount);
+                Log::info("Reduce " . $stock->product->name . " stock amount: " . $stock->id . " by " . $reduceAmount);
 
                 if ($amount == 0) break;
             }

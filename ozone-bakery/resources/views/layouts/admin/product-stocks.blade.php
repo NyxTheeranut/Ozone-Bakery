@@ -5,7 +5,7 @@
     }
 
     tr {
-        height: 130px;
+        height: 70px;
         border-bottom: 1px solid #c4b7a6;
     }
 </style>
@@ -47,11 +47,11 @@
 
                     <td class="text-xl">{{ $stock->product->name }}</td>
 
-                    <td><input class="pr-2 text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="number" onchange="onStockDetailChange({{ $stock->id }})" id="stockAmountInput{{ $stock->id }}" value="{{ $stock->amount }}"></td>
-                    <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="date" onchange="onStockDetailChange({{ $stock->id }})" id="stockExpDateInput{{ $stock->id }}" value="{{ $stock->exp_date }}"></td>
+                    <td><input class="pr-2 text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" min="0" type="number" onchange="onStockDetailChange({{ $stock->id }})" id="stockAmountInput{{ $stock->id }}" value="{{ $stock->amount }}"></td>
+                    <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" min="{{ now()->format('Y-m-d') }}" type="date" onchange="onStockDetailChange({{ $stock->id }})" id="stockExpDateInput{{ $stock->id }}" value="{{ $stock->exp_date }}"></td>
                     <td style="width: 15%;">
-                        <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onSaveStockButtonClicked({{ $stock->id }})" id="saveStockButton{{ $stock->id }}" style="display: none">Save</button>
-                        <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onDeleteStockButtonClicked({{ $stock->id }})" id="deleteStockButton{{ $stock->id }}">Delete</button>
+                        <button class="flex flex-wrap block py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onSaveStockButtonClicked({{ $stock->id }})" id="saveStockButton{{ $stock->id }}" style="display: none">Save</button>
+                        <button class="flex flex-wrap block py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onDeleteStockButtonClicked({{ $stock->id }})" id="deleteStockButton{{ $stock->id }}">Delete</button>
                     </td>
                     @php
                     $lastStockId = $stock->id;
@@ -67,12 +67,12 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="number" id="newStockAmount"></td>
-                    <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="date" id="newStockExpDate"></td>
-                    <td class="flex flex-row">
-                        <button class="flex flex-wrap block m-2 mt-10 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onSaveNewStockClicked()" id="saveNewStockButton">
+                    <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" min="0" type="number" id="newStockAmount"></td>
+                    <td><input class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" min="{{ now()->format('Y-m-d') }}" type="date" id="newStockExpDate"></td>
+                    <td class="flex flex-row" >
+                        <button style="margin-top: 10px" class="flex flex-wrap block py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onSaveNewStockClicked()" id="saveNewStockButton">
                             Save</button>
-                        <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onCancelNewStockButtonClicked()" id="cancleNewStockButton">
+                        <button style="margin-top: 10px; margin-left: 10px" class="flex flex-wrap block py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" onclick="onCancelNewStockButtonClicked()" id="cancleNewStockButton">
                             Cancel</button>
                     </td>
                 </tr>

@@ -87,7 +87,7 @@ $totalPrice = 0;
     </div>
     <div class="mt-5 ml-10">
         <span class="text-2xl font-semibold">Pickup Date: </span>
-        <input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" style="border-width: 4px;" type="date" value="{{ $pickupDate }}" id="pickupDate" onchange="onPickupDateChange()">
+        <input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" min="{{date('Y-m-d')}}" style="border-width: 4px;" type="date" value="{{ $pickupDate }}" id="pickupDate" onchange="onPickupDateChange()">
         <button onclick="onConfirmChangeButtonClicked()" id="confirmChangeButton" class="flex flex-wrap block mt-7 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" style="display: none;">
             Confirm Changes
         </button>
