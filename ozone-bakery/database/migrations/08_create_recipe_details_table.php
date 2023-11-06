@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->foreignId('recipe_id')->constrained('recipes')->onDelete('cascade');
             $table->foreignId('ingredient_id')->constrained('ingredients');
-            $table->unsignedInteger('quantity');
+            $table->double('quantity')->unsigned();
 
             $table->unique(['recipe_id', 'ingredient_id']);
 

@@ -34,7 +34,8 @@
                     <th class="text-2xl font-semibold pl-2" style="width: 20%;">Name</th>
                     <th class="text-2xl font-semibold" style="width: 30%;">Description</th>
                     <th class="text-2xl font-semibold" style="width: 15%; text-align: center">Price</th>
-                    <th class="text-2xl font-semibold pr-4" style="width: 15%; text-align: center">Recipe</th>
+                    <th class="text-2xl font-semibold pr-4" style="width: 10%; text-align: center">Recipe</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -52,7 +53,7 @@
                     </td>
                     <td class="text-xl pl-2"><input id="name{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" type="text" value="{{ $product->name }}" class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"></td>
                     <td class="text-lg" style="text-align: left;"><textarea id="description{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" class="w-full text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all">{{ $product->description }}</textarea></td>
-                    <td class="text-xl" style="text-align: center; width: 10%;">
+                    <td class="text-xl" style="text-align: center; width: 15%;">
                         <input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" type="number" value="{{ $product->price }}" id="price{{ $product->id }}" onchange="onProductDetailChange({{$product->id}})" style="width: 50%;" ]>
                         Baht
                     </td>
@@ -62,7 +63,7 @@
                     <td>
                         <button class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" id="deleteProductButton{{$product->id}}" onclick="onDeleteProductButtonClicked({{$product->id}})">
                             Delete</button>
-                        <button id="saveProductButton{{$product->id}}" onclick="onSaveProductButtonClicked({{$product->id}})" style="display: none">
+                        <button id="saveProductButton{{$product->id}}" onclick="onSaveProductButtonClicked({{$product->id}})" style="display: none" class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all">
                             Save</button>
                     </td>
                     @php
