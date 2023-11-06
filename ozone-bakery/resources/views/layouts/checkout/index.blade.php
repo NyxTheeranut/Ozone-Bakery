@@ -59,7 +59,7 @@
                     </section>
 
                     <section class="flex flex-col items-stretch w-[50%] max-md:w-full max-md:h-full">
-                        <div class="mb-auto mr-10 pb-4 text-right text-2xl font-semibold">
+                        <div style="margin-top: 200px" class="mb-auto mr-10 pb-4 text-right text-2xl font-semibold">
                             <div class="flex-row mb-4">
                                 <span>Pickup Date:</span>
                                 {{ $pickupDate }}
@@ -67,7 +67,7 @@
                             
                             <span>Total Price:</span> {{ $totalPrice }} Baht
                             <button id="confirmOrderButton" onclick="onConfirmOrderButtonClicked()"
-                                style="margin-top: 200px;"
+                                style="margin-top: 20px;"
                                 class="bg-pink-200 flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all">
                                 Confirm Order
                             </button>

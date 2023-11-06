@@ -23,7 +23,7 @@
         <div id="order-p" class="order-content">
             @foreach ($orders as $order)
                 @if (Auth::check() && $order->user_id == Auth::user()->id)
-                    <a href="/order/{{ $order->id }}?source=history">
+                    <a href="/orders/{{ $order->id }}?source=history">
                         <div class="bg-stone-100 rounded-xl shadow-lg mt-7 mb-7 p-4 sm:p-7 hover:bg-stone-200">
 
                             <p class="ml-0 mb-5 text-2xl font-semibold">
