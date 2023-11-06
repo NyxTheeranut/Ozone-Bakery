@@ -149,7 +149,7 @@
                 // Automatically hide the pop-up after 3 seconds
                 setTimeout(function() {
                     popup.style.display = 'none';
-                }, 3000);
+                }, 1500);
                 return;
             }
             // Send a fetch POST request to the route
@@ -177,7 +177,7 @@
                     // Automatically hide the pop-up after 3 seconds
                     setTimeout(function() {
                         popup.style.display = 'none';
-                    }, 3000);
+                    }, 1500);
                 })
                 .catch(error => {
                     // Handle errors if any
