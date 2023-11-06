@@ -41,8 +41,8 @@ $totalPrice = 0;
         <div class="bg-white rounded-xl shadow-lg mt-7 p-4 sm:p-7 ">
             <div class="mb-3 flex flex-wrap">
                 <section class="flex flex-col items-center justify-center w-[25%] max-md:w-full">
-                    <div class="flex flex-wrap items-center">
-                        <img src="{{ asset($item->product->image_path) }}" class="h-40 w-40 rounded-3xl">
+                    <div style="width: 200px; height: 200px; overflow: hidden;">
+                        <img src="{{ asset($item->product->image_path) }}" class="rounded-3xl" style="object-fit: cover; width: 100%; height: 100%;">
                     </div>
                 </section>
 

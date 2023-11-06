@@ -113,6 +113,9 @@
     }
 
     function onAddToCartButtonClicked() {
+        if (!confirm("Are you sure you want to add " + document.getElementById("amount").value + " {{$product->name}} to your cart?")) {
+            return;
+        }
         // Send a fetch POST request to the route
         fetch("/api/carts", {
                 method: "POST",
