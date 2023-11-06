@@ -45,7 +45,7 @@
                         <span class="text-xl font-semibold mr-5 mt-2">
                             Amount:
                         </span>
-                        <input type="number" onchange="onAmountChange()" id="amount" value="1" min="1"
+                        <input type="number" id="amount" value="1" min="1"
                             class="flex flex-wrap block mt-auto py-2 px-3 mr-auto ml-9 
                         text-center rounded-3xl border border-stone-200 
                         font-semibold text-xl bg-stone-100 hover-bg-stone-200 transition-all 
@@ -126,11 +126,6 @@
             })
         }
 
-        function onAmountChange() {
-            if (document.getElementById("amount").value > document.getElementById("amount").max) {
-                document.getElementById("amount").value = document.getElementById("amount").max;
-            }
-        }
 
         function onAddToCartButtonClicked() {
             // Send a fetch POST request to the route
