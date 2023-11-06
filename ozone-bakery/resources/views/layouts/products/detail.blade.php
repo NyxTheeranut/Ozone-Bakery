@@ -47,10 +47,10 @@
                         </span>
                         <input type="number" id="amount" value="1" min="1"
                             class="flex flex-wrap block mt-auto py-2 px-3 mr-auto ml-9 
-                        text-center rounded-3xl border border-stone-200 
-                        font-semibold text-xl bg-stone-100 hover-bg-stone-200 transition-all 
-                        text-sm rounded-3xl text-center mb-4"
+    text-center rounded-3xl border border-stone-200 font-semibold text-xl bg-stone-100 hover-bg-stone-200 transition-all 
+    text-sm rounded-3xl text-center mb-4"
                             style="border-width: 4px;">
+
                     </div>
 
                     <div class="flex flex-row">
@@ -74,6 +74,11 @@
             Product has been added
         </div>
     </div>
+    <div id="popupblock" class="fixed top-0 left-0 w-full h-full flex items-center justify-center hidden">
+        <div class="absolute w-60 p-4 bg-red-500 text-white rounded-md">
+           Amount cannot be 0
+        </div>
+    </div>
     <!-- End Card -->
 
     <!-- End Card Section -->
@@ -90,7 +95,7 @@
                     // Update the product details in your HTML
                     document.getElementById("product-name").textContent = data.name;
                     document.getElementById("product-description").textContent = data.description;
-                    document.getElementById("product-price").textContent = data.price ;
+                    document.getElementById("product-price").textContent = data.price;
                     document.getElementById("product-image").src = data.image_path; // Set the image source
 
 
@@ -133,6 +138,19 @@
 
 
         function onAddToCartButtonClicked() {
+            const amountInput = document.getElementById("amount");
+            const amount = parseInt(amountInput.value, 10);
+            if (amount === 0) {
+                // Display a message or perform any action when the amount is 0
+                const popup = document.getElementById('popupblock');
+                popup.style.display = 'block';
+
+                // Automatically hide the pop-up after 3 seconds
+                setTimeout(function() {
+                    popup.style.display = 'none';
+                }, 3000);
+                return;
+            }
             // Send a fetch POST request to the route
             fetch("/api/carts", {
                     method: "POST",
