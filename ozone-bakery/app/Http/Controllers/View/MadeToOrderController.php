@@ -18,12 +18,7 @@ class MadeToOrderController extends Controller
 
     public function index()
     {
-        // $items = Product::get();
-        // return $items;
-        $products = Product::get();
-
         return view('layouts.made-to-order.index', [
-            'products' => $products,
             'discount' => MadeToOrder::getDiscount(),
         ]);
     }

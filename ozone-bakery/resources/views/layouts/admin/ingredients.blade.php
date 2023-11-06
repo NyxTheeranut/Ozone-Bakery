@@ -71,12 +71,12 @@
                             {{ $lastIngredientId + 1 }}</td>
                         <td style="width: 40%;">
                             <input
-                                class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
                                 type="text" id="new-ingredient-name">
                         </td>
                         <td style="width: 30%;">
                             <input
-                                class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                                class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
                                 type="text" id="new-ingredient-quantity-unit">
                         </td>
                         <td class="flex flex-row">
