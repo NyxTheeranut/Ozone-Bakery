@@ -29,9 +29,6 @@
                                     {{ Auth::user()->email }}
                                 </p>
                             </div>
-
-                            <a href="{{ route('layouts.orders.history') }}">Order History</a>
-
                             <a href=" {{ route('profile.index', ['user' => Auth::user()]) }} ">Profile</a>
 
                             <form action="{{ route('logout') }}" method="POST">
