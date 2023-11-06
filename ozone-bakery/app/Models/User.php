@@ -27,6 +27,14 @@ class User extends Authenticatable
         return $this->hasMany(MadeToOrder::class);
     }
 
+    public function getRedirectRoute()
+    {
+        return match((int)$this->is_admin) {
+            0 => '/',
+            1 => '/orders',
+            // ...
+        };
+    }
     /**
      * The attributes that are mass assignable.
      *

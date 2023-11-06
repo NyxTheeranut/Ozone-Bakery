@@ -56,9 +56,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'  => 'required|min:3|max:256',
-            'lastname'  => 'required|min:3|max:256',
-            'tel'   => 'required|string|size:10|regex:/^[0-9]+$/',
+            'name'  => 'required|min:3|max:256|regex:/^[\p{L}\s]+$/u',
+            'lastname'  => 'required|min:3|max:256|regex:/^[\p{L}\s]+$/u',
+            'tel'   => 'required|string|size:10|regex:/^\d+$/',
             'email' => 'required|email',
             'password'  => 'required|string|min:8',
             'is_admin'  => 'nullable|boolean'

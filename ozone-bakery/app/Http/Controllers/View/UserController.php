@@ -20,9 +20,9 @@ class UserController extends Controller
     {
 
         $request->validate([
-            'name'  => 'nullable|min:3|max:256|regex:/^[a-zA-Z]+$/',
-            'lastname'  => 'nullable|min:3|max:256|regex:/^[a-zA-Z]+$/',
-            'tel'   => 'nullable|string|size:10|regex:/^[0-9]+$/',
+            'name'  => 'nullable|min:3|max:256|regex:/^[\p{L}\s]+$/u',
+            'lastname'  => 'nullable|min:3|max:256|regex:/^[\p{L}\s]+$/u',
+            'tel'   => 'nullable|string|size:10|regex:/^\d+$/',
             'email' => 'nullable|email',
             'email_verified_at' => 'nullable|date',
             'password'  => 'nullable|string|min:8',
