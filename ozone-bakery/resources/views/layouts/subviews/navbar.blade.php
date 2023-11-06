@@ -56,7 +56,7 @@
 
 
 
-                            <a href="login">Sign in</a>
+                            <a href="login">Log in</a>
                             <a href="register">Register</a>
 
                         </div>

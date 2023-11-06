@@ -1,11 +1,13 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="max-w-screen-sm px-4 py-1 sm:px-2 lg:px-2 lg:py-1 mx-auto">
-        <div class="bg-stone-100 rounded-xl shadow-lg mt-7 p-4 sm:p-7">
-
+<x-guest-layout>  
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
+            <h1 class="text-center text-3xl font-semibold mt-3 mb-3">
+                Log In
+            </h1>
+            <hr class="mt-7 mb-5" style="border-color: #c4b7a6; border-width: 2px; width: 100%;">
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -50,6 +52,5 @@
                     </x-primary-button>
                 </div>
             </form>
-        </div>
-    </div>
+</x-guest-layout>
 @endsection

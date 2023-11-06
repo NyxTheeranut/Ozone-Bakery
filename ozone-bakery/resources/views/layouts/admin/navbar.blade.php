@@ -24,7 +24,7 @@
                         <div class="dropdown-content">
 
                             <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-stone-500">
-                                <p class="text-sm text-gray-500 dark:text-gray-300">Signed in as</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">Logged in as</p>
                                 <p class="text-sm font-medium text-gray-800 dark:text-gray-400">
                                     {{ Auth::user()->email }}
                                 </p>
@@ -53,7 +53,7 @@
 
 
 
-                            <a href="login">Sign in</a>
+                            <a href="login">Log in</a>
                             <a href="register">Register</a>
 
                         </div>
