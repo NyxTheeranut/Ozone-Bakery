@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::delete('/carts/reset', 'App\Http\Controllers\API\CartController@resetCart');
 
 Route::put('/products/select-products', 'App\Http\Controllers\API\ProductController@selectProductsFromStock');
 

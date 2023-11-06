@@ -64,7 +64,7 @@
                                 <span>Pickup Date:</span>
                                 {{ $pickupDate }}
                             </div>
-                            
+
                             <span>Total Price:</span> {{ $totalPrice }} Baht
                             <button id="confirmOrderButton" onclick="onConfirmOrderButtonClicked()"
                                 style="margin-top: 20px;"
@@ -90,7 +90,7 @@
 
             if (!confirm(
                     'Are you sure you want to confirm this order? Please ensure that you have made the payment for this order to proceed.'
-                    )) {
+                )) {
                 return;
             }
 
@@ -118,6 +118,29 @@
                 order_details: orderDetails,
             });
 
+            function resetCart() {
+                console.log("resetCart");
+                fetch('/api/carts/reset', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        },
+                        body: JSON.stringify({
+                            user_id: @json(Auth::user()->id),
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:');
+                        console.log(data);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            }
+            resetCart();
+            
             fetch('/api/orders', {
                     method: 'POST',
                     headers: {

@@ -67,4 +67,18 @@ class CartController extends Controller
         $cart->delete();
         return ["message" => "Deleted successfully"];
     }
+    
+    public function resetCart(Request $request)
+    {
+        Log::debug("resetCart");
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $carts = Cart::where('user_id', $request->get('user_id'))->get();
+        foreach ($carts as $cart) {
+            $cart->delete();
+        }
+        return ["message" => "Deleted successfully"];
+    }
 }
