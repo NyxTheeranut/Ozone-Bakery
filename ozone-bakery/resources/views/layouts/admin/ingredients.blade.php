@@ -97,11 +97,11 @@
                             value="${ingredient.quantity_unit}"></td>
                         <td style="width: 10%;">
                             <button
-                                class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all"
+                                class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all"
                                 onclick="onSaveIngredientButtonClicked(${ingredient.id})"
                                 id="saveIngredientButton${ingredient.id}" style="display: none">Save</button>
                             <button
-                                class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all"
+                                class="flex flex-wrap block mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all"
                                 onclick="onDeleteIngredientButtonClicked(${ingredient.id})"
                                 id="deleteIngredientButton${ingredient.id}">Delete</button>
                         </td>

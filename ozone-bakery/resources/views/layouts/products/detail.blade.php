@@ -53,13 +53,6 @@
 
                     </div>
 
-                    <div class="flex flex-row" id="pickupDate">
-                        <span class="text-xl font-semibold mr-5 mt-2">Pickup Date: </span>
-                        <input
-                            class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover-bg-white transition-all"
-                            style="border-width: 4px;" type="date" value="{{ $pickupDate }}" id="pickupDate"
-                            onchange="onPickupDateChange()">
-                    </div>
 
                     <button onclick="onAddToCartButtonClicked()" id="addToCardButton"
                         class="flex flex-wrap block mt-3 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all text-sm rounded-3xl">
