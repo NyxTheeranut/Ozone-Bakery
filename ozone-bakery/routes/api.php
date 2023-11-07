@@ -24,15 +24,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::delete('/carts/reset', 'App\Http\Controllers\API\CartController@resetCart');
 
 Route::put('/products/select-products', 'App\Http\Controllers\API\ProductController@selectProductsFromStock');
 
 Route::apiResource('/users', UserController::class);
+Route::get('/api/user', [UserController::class, 'getUserData']);
+
 
 Route::apiResource('/orders', OrderController::class);
 Route::put('/orders/reject/{order}', 'App\Http\Controllers\API\OrderController@rejectOrder');
 
 Route::apiResource('/products', ProductController::class);
+Route::get('/api/products/{id}', 'API\ProductController@show');
 Route::get('/products/available', 'App\Http\Controllers\API\ProductController@indexAvailableProduct');
 Route::get('/products/all', 'App\Http\Controllers\API\ProductController@indexAllProduct');
 

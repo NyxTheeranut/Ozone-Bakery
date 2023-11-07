@@ -16,16 +16,16 @@ class ProductStocksTableSeeder extends Seeder
     {
         $data = [
             [
-                'product_id' => 1, // Replace with an existing product's ID
+                'product_id' => 3, // Replace with an existing product's ID
                 'amount' => 100,
-                'exp_date' => Carbon::now()->addDays(30),
+                'exp_date' => Carbon::now()->addDays(7),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'product_id' => 2, // Replace with another existing product's ID
+                'product_id' => 5, // Replace with another existing product's ID
                 'amount' => 50,
-                'exp_date' => Carbon::now()->addDays(60),
+                'exp_date' => Carbon::now()->addDays(15),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

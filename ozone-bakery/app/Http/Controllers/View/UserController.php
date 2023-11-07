@@ -6,23 +6,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index(Request $request): View
     {
-        return view('profile.index', [
-            'user' => $request->user(),
-        ]);
+        $user = Auth::user(); // Example: Get the currently authenticated user
+
+        return view('profile.index', compact('user'));
     }
     public function update(Request $request)
     {
 
         $request->validate([
-            'name'  => 'nullable|min:3|max:256|regex:/^[a-zA-Z]+$/',
-            'lastname'  => 'nullable|min:3|max:256|regex:/^[a-zA-Z]+$/',
-            'tel'   => 'nullable|string|size:10|regex:/^[0-9]+$/',
+            'name'  => 'nullable|min:3|max:256|regex:/^[\p{L}\s]+$/u',
+            'lastname'  => 'nullable|min:3|max:256|regex:/^[\p{L}\s]+$/u',
+            'tel'   => 'nullable|string|size:10|regex:/^\d+$/',
             'email' => 'nullable|email',
             'email_verified_at' => 'nullable|date',
             'password'  => 'nullable|string|min:8',

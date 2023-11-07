@@ -24,12 +24,7 @@ class MadeToOrderController extends Controller
         if (Auth::user()==null) {
             return redirect()->route('login');
         }
-        // $items = Product::get();
-        // return $items;
-        $products = Product::get();
-
         return view('layouts.made-to-order.index', [
-            'products' => $products,
             'discount' => MadeToOrder::getDiscount(),
         ]);
     }

@@ -59,23 +59,21 @@ class ProductController extends Controller
         ]);
     }
 
-    public function showProductDetail($productId)
+    public function showProductDetail($id)
     {
         if (Auth::user()==null) {
             return redirect()->route('login');
         }
+        // Fetch the product details by ID
+        $product = Product::find($id);
 
-        $product = Product::find($productId);
-        if (session()->has('pickupDate')) {
-            $pickupDate = Carbon::parse(session('pickupDate'))->format('Y-m-d');
-        } else {
-            session(['pickupDate' => Carbon::now()->format('Y-m-d')]);
-            $pickupDate = Carbon::now()->format('Y-m-d');
+        if (!$product) {
+            abort(404);
         }
-        return view('layouts.products.detail', [
-            'product' => $product,
-            'pickupDate' => $pickupDate
-        ]);
+        $pickupDate = session()->has('pickupDate') ? Carbon::parse(session('pickupDate'))->format('Y-m-d') : Carbon::now()->format('Y-m-d');
+
+
+        return view('layouts.products.detail', compact('product', 'pickupDate'));
     }
 
     public function getStock($product)
