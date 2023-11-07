@@ -36,6 +36,8 @@
                         <th style="width: 30%;" class="text-2xl text-left font-semibold pb-4 p-2">Product</th>
                         <th style="width: 20%;" class="text-2xl text-left font-semibold pb-4 pl-12 p-2"> Amount</th>
                         <th style="width: 20%;" class="text-2xl text-left font-semibold pb-4 pl-8 p-2">Exp. date</th>
+                        <th style="width: 20%;" class="text-2xl text-left font-semibold pb-4 pl-8 p-2"></th>
+
                     </tr>
                 </thead>
 
@@ -62,10 +64,10 @@
                         </td>
                         <td class="flex flex-row">
                             <button
-                                class="flex flex-wrap block m-2 mt-10 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all"
+                                class="flex flex-wrap block m-2 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all"
                                 onclick="onSaveNewStockClicked()">Save</button>
                             <button
-                                class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all"
+                                class="flex flex-wrap block m-2 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all"
                                 onclick="onCancelNewStockButtonClicked()">Cancel</button>
                         </td>
                     </tr>
@@ -110,8 +112,8 @@
                     <td><input class="pr-2 text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" min="0" type="number" onchange="onStockDetailChange(${stock.id})" id="stockAmountInput${stock.id}" value="${stock.amount}"></td>
                     <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" min="{{ now()->format('Y-m-d') }}" type="date" onchange="onStockDetailChange(${stock.id})" id="stockExpDateInput${stock.id}" value="${stock.exp_date}"></td>                    
                     <td style="width: 15%">
-    <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" id="saveStockButton${stock.id}" onclick="onSaveStockButtonClicked(${stock.id})" style="display: none">Save</button>
-    <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" id="deleteStockButton${stock.id}" onclick="onDeleteStockButtonClicked(${stock.id})">Delete</button>
+    <button class="flex flex-wrap block m-2 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" id="saveStockButton${stock.id}" onclick="onSaveStockButtonClicked(${stock.id})" style="display: none">Save</button>
+    <button class="flex flex-wrap block m-2 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" id="deleteStockButton${stock.id}" onclick="onDeleteStockButtonClicked(${stock.id})">Delete</button>
 </td>
                 `;
                     stockTable.appendChild(row);
