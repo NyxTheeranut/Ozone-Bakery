@@ -38,6 +38,8 @@
                         <th class="text-2xl font-semibold" style="width: 30%;">Description</th>
                         <th class="text-2xl font-semibold" style="width: 15%; text-align: center">Price</th>
                         <th class="text-2xl font-semibold pr-4" style="width: 15%; text-align: center">Recipe</th>
+                        <th class="text-2xl font-semibold pr-4" style="width: 15%; text-align: center"></th>
+
                     </tr>
                 </thead>
                 <tbody id="productTable">
@@ -55,13 +57,13 @@
                     </td>
                     <td><input
                             class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
-                            type="text" id="new-product-name" style="width: 80%;"></td>
+                            type="text" id="new-product-name" placeholder="Product name" style="width: 80%;"></td>
                     <td><input
                             class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
-                            type="text" id="new-product-description" style="width: 80%;"></td>
+                            type="text" id="new-product-description" placeholder="Product description" style="width: 80%;"></td>
                     <td><input
-                            class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
-                            type="text" id="new-product-price" style="width: 80%;"></td>
+                            class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
+                            type="text" id="new-product-price" placeholder="Price" style="width: 80%;"></td>
                     <td>
                         <div class="flex flex-row">
                             <p>

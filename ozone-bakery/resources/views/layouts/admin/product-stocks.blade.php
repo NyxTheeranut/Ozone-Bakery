@@ -53,7 +53,7 @@
                         <td>
                             <input data-input-type="amount"
                                 class="text-left rounded-3xl border border-stone-300 bg-stone-100 hover-bg-white transition-all"
-                                type="number" id="newStockAmount"> <!-- Unique ID for amount input -->
+                                type="number" placeholder="Amount" id="newStockAmount"> <!-- Unique ID for amount input -->
                         </td>
                         <td>
                             <input data-input-type="exp-date"
@@ -107,12 +107,12 @@
                     row.innerHTML = `
                     <td class="pl-4 text-xl">${stock.id}</td>
                     <td class="text-xl" data-product-name="${stock.product.name}">${stock.product.name}</td>
-                    <td><input data-input-type="amount" class="pr-2 text-center rounded-3xl border border-stone-300 bg-stone-100 hover-bg-white transition-all" onchange="onStockDetailChange(${stock.id})" value="${stock.amount}"></td>
-                    <td><input data-input-type="exp-date" class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover-bg-white transition-all" onchange="onStockDetailChange(${stock.id})" value="${stock.exp_date}"></td>
+                    <td><input class="pr-2 text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" min="0" type="number" onchange="onStockDetailChange(${stock.id})" id="stockAmountInput${stock.id}" value="${stock.amount}"></td>
+                    <td><input class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all" min="{{ now()->format('Y-m-d') }}" type="date" onchange="onStockDetailChange(${stock.id})" id="stockExpDateInput${stock.id}" value="${stock.exp_date}"></td>                    
                     <td style="width: 15%">
-                        <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" onclick="onSaveStockButtonClicked(${stock.id})" style="display: none">Save</button>
-                        <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" onclick="onDeleteStockButtonClicked(${stock.id})">Delete</button>
-                    </td>
+    <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" id="saveStockButton${stock.id}" onclick="onSaveStockButtonClicked(${stock.id})" style="display: none">Save</button>
+    <button class="flex flex-wrap block m-2 mt-auto py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" id="deleteStockButton${stock.id}" onclick="onDeleteStockButtonClicked(${stock.id})">Delete</button>
+</td>
                 `;
                     stockTable.appendChild(row);
                 });

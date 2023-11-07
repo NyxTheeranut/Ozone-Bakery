@@ -36,6 +36,8 @@
                         <th style="width: 10%;" class="text-2xl text-left font-semibold pb-4 p-2">ID</th>
                         <th style="width: 40%;" class="text-2xl text-left font-semibold pb-4 pl-10 p-2">Ingredient</th>
                         <th style="width: 30%;" class="text-2xl text-left font-semibold pb-4 pl-6 p-2">Quantity Unit</th>
+                        <th style="width: 30%;" class="text-2xl text-left font-semibold pb-4 pl-6 p-2"></th>
+
                     </tr>
                 </thead>
                 <tbody id="ingredientTable">
@@ -47,19 +49,19 @@
                     <td style="width: 40%;">
                         <input
                             class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
-                            type="text" id="new-ingredient-name">
+                            type="text"  placeholder="Ingredient name" id="new-ingredient-name">
                     </td>
                     <td style="width: 30%;">
                         <input
                             class="text-center rounded-3xl border border-stone-300 bg-stone-100 hover:bg-white transition-all"
-                            type="text" id="new-ingredient-quantity-unit">
+                            type="text" placeholder="Quantity unit" id="new-ingredient-quantity-unit">
                     </td>
                     <td class="flex flex-row">
                         <button
-                            class="flex flex-wrap block m-2 mt-10 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                            class="flex flex-wrap block m-2 py-2 px-3 ml-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
                             onclick="onSaveNewIngredientButtonClicked()" id="saveNewIngredientButton">Save</button>
                         <button
-                            class="block m-2 py-2 px-3 mt-auto rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
+                            class="block m-2 py-2 px-3 rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all"
                             onclick="onCancelNewIngredientButtonClicked()" id="cancleNewIngredientButton">Cancel</button>
                     </td>
                 </tr>
