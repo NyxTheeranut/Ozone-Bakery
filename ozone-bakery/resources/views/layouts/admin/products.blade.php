@@ -149,7 +149,7 @@
                     </td>
                     <td>
                         <button class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover-bg-stone-600 transition-all" id="deleteProductButton${product.id}" onclick="onDeleteProductButtonClicked(${product.id})">Delete</button>
-                        <button id="saveProductButton${product.id}" onclick="onSaveProductButtonClicked(${product.id})" style="display: none">Save</button>
+                        <button class="block m-2 mr-0 mt-auto py-2 px-3  rounded-md border border-transparent font-semibold bg-stone-500 text-white text-xl hover:bg-stone-600 transition-all" id="saveProductButton${product.id}" onclick="onSaveProductButtonClicked(${product.id})" style="display: none">Save</button>
                     </td>
                 `;
 

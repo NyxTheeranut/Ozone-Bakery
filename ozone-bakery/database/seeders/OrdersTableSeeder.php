@@ -26,6 +26,12 @@ class OrdersTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'user_id' => 2, // Replace with another existing user's ID
+                'status' => 'failed',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             // Add more order data as needed
         ];
 
