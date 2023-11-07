@@ -14,307 +14,57 @@ class IngredientsTableSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            [//1
-                'name' => 'แป้งบัวแดง',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [//2
-                'name' => 'กล้วยหอมบด',
-                'quantity_unit' => 'pieces',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [//3
-                'name' => 'กลิ่นกล้วยหอม',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [//4
-                'name' => 'กลิ่นวานิลลา',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //5
-                'name' => 'กลิ่นส้ม',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //6
-                'name' => 'กะทิ',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //7
-                'name' => 'Sp',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //8
-                'name' => 'เกลือ',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //9
-                'name' => 'ไข่ไก่',
-                'quantity_unit' => 'fong',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //10
-                'name' => 'ออริกาโน่',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //11
-                'name' => 'ครีมออฟทาทาร์',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //12
-                'name' => 'ช็อกโกแลคชิป',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //13
-                'name' => 'ช็อกโกแลต(Compound)',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //15
-                'name' => 'ซอสมะเขือเทศ',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //16
-                'name' => 'ดาร์กช็อกโกแลต(70%)',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //17
-                'name' => 'นมสดจืด',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //18
-                'name' => 'นมข้นจืด',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //19
-                'name' => 'นมสด',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //20
-                'name' => 'น้ำตาลทรายขาว',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //21
-                'name' => 'น้ำตาลเบเกอรี่',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //22
-                'name' => 'น้ำใบเตย',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //23
-                'name' => 'น้ำเปล่า',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //24
-                'name' => 'น้ำเปล่า(เย็น)',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //25
-                'name' => 'น้ำมะพร้าว',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //26
-                'name' => 'น้ำมันพืช',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //27
-                'name' => 'น้ำส้มซันควิก',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //28
-                'name' => 'เนยเค็ม',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //29
-                'name' => 'เนยจืด',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //30
-                'name' => 'เบกกิ้งโซดา',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //31
-                'name' => 'แป้งกวนไส้',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //32
-                'name' => 'แป้งขนมปัง',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //33
-                'name' => 'แป้งข้าวโพด',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //34
-                'name' => 'แป้งเค้ก',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //35
-                'name' => 'แป้งอเนกประสงค์',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //36
-                'name' => 'ผงโกโก้',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //37
-                'name' => 'ผงชาเขียว',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //38
-                'name' => 'ผงชาไทย',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //39
-                'name' => 'ผงฟู',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //40
-                'name' => 'ผงวานิลลา',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //41
-                'name' => 'ผงวุ้น',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //42
-                'name' => 'ฝอยทอง',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //43
-                'name' => 'มะพร้าวอ่อนขูด',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //44
-                'name' => 'มายองเนส',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //45
-                'name' => 'ยีสต์',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //46
-                'name' => 'แยมสตรอว์เบอรรี่',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //47
-                'name' => 'โยเกิร์ต',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //48
-                'name' => 'วิปครีม',
-                'quantity_unit' => 'grams',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //49
-                'name' => 'สีผสมอาหาร(เขียวแอปเปิ้ล)',
-                'quantity_unit' => 'tea spoon',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //50
-                'name' => 'สีผสมอาหาร(ส้ม)',
-                'quantity_unit' => 'drops',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [ //51
-                'name' => 'ไส้กรอก',
-                'quantity_unit' => 'pieces',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            
+            ['name' => 'SP', 'quantity_unit' => 'grams'], // 1
+            ['name' => 'Mashed ripe bananas', 'quantity_unit' => 'grams'], // 2
+            ['name' => 'Banana aroma', 'quantity_unit' => 'tsp'], // 3
+            ['name' => 'Vanilla aroma', 'quantity_unit' => 'tsp'], // 4
+            ['name' => 'Orange aroma', 'quantity_unit' => 'tsp'], // 5
+            ['name' => 'Coconut', 'quantity_unit' => 'grams'], // 6
+            ['name' => 'Salt', 'quantity_unit' => 'tsp'], // 7
+            ['name' => 'Chicken eggs', 'quantity_unit' => 'pieces'], // 8
+            ['name' => 'Eggs', 'quantity_unit' => 'grams'], // 9
+            ['name' => 'Cream of tartar', 'quantity_unit' => 'tsp'], // 10
+            ['name' => 'Chocolate chips', 'quantity_unit' => 'grams'], // 11
+            ['name' => 'Chocolate (Compound)', 'quantity_unit' => 'grams'], // 12
+            ['name' => 'Tomato sauce', 'quantity_unit' => 'grams'], // 13
+            ['name' => 'Dark chocolate (70%)', 'quantity_unit' => 'grams'], // 14
+            ['name' => 'Unsweetened condensed milk', 'quantity_unit' => 'grams'], // 15
+            ['name' => 'Heavy cream', 'quantity_unit' => 'grams'], // 16
+            ['name' => 'Fresh milk', 'quantity_unit' => 'grams'], // 17
+            ['name' => 'White granulated sugar', 'quantity_unit' => 'grams'], // 18
+            ['name' => 'Brown sugar', 'quantity_unit' => 'grams'], // 19
+            ['name' => 'Pandan leaves', 'quantity_unit' => 'grams'], // 20
+            ['name' => 'Water', 'quantity_unit' => 'grams'], // 21
+            ['name' => 'Cold water', 'quantity_unit' => 'grams'], // 22
+            ['name' => 'Coconut water', 'quantity_unit' => 'grams'], // 23
+            ['name' => 'Vegetable oil', 'quantity_unit' => 'grams'], // 24
+            ['name' => 'Sunquick orange juice', 'quantity_unit' => 'grams'], // 25
+            ['name' => 'Salted butter', 'quantity_unit' => 'grams'], // 26
+            ['name' => 'Unsalted butter', 'quantity_unit' => 'grams'], // 27
+            ['name' => 'Baking soda', 'quantity_unit' => 'tsp'], // 28
+            ['name' => 'Cornstarch', 'quantity_unit' => 'grams'], // 29
+            ['name' => 'Corn flour', 'quantity_unit' => 'grams'], // 30
+            ['name' => 'Cake flour', 'quantity_unit' => 'grams'], // 31
+            ['name' => 'Red bean flour', 'quantity_unit' => 'grams'], // 32
+            ['name' => 'Cornstarch', 'quantity_unit' => 'grams'], // 33
+            ['name' => 'Cocoa powder', 'quantity_unit' => 'grams'], // 34
+            ['name' => 'Matcha powder', 'quantity_unit' => 'tsp'], // 35
+            ['name' => 'Thai tea powder', 'quantity_unit' => 'tsp'], // 36
+            ['name' => 'Baking powder', 'quantity_unit' => 'tsp'], // 37
+            ['name' => 'Vanilla powder', 'quantity_unit' => 'tsp'], // 38
+            ['name' => 'Agar-agar powder', 'quantity_unit' => 'tsp'], // 39
+            ['name' => 'Gelatin powder', 'quantity_unit' => 'tsp'], // 40
+            ['name' => 'Gold thread', 'quantity_unit' => 'grams'], // 41
+            ['name' => 'Grated young coconut', 'quantity_unit' => 'grams'], // 42
+            ['name' => 'Mayonnaise', 'quantity_unit' => 'grams'], // 43
+            ['name' => 'Yeast', 'quantity_unit' => 'grams'], // 44
+            ['name' => 'Strawberry jam', 'quantity_unit' => 'grams'], // 45
+            ['name' => 'Yogurt', 'quantity_unit' => 'grams'], // 46
+            ['name' => 'Whipped cream', 'quantity_unit' => 'grams'], // 47
+            ['name' => 'Food coloring (green apple)', 'quantity_unit' => 'tsp'], // 48
+            ['name' => 'Food coloring (orange)', 'quantity_unit' => 'drops'], // 49
+            ['name' => 'Sausages', 'quantity_unit' => 'pieces'], // 50
+            ['name' => 'Origano', 'quantity_unit' => 'grams'], // 51
         ];
 
 

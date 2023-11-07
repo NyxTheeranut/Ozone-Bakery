@@ -23,7 +23,7 @@ class ProductStockController extends Controller
         $request->validate ([
             'product_id'    => 'required|exists:products,id',
             'amount'    => 'required|integer|min:0',
-            'exp_date'  => 'required|date'
+            'exp_date'  => 'required|date|after:yesterday'
         ]);
     
         $productStock = new ProductStock();
