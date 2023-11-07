@@ -59,7 +59,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function showProduct($productId)
+    public function showProductDetail($productId)
     {
         if (Auth::user()==null) {
             return redirect()->route('login');

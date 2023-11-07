@@ -17,8 +17,8 @@ class UsersTableSeeder extends Seeder
     {
 
         $user = new User();
-        $user->name = 'หมิวหมิว';
-        $user->lastname = 'หมิวหมิว';
+        $user->name = 'mute';
+        $user->lastname = 'mute';
         $user->tel = '0987654321';
         $user->email = 'mute@example.com';
         $user->password = 'mute';
