@@ -13,9 +13,8 @@
             <h1 class="text-5xl text-white">Welcome to Ozone Bakery</h1>
             <p class="text-2xl my-5">Delicious pastries baked fresh every day</p>
             <a href="/products" class="bg-stone-500 text-white no-underline px-5 py-2.5 rounded-3xl">All Products</a>
-            <p class="text-xl font-bold mt-5">59/63 Moo 6, Semafahram road, Khukhot, Lamlukka, Phathumthanee, 12130</p>
-            <p class="text-xl font-bold">Tel. 098-248-5817</p>
-
+            <p class="text-xl font-bold my-5">59/63 Moo 6, Semafahram road, Khukhot, Lamlukka, Phathumthanee, 12130</p>
+            <p class="text-xl font-bold my-4">Tel. 098-248-5817</p>
             
         </section>
         <section class="bg-neutral-100 flex flex-col text-4xl pt-10 pb-5">
