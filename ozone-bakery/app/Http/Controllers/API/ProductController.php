@@ -19,6 +19,18 @@ class ProductController extends Controller
         return Product::get();
     }
 
+    public function show($id)
+    {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        return response()->json($product);
+    }
+
+
     public function indexAvailableProduct()
     {
         $products = Product::select('products.*', DB::raw('SUM(product_stocks.amount) as total_stock'))
@@ -73,7 +85,7 @@ class ProductController extends Controller
         $product_stocks = $product_stocks->where('exp_date', '>=', $pickupDate);
         $product_stocks = $product_stocks->sortBy('exp_date');
 
-        $data=[];
+        $data = [];
 
         foreach ($product_stocks as $stock) {
             if ($amount > 0) {
@@ -94,11 +106,6 @@ class ProductController extends Controller
             'message' => 'Successfully reduce stock',
             'data' => $data,
         ], 200);
-    }
-
-    public function show(Product $product)
-    {
-        return $product;
     }
 
     public function getStock($product_id)

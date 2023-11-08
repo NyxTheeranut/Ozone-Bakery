@@ -30,6 +30,13 @@ class OrderDetailsTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'order_id' => 3, // Replace with another existing order's ID
+                'product_id' => 4, // Replace with another existing product's ID
+                'amount' => 5,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             // Add more order detail data as needed
         ];
 

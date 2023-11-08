@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         $user->lastname = 'mute';
         $user->tel = '0987654321';
         $user->email = 'mute@example.com';
-        $user->password = 'mute';
+        $user->password = 'mutemute';
         $user->is_admin = 0;
         $user->save();
 
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         $user->lastname = 'art';
         $user->tel = '0987654322';
         $user->email = 'smart@example.com';
-        $user->password = 'smart';
+        $user->password = 'smartart';
         $user->is_admin = 1;
         $user->save();
 

@@ -11,20 +11,54 @@ class UserController extends Controller
 {
     public function index()
     {
-        return User::get();
+        // Retrieve the authenticated user's profile
+        $user = auth()->user(); // Assuming you are using authentication
+
+        if ($user) {
+            return response()->json($user);
+        } else {
+            return response()->json(['message' => 'User not authenticated'], 401);
+        }
     }
 
-    public function show(User $user)
+    public function getUserData(Request $request)
     {
-        return $user;
+        $user = $request->user(); // Assuming you want to fetch the authenticated user's data
+
+        return response()->json([
+            'user' => $user,
+        ]);
+    }
+
+    public function show(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('profile.index')->with('error', 'User not found.');
+        }
+
+        if ($request->wantsJson()) {
+            // For API requests, return JSON data
+            return response()->json($user);
+        }
+
+        // For web requests, return a view
+        return view('user.profile', ['user' => $user]);
+    }
+
+    public function getUserProfile()
+    {
+        $user = auth()->user(); // Assuming you are using authentication
+        return response()->json($user);
     }
 
     public function store(Request $request)
     {
-        $request->validate ([
-            'name'  => 'required|min:3|max:256',
-            'lastname'  => 'required|min:3|max:256',
-            'tel'   => 'required|string|size:10|regex:/^[0-9]+$/',
+        $request->validate([
+            'name'  => 'required|min:3|max:256|regex:/^[\p{L}\s]+$/u',
+            'lastname'  => 'required|min:3|max:256|regex:/^[\p{L}\s]+$/u',
+            'tel'   => 'required|string|size:10|regex:/^\d+$/',
             'email' => 'required|email',
             'password'  => 'required|string|min:8',
             'is_admin'  => 'nullable|boolean'
@@ -46,7 +80,7 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $request->validate ([
+        $request->validate([
             'name'  => 'nullable|min:3|max:256',
             'lastname'  => 'nullable|min:3|max:256',
             'tel'   => 'nullable|string|size:10|regex:/^[0-9]+$/',
@@ -68,7 +102,7 @@ class UserController extends Controller
         $user->refresh();
         return $user;
     }
-  
+
     public function destroy(User $user)
     {
         $user->delete();
